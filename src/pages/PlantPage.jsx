@@ -1,4 +1,4 @@
-import { ArrowLeft, Compass, Leaf, ThermometerSun } from "lucide-react";
+import { ArrowLeft, Compass, Leaf, ShoppingBag, ThermometerSun } from "lucide-react";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Badge from "../components/Badge.jsx";
@@ -27,6 +27,7 @@ export default function PlantPage() {
   }
 
   const relatedPlants = getRelatedPlants(plant);
+  const shopUrl = (plant.shopUrl || "").trim();
 
   return (
     <>
@@ -90,6 +91,31 @@ export default function PlantPage() {
               This keeps the new site honest: no major care facts were invented beyond the original
               Wix finder categories.
             </p>
+          </article>
+
+          <article className="detail-card shop-card">
+            <div>
+              <p className="eyebrow">
+                <ShoppingBag size={16} aria-hidden="true" />
+                Seeds
+              </p>
+              <h2>Shop seeds here</h2>
+              {!shopUrl && <p className="shop-note">Coming soon</p>}
+            </div>
+            {shopUrl ? (
+              <a
+                className="button primary shop-button"
+                href={shopUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Shop seeds here
+              </a>
+            ) : (
+              <button className="button primary shop-button" type="button" disabled>
+                Shop seeds here
+              </button>
+            )}
           </article>
         </div>
       </section>
