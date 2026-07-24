@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { formatList, labelFor } from "../data/plants.js";
 import Badge from "./Badge.jsx";
 import PlantImage from "./PlantImage.jsx";
+import SavePlantButton from "./SavePlantButton.jsx";
 
 export default function PlantCard({ plant }) {
   return (
     <article className="plant-card">
+      <SavePlantButton plant={plant} className="plant-card-save" />
       <PlantImage plant={plant} />
       <div className="plant-card-body">
         <div>

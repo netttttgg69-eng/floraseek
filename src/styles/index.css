@@ -157,6 +157,106 @@ img {
   background: var(--leaf-soft);
 }
 
+.nav-search {
+  flex: 1;
+  max-width: 340px;
+  min-width: 220px;
+}
+
+.plant-search {
+  position: relative;
+  min-width: 0;
+}
+
+.plant-search label,
+.climate-search label,
+.location-picker label {
+  display: grid;
+  gap: 8px;
+}
+
+.plant-search label > span,
+.climate-search label > span,
+.location-picker label > span {
+  color: var(--leaf-dark);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.plant-search-nav label > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.search-field {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+}
+
+.search-field svg {
+  flex: none;
+  color: var(--leaf);
+}
+
+.search-field input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  color: var(--ink);
+  background: transparent;
+}
+
+.search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 40;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.search-results button {
+  width: 100%;
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.search-results button:hover,
+.search-results button:focus-visible {
+  background: var(--leaf-soft);
+}
+
+.search-results span,
+.search-results p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.search-results p {
+  padding: 14px;
+}
+
 main {
   flex: 1;
 }
@@ -232,6 +332,13 @@ p {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 28px;
+}
+
+.page-heading-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
 }
 
 .button {
@@ -389,6 +496,7 @@ p {
 }
 
 .plant-card {
+  position: relative;
   min-height: 100%;
   overflow: hidden;
   display: flex;
@@ -401,6 +509,49 @@ p {
     transform 180ms ease,
     box-shadow 180ms ease,
     border-color 180ms ease;
+}
+
+.save-plant-button {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border: 1px solid rgba(215, 227, 212, 0.92);
+  border-radius: 999px;
+  color: var(--leaf-dark);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--soft-shadow);
+  font-size: 0.82rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.save-plant-button:hover {
+  transform: translateY(-2px);
+}
+
+.save-plant-button.saved {
+  color: var(--white);
+  border-color: var(--leaf);
+  background: var(--leaf);
+}
+
+.plant-card-save {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+}
+
+.profile-save-button {
+  margin-top: 18px;
 }
 
 .plant-card:hover {
@@ -579,6 +730,34 @@ p {
   background: #f6dfb8;
 }
 
+.plant-week-card {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--soft-shadow);
+}
+
+.plant-week-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  padding: 28px;
+}
+
+.plant-week-copy p {
+  margin: 0;
+}
+
+.plant-week-badges {
+  margin-top: 0;
+}
+
 .page-heading {
   max-width: 820px;
   margin-bottom: 34px;
@@ -586,7 +765,7 @@ p {
 
 .finder-panel {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(220px, 1.25fr) repeat(3, minmax(0, 1fr)) minmax(110px, 0.7fr);
   gap: 14px;
   align-items: end;
   margin-bottom: 34px;
@@ -615,6 +794,76 @@ p {
   cursor: pointer;
 }
 
+.climate-tool {
+  display: grid;
+  gap: 18px;
+  margin: 0 0 34px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--soft-shadow);
+}
+
+.climate-tool h2 {
+  font-size: 1.8rem;
+}
+
+.climate-tool p {
+  margin: 8px 0 0;
+}
+
+.climate-search,
+.location-picker {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.climate-search input,
+.location-picker select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 12px;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+}
+
+.climate-result {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid color-mix(in srgb, var(--leaf), var(--border));
+  border-radius: var(--radius);
+  background: var(--mint);
+}
+
+.climate-result span {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.climate-result strong {
+  color: var(--leaf-dark);
+  font-size: 1.12rem;
+}
+
+.climate-error {
+  padding: 12px 14px;
+  border: 1px solid rgba(167, 93, 61, 0.36);
+  border-radius: var(--radius);
+  color: #7d321c;
+  background: rgba(255, 237, 229, 0.86);
+  font-weight: 800;
+}
+
+.climate-attribution {
+  font-size: 0.9rem;
+}
+
 .reset-button {
   width: 100%;
 }
@@ -637,6 +886,22 @@ p {
 
 .split-section {
   align-items: start;
+}
+
+.info-grid,
+.policy-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.policy-list {
+  align-items: stretch;
+}
+
+.info-grid .detail-card,
+.policy-list .detail-card {
+  background: var(--white);
 }
 
 .steps {
@@ -826,10 +1091,27 @@ p {
 }
 
 @media (max-width: 900px) {
+  .nav {
+    flex-wrap: wrap;
+    padding: 14px 0;
+  }
+
+  .nav-search {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
+  }
+
   .hero-grid,
   .plant-hero-grid,
   .split-section,
   .plant-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plant-week-card,
+  .info-grid,
+  .policy-list {
     grid-template-columns: 1fr;
   }
 
@@ -879,15 +1161,27 @@ p {
   }
 
   .hero-panel,
+  .climate-search,
   .finder-panel,
+  .location-picker,
   .card-grid,
   .card-grid.three,
   .category-grid {
     grid-template-columns: 1fr;
   }
 
+  .search-results {
+    position: static;
+    margin-top: 8px;
+  }
+
   .hero-card {
     min-height: 140px;
+  }
+
+  .climate-tool,
+  .plant-week-copy {
+    padding: 20px;
   }
 
   .shop-card {

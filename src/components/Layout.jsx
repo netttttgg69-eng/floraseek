@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { Leaf, Search, Sprout } from "lucide-react";
+import { Heart, Leaf, Search, Sprout, Users } from "lucide-react";
+import PlantSearch from "./PlantSearch.jsx";
 
 export default function Layout() {
   return (
@@ -16,13 +17,25 @@ export default function Layout() {
             </span>
           </NavLink>
 
+          <PlantSearch className="nav-search" placeholder="Search Floraseek" />
+
           <div className="nav-links">
+            <NavLink to="/">
+              <Leaf size={17} />
+              Home
+            </NavLink>
             <NavLink to="/finder">
               <Search size={17} />
-              Finder
+              Plant Finder
             </NavLink>
-            <NavLink to="/flowers">Flowers</NavLink>
-            <NavLink to="/plants">Plants</NavLink>
+            <NavLink to="/saved-plants">
+              <Heart size={17} />
+              Saved Plants
+            </NavLink>
+            <NavLink to="/about">
+              <Users size={17} />
+              Who We Are
+            </NavLink>
           </div>
         </nav>
       </header>
@@ -39,13 +52,16 @@ export default function Layout() {
               Floraseek
             </div>
             <p>
-              A standalone React version of the Floraseek school project, built for Vercel.
+              An educational plant-discovery tool for browsing by climate, difficulty, and type.
             </p>
           </div>
           <div className="footer-links" aria-label="Footer navigation">
             <NavLink to="/finder">Plant Finder</NavLink>
+            <NavLink to="/saved-plants">Saved Plants</NavLink>
             <NavLink to="/flowers">Flowers</NavLink>
             <NavLink to="/plants">Plants</NavLink>
+            <NavLink to="/about">Who We Are</NavLink>
+            <NavLink to="/ai-policy">AI Policy</NavLink>
           </div>
         </div>
       </footer>

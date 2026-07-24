@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import Badge from "../components/Badge.jsx";
 import PlantCard from "../components/PlantCard.jsx";
 import PlantImage from "../components/PlantImage.jsx";
+import SavePlantButton from "../components/SavePlantButton.jsx";
 import SectionHeader from "../components/SectionHeader.jsx";
 import { formatList, getPlantBySlug, getRelatedPlants, labelFor } from "../data/plants.js";
 import { setPageMeta } from "../utils/meta.js";
@@ -49,6 +50,7 @@ export default function PlantPage() {
               <span>{formatList(plant.climates, "climate")}</span>
               <span>{labelFor("type", plant.type)}</span>
             </div>
+            <SavePlantButton plant={plant} className="profile-save-button" />
           </div>
           <PlantImage plant={plant} size="hero" />
         </div>

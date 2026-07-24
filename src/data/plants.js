@@ -379,6 +379,38 @@ export function formatList(values, category) {
   return values.map((value) => labelFor(category, value)).join(", ");
 }
 
+export function normalizeSearchQuery(query) {
+  return String(query || "").trim().toLowerCase();
+}
+
+export function getPlantSearchText(plant) {
+  return [
+    plant.name,
+    plant.summary,
+    plant.type,
+    labelFor("type", plant.type),
+    plant.difficulty,
+    labelFor("difficulty", plant.difficulty),
+    ...plant.climates,
+    ...plant.climates.map((climate) => labelFor("climate", climate)),
+  ].join(" ").toLowerCase();
+}
+
+export function searchPlants(query, sourcePlants = plants) {
+  const normalizedQuery = normalizeSearchQuery(query);
+
+  if (!normalizedQuery) {
+    return sourcePlants;
+  }
+
+  const terms = normalizedQuery.split(/\s+/).filter(Boolean);
+
+  return sourcePlants.filter((plant) => {
+    const searchableText = getPlantSearchText(plant);
+    return terms.every((term) => searchableText.includes(term));
+  });
+}
+
 export function normalizeFilter(value) {
   const normalized = String(value || ALL_VALUE).trim().toLowerCase();
   return normalized === "" ? ALL_VALUE : normalized;

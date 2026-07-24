@@ -2,7 +2,10 @@ import { ArrowRight, Filter, Leaf, Sparkles } from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import CategoryCard from "../components/CategoryCard.jsx";
+import ClimateFinder from "../components/ClimateFinder.jsx";
 import PlantCard from "../components/PlantCard.jsx";
+import PlantOfWeek from "../components/PlantOfWeek.jsx";
+import RandomPlantButton from "../components/RandomPlantButton.jsx";
 import SectionHeader from "../components/SectionHeader.jsx";
 import { plants } from "../data/plants.js";
 import { setPageMeta } from "../utils/meta.js";
@@ -45,6 +48,7 @@ export default function HomePage() {
               <Link className="button secondary" to="/plants">
                 Browse plants
               </Link>
+              <RandomPlantButton />
             </div>
           </div>
 
@@ -65,6 +69,15 @@ export default function HomePage() {
               <span>Difficulty levels</span>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <SectionHeader eyebrow="Weekly pick" title="Plant of the Week">
+            A deterministic weekly feature chosen from the central Floraseek plant catalogue.
+          </SectionHeader>
+          <PlantOfWeek />
         </div>
       </section>
 
@@ -112,6 +125,12 @@ export default function HomePage() {
               <p>Open each plant page for a clean summary and related profiles.</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <ClimateFinder />
         </div>
       </section>
 

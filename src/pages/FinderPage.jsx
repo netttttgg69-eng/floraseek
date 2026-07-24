@@ -1,10 +1,14 @@
 import { SlidersHorizontal } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import ClimateFinder from "../components/ClimateFinder.jsx";
 import EmptyState from "../components/EmptyState.jsx";
 import FilterSelect from "../components/FilterSelect.jsx";
 import PlantCard from "../components/PlantCard.jsx";
+import PlantSearch from "../components/PlantSearch.jsx";
+import RandomPlantButton from "../components/RandomPlantButton.jsx";
 import SectionHeader from "../components/SectionHeader.jsx";
-import { ALL_VALUE, filterOptions, filterPlants, plants } from "../data/plants.js";
+import { ALL_VALUE, filterOptions, filterPlants, plants, searchPlants } from "../data/plants.js";
 import { setPageMeta } from "../utils/meta.js";
 
 const initialFilters = {
@@ -14,9 +18,12 @@ const initialFilters = {
 };
 
 export default function FinderPage() {
+  const [searchParams] = useSearchParams();
   const [filters, setFilters] = useState(initialFilters);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const results = useMemo(() => filterPlants(filters), [filters]);
+  const filteredPlants = useMemo(() => filterPlants(filters), [filters]);
+  const results = useMemo(() => searchPlants(searchQuery, filteredPlants), [filteredPlants, searchQuery]);
 
   useEffect(() => {
     setPageMeta(
@@ -24,6 +31,18 @@ export default function FinderPage() {
       "Filter Floraseek plants by difficulty, climate, and type."
     );
   }, []);
+
+  useEffect(() => {
+    const climate = searchParams.get("climate");
+    const validClimate = filterOptions.climate.some((option) => option.value === climate);
+
+    if (validClimate && climate !== ALL_VALUE) {
+      setFilters((current) => ({
+        ...current,
+        climate,
+      }));
+    }
+  }, [searchParams]);
 
   function updateFilter(key, value) {
     setFilters((current) => ({
@@ -34,6 +53,7 @@ export default function FinderPage() {
 
   function resetFilters() {
     setFilters(initialFilters);
+    setSearchQuery("");
   }
 
   return (
@@ -49,9 +69,19 @@ export default function FinderPage() {
             Combine difficulty, climate, and type to narrow the project catalogue without refreshing
             the page.
           </p>
+          <div className="page-heading-actions">
+            <RandomPlantButton />
+          </div>
         </div>
 
         <form className="finder-panel" onSubmit={(event) => event.preventDefault()}>
+          <PlantSearch
+            label="Search"
+            placeholder="Search by name, climate, type"
+            value={searchQuery}
+            variant="finder"
+            onChange={setSearchQuery}
+          />
           <FilterSelect
             id="difficulty"
             label="Difficulty"
@@ -78,6 +108,8 @@ export default function FinderPage() {
           </button>
         </form>
 
+        <ClimateFinder onApplyClimate={(climate) => updateFilter("climate", climate)} />
+
         <div className="results-header" aria-live="polite">
           <SectionHeader title={results.length === 1 ? "1 matching plant" : `${results.length} matching plants`}>
             Showing {results.length} of {plants.length} total Floraseek profiles.
@@ -91,7 +123,11 @@ export default function FinderPage() {
             ))}
           </div>
         ) : (
-          <EmptyState onReset={resetFilters} />
+          <EmptyState
+            title="No plants match that search"
+            message="Try a different search term, choose All in one category, or reset the finder to see every Floraseek plant."
+            onReset={resetFilters}
+          />
         )}
       </div>
     </section>
