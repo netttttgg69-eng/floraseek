@@ -84,15 +84,6 @@ export default function PlantPage() {
             </dl>
           </article>
 
-          <article className="detail-card care-card">
-            <h2>Care information</h2>
-            <p>{plant.care}</p>
-            <p className="quiet-note">
-              This keeps the new site honest: no major care facts were invented beyond the original
-              Wix finder categories.
-            </p>
-          </article>
-
           <article className="detail-card shop-card">
             <div>
               <p className="eyebrow">
