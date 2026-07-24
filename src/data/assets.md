@@ -2,4 +2,4 @@
 
 The Wix Git Integration export did not include the original Wix Studio canvas images or icon assets. The only image-like files available locally were dependency/template assets inside `node_modules`, which are not Floraseek content.
 
-The React version therefore uses consistent CSS-based visual placeholders with accessible labels. Real plant images can be added later under `public/assets/plants/` and connected in `src/data/plants.js` by adding an `image` path to each plant object.
+Plant images now live in `public/images/plants/` as PNG files. Each plant has a matching lowercase filename in `src/data/plants.js`, and `public/images/plants/placeholder.png` is used as the fallback if a plant-specific image is missing.
