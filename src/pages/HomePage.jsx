@@ -13,6 +13,8 @@ export default function HomePage() {
   const featuredPlants = plants.filter((plant) => featuredIds.includes(plant.id));
   const flowerCount = plants.filter((plant) => plant.type === "flower").length;
   const plantCount = plants.filter((plant) => plant.type === "plant").length;
+  const climateCount = new Set(plants.flatMap((plant) => plant.climates)).size;
+  const difficultyCount = new Set(plants.map((plant) => plant.difficulty)).size;
 
   useEffect(() => {
     setPageMeta(
@@ -28,12 +30,12 @@ export default function HomePage() {
           <div className="hero-copy">
             <p className="eyebrow">
               <Leaf size={16} aria-hidden="true" />
-              School project showcase
+              FIND YOUR PERFECT PLANT
             </p>
             <h1>Find the right plant with a clearer, calmer Floraseek.</h1>
             <p className="hero-lede">
-              Browse plant and flower profiles by difficulty, climate, and type in a refined,
-              presentation-ready site built for Vercel.
+              Explore a collection of plants and flowers and discover the ones best suited to your
+              climate, experience, and preferences.
             </p>
             <div className="hero-actions">
               <Link className="button primary" to="/finder">
@@ -46,21 +48,21 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="hero-panel" aria-label="Floraseek project overview">
+          <div className="hero-panel" aria-label="Floraseek overview">
             <div className="hero-card hero-card-large">
               <Sparkles size={24} aria-hidden="true" />
               <strong>{plants.length}</strong>
-              <span>Plant profiles preserved from the original project</span>
+              <span>Plant profiles available</span>
             </div>
             <div className="hero-card">
               <Filter size={24} aria-hidden="true" />
-              <strong>3</strong>
-              <span>Filters working together</span>
+              <strong>{climateCount}</strong>
+              <span>Climate categories</span>
             </div>
             <div className="hero-card">
               <Leaf size={24} aria-hidden="true" />
-              <strong>0</strong>
-              <span>Wix runtime dependencies</span>
+              <strong>{difficultyCount}</strong>
+              <span>Difficulty levels</span>
             </div>
           </div>
         </div>
@@ -68,7 +70,7 @@ export default function HomePage() {
 
       <section className="section">
         <div className="container">
-          <SectionHeader eyebrow="Featured" title="Start with a few project highlights">
+          <SectionHeader eyebrow="Featured" title="Start with a few Floraseek highlights">
             These cards use the same plant catalogue as the finder, so the whole site stays consistent.
           </SectionHeader>
           <div className="card-grid three">
