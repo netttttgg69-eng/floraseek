@@ -1,12 +1,12 @@
-import { Leaf, Search, Sprout } from "lucide-react";
+import { Sprout } from "lucide-react";
 import { useEffect } from "react";
 import { setPageMeta } from "../utils/meta.js";
 
 export default function AboutPage() {
   useEffect(() => {
     setPageMeta(
-      "Who We Are",
-      "Learn what Floraseek is and how it helps people discover plants."
+      "About the Creator",
+      "Learn about Lincoln Zhang, the creator of Floraseek."
     );
   }, []);
 
@@ -18,30 +18,22 @@ export default function AboutPage() {
             <Sprout size={16} aria-hidden="true" />
             About Floraseek
           </p>
-          <h1>Who We Are</h1>
+          <h1>About the Creator</h1>
           <p>
-            Floraseek helps people discover plants suited to their preferences and environment
-            through clear browsing, filtering, and plant profiles.
+            Floraseek was created by Lincoln Zhang as a personal project to make choosing plants
+            simpler and more accessible.
           </p>
-        </div>
-
-        <div className="info-grid">
-          <article className="detail-card">
-            <Leaf size={24} aria-hidden="true" />
-            <h2>Plant discovery made clearer</h2>
-            <p>
-              Users can browse plants by climate, difficulty, and plant type, then open each profile
-              to compare simple details before deciding what to explore next.
-            </p>
-          </article>
-          <article className="detail-card">
-            <Search size={24} aria-hidden="true" />
-            <h2>An educational project</h2>
-            <p>
-              Floraseek began as a project focused on making plant selection simpler and clearer.
-              The website is intended as an educational plant-discovery tool.
-            </p>
-          </article>
+          <p>
+            Lincoln designed the website to help people discover plants based on their climate,
+            experience level, and preferences. While building Floraseek, he developed skills in
+            website design, coding, research, organisation, and using feedback to improve a digital
+            product.
+          </p>
+          <p>
+            The project also helped Lincoln learn more about different plants and the conditions
+            they need to grow. Floraseek reflects his interest in creating useful online tools that
+            solve everyday problems in a clear and practical way.
+          </p>
         </div>
       </div>
     </section>

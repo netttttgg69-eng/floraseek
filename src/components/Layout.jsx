@@ -34,7 +34,7 @@ export default function Layout() {
             </NavLink>
             <NavLink to="/about">
               <Users size={17} />
-              Who We Are
+              About the Creator
             </NavLink>
           </div>
         </nav>
@@ -60,7 +60,7 @@ export default function Layout() {
             <NavLink to="/saved-plants">Saved Plants</NavLink>
             <NavLink to="/flowers">Flowers</NavLink>
             <NavLink to="/plants">Plants</NavLink>
-            <NavLink to="/about">Who We Are</NavLink>
+            <NavLink to="/about">About the Creator</NavLink>
             <NavLink to="/ai-policy">AI Policy</NavLink>
           </div>
         </div>
