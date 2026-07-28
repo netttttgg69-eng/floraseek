@@ -73,11 +73,11 @@ export default function PlantSearch({
             results.map((plant) => (
               <button key={plant.id} type="button" onClick={() => openPlant(plant)}>
                 <strong>{plant.name}</strong>
-                <span>{plant.summary}</span>
+                <span>{plant.shortDescription || plant.summary}</span>
               </button>
             ))
           ) : (
-            <p>No plants found for "{trimmedQuery}".</p>
+            <p>No plants found for &quot;{trimmedQuery}&quot;.</p>
           )}
         </div>
       )}

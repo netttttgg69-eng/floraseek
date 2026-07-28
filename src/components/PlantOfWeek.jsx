@@ -7,6 +7,7 @@ import PlantImage from "./PlantImage.jsx";
 
 export default function PlantOfWeek() {
   const { plant, week, year } = getPlantOfWeek();
+  const description = plant.shortDescription || plant.summary;
 
   return (
     <article className="plant-week-card">
@@ -17,7 +18,7 @@ export default function PlantOfWeek() {
           Week {week}, {year}
         </p>
         <h3>{plant.name}</h3>
-        <p>{plant.summary}</p>
+        <p>{description}</p>
         <div className="profile-badges plant-week-badges">
           <Badge category="difficulty" value={plant.difficulty} />
           <span>{formatList(plant.climates, "climate")}</span>

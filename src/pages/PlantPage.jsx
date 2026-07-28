@@ -18,7 +18,7 @@ export default function PlantPage() {
     if (plant) {
       setPageMeta(
         plant.name,
-        `${plant.name} profile in Floraseek: ${labelFor("difficulty", plant.difficulty)} ${labelFor("type", plant.type).toLowerCase()} for ${formatList(plant.climates, "climate")} climates.`
+        plant.shortDescription || `${plant.name} profile in Floraseek: ${labelFor("difficulty", plant.difficulty)} ${labelFor("type", plant.type).toLowerCase()} for ${formatList(plant.climates, "climate")} climates.`
       );
     }
   }, [plant]);
@@ -29,6 +29,7 @@ export default function PlantPage() {
 
   const relatedPlants = getRelatedPlants(plant);
   const shopUrl = (plant.shopUrl || "").trim();
+  const description = plant.shortDescription || plant.summary;
 
   return (
     <>
@@ -44,7 +45,7 @@ export default function PlantPage() {
               {labelFor("type", plant.type)} profile
             </p>
             <h1>{plant.name}</h1>
-            <p>{plant.summary}</p>
+            <p>{description}</p>
             <div className="profile-badges">
               <Badge category="difficulty" value={plant.difficulty} />
               <span>{formatList(plant.climates, "climate")}</span>
@@ -60,7 +61,7 @@ export default function PlantPage() {
         <div className="container plant-detail-grid">
           <article className="detail-card">
             <h2>Quick summary</h2>
-            <p>{plant.summary}</p>
+            <p>{description}</p>
             <dl className="plant-facts">
               <div>
                 <dt>

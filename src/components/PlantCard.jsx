@@ -6,6 +6,8 @@ import PlantImage from "./PlantImage.jsx";
 import SavePlantButton from "./SavePlantButton.jsx";
 
 export default function PlantCard({ plant }) {
+  const description = plant.shortDescription || plant.summary;
+
   return (
     <article className="plant-card">
       <SavePlantButton plant={plant} className="plant-card-save" />
@@ -14,7 +16,7 @@ export default function PlantCard({ plant }) {
         <div>
           <p className="eyebrow">{labelFor("type", plant.type)}</p>
           <h3>{plant.name}</h3>
-          <p>{plant.summary}</p>
+          <p>{description}</p>
         </div>
 
         <dl className="plant-facts compact">
