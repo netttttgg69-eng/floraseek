@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { formatList, labelFor } from "../data/plants.js";
 import Badge from "./Badge.jsx";
+import ComparePlantButton from "./ComparePlantButton.jsx";
 import PlantImage from "./PlantImage.jsx";
 import SavePlantButton from "./SavePlantButton.jsx";
 
@@ -33,10 +34,13 @@ export default function PlantCard({ plant }) {
           </div>
         </dl>
 
-        <Link className="text-link" to={`/plants/${plant.slug}`} aria-label={`View ${plant.name}`}>
-          View plant
-          <ArrowRight size={17} aria-hidden="true" />
-        </Link>
+        <div className="plant-card-actions">
+          <Link className="text-link" to={`/plants/${plant.slug}`} aria-label={`View ${plant.name}`}>
+            View plant
+            <ArrowRight size={17} aria-hidden="true" />
+          </Link>
+          <ComparePlantButton plant={plant} />
+        </div>
       </div>
     </article>
   );

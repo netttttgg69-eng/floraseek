@@ -6,6 +6,8 @@ import AiPolicyPage from "./pages/AiPolicyPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import FinderPage from "./pages/FinderPage.jsx";
 import CategoryPage from "./pages/CategoryPage.jsx";
+import ComparePage from "./pages/ComparePage.jsx";
+import FindMyPlantPage from "./pages/FindMyPlantPage.jsx";
 import PlantPage from "./pages/PlantPage.jsx";
 import SavedPlantsPage from "./pages/SavedPlantsPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
@@ -18,6 +20,8 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="finder" element={<FinderPage />} />
+          <Route path="compare" element={<ComparePage />} />
+          <Route path="find-my-plant" element={<FindMyPlantPage />} />
           <Route path="saved-plants" element={<SavedPlantsPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="ai-policy" element={<AiPolicyPage />} />

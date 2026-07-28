@@ -71,7 +71,7 @@ export default function ClimateFinder({ onApplyClimate }) {
   }
 
   return (
-    <div className="climate-tool">
+    <div className="climate-tool" id="climate-finder">
       <div>
         <p className="eyebrow">
           <MapPin size={16} aria-hidden="true" />

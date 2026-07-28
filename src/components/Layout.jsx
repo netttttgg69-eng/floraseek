@@ -1,8 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { Heart, Leaf, Search, Sprout, Users } from "lucide-react";
+import { GitCompareArrows, Heart, Leaf, Search, Sparkles, Sprout, Users } from "lucide-react";
+import useComparison from "../hooks/useComparison.js";
 import PlantSearch from "./PlantSearch.jsx";
 
 export default function Layout() {
+  const { comparisonCount, comparisonLimit } = useComparison();
+
   return (
     <div className="site-shell">
       <header className="site-header">
@@ -27,6 +30,17 @@ export default function Layout() {
             <NavLink to="/finder">
               <Search size={17} />
               Plant Finder
+            </NavLink>
+            <NavLink to="/find-my-plant">
+              <Sparkles size={17} />
+              Find My Plant
+            </NavLink>
+            <NavLink to="/compare" className="comparison-nav-link">
+              <GitCompareArrows size={17} />
+              Compare
+              <span className="nav-count" aria-label={`${comparisonCount} of ${comparisonLimit} plants selected for comparison`}>
+                {comparisonCount}
+              </span>
             </NavLink>
             <NavLink to="/saved-plants">
               <Heart size={17} />
@@ -57,6 +71,8 @@ export default function Layout() {
           </div>
           <div className="footer-links" aria-label="Footer navigation">
             <NavLink to="/finder">Plant Finder</NavLink>
+            <NavLink to="/find-my-plant">Find My Plant</NavLink>
+            <NavLink to="/compare">Compare</NavLink>
             <NavLink to="/saved-plants">Saved Plants</NavLink>
             <NavLink to="/flowers">Flowers</NavLink>
             <NavLink to="/plants">Plants</NavLink>

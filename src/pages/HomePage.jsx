@@ -92,6 +92,30 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section quiz-home-section">
+        <div className="container split-section">
+          <div>
+            <p className="eyebrow">
+              <Sparkles size={16} aria-hidden="true" />
+              Guided pick
+            </p>
+            <h2>Not sure which plant to choose?</h2>
+            <p>
+              Answer a few quick questions about climate, category, type, and challenge level to
+              get three recommendations from the Floraseek catalogue.
+            </p>
+          </div>
+          <div className="quiz-home-panel">
+            <strong>{plants.length}</strong>
+            <span>plants and techniques can be scored for your preferences</span>
+            <Link className="button primary" to="/find-my-plant">
+              Take the plant quiz
+              <ArrowRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="section">
         <div className="container">
           <SectionHeader eyebrow="Weekly pick" title="Plant of the Week">

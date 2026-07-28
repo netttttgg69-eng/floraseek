@@ -2,6 +2,7 @@ import { ArrowLeft, Compass, Leaf, ShoppingBag, ThermometerSun } from "lucide-re
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Badge from "../components/Badge.jsx";
+import ComparePlantButton from "../components/ComparePlantButton.jsx";
 import PlantCard from "../components/PlantCard.jsx";
 import PlantImage from "../components/PlantImage.jsx";
 import SavePlantButton from "../components/SavePlantButton.jsx";
@@ -52,7 +53,10 @@ export default function PlantPage() {
               <span>{formatList(plant.climates, "climate")}</span>
               <span>{labelFor("type", plant.type)}</span>
             </div>
-            <SavePlantButton plant={plant} className="profile-save-button" />
+            <div className="profile-actions">
+              <SavePlantButton plant={plant} className="profile-save-button" />
+              <ComparePlantButton plant={plant} className="profile-compare-button" />
+            </div>
           </div>
           <PlantImage plant={plant} size="hero" />
         </div>
