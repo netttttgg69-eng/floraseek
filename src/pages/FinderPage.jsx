@@ -15,10 +15,11 @@ const initialFilters = {
   difficulty: ALL_VALUE,
   climate: ALL_VALUE,
   type: ALL_VALUE,
+  category: ALL_VALUE,
 };
 
 export default function FinderPage() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState(initialFilters);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -33,15 +34,20 @@ export default function FinderPage() {
   }, []);
 
   useEffect(() => {
-    const climate = searchParams.get("climate");
-    const validClimate = filterOptions.climate.some((option) => option.value === climate);
+    const urlFilters = Object.keys(initialFilters).reduce((nextFilters, key) => {
+      const value = searchParams.get(key);
+      const isValidValue = filterOptions[key].some((option) => option.value === value);
 
-    if (validClimate && climate !== ALL_VALUE) {
-      setFilters((current) => ({
-        ...current,
-        climate,
-      }));
-    }
+      return {
+        ...nextFilters,
+        [key]: isValidValue && value !== ALL_VALUE ? value : ALL_VALUE,
+      };
+    }, initialFilters);
+
+    setFilters((current) => {
+      const filtersChanged = Object.keys(initialFilters).some((key) => current[key] !== urlFilters[key]);
+      return filtersChanged ? urlFilters : current;
+    });
   }, [searchParams]);
 
   function updateFilter(key, value) {
@@ -49,11 +55,32 @@ export default function FinderPage() {
       ...current,
       [key]: value,
     }));
+
+    setSearchParams((currentParams) => {
+      const nextParams = new URLSearchParams(currentParams);
+
+      if (value && value !== ALL_VALUE) {
+        nextParams.set(key, value);
+      } else {
+        nextParams.delete(key);
+      }
+
+      return nextParams;
+    });
   }
 
   function resetFilters() {
     setFilters(initialFilters);
     setSearchQuery("");
+    setSearchParams((currentParams) => {
+      const nextParams = new URLSearchParams(currentParams);
+
+      Object.keys(initialFilters).forEach((key) => {
+        nextParams.delete(key);
+      });
+
+      return nextParams;
+    });
   }
 
   return (
@@ -66,8 +93,8 @@ export default function FinderPage() {
           </p>
           <h1>Filter every Floraseek plant.</h1>
           <p>
-            Combine difficulty, climate, and type to narrow the project catalogue without refreshing
-            the page.
+            Combine difficulty, climate, category, and type to narrow the project catalogue without
+            refreshing the page.
           </p>
           <div className="page-heading-actions">
             <RandomPlantButton />
@@ -77,7 +104,7 @@ export default function FinderPage() {
         <form className="finder-panel" onSubmit={(event) => event.preventDefault()}>
           <PlantSearch
             label="Search"
-            placeholder="Search by name, climate, type"
+            placeholder="Search by name, category, climate, type"
             value={searchQuery}
             variant="finder"
             onChange={setSearchQuery}
@@ -95,6 +122,13 @@ export default function FinderPage() {
             value={filters.climate}
             options={filterOptions.climate}
             onChange={(value) => updateFilter("climate", value)}
+          />
+          <FilterSelect
+            id="category"
+            label="Category"
+            value={filters.category}
+            options={filterOptions.category}
+            onChange={(value) => updateFilter("category", value)}
           />
           <FilterSelect
             id="type"

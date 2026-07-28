@@ -20,6 +20,7 @@ export default function PlantOfWeek() {
         <h3>{plant.name}</h3>
         <p>{description}</p>
         <div className="profile-badges plant-week-badges">
+          <Badge category="category" value={plant.category} />
           <Badge category="difficulty" value={plant.difficulty} />
           <span>{formatList(plant.climates, "climate")}</span>
           <span>

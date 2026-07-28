@@ -1,4 +1,15 @@
-import { ArrowRight, Filter, Leaf, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  CircleDot,
+  Filter,
+  Flower2,
+  House,
+  Leaf,
+  Scissors,
+  Sparkles,
+  Sprout,
+  TreePine,
+} from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import CategoryCard from "../components/CategoryCard.jsx";
@@ -11,6 +22,15 @@ import { plants } from "../data/plants.js";
 import { setPageMeta } from "../utils/meta.js";
 
 const featuredIds = ["monstera-deliciosa", "sunflower", "snake-plant"];
+const homepageCategories = [
+  { name: "Flowers", Icon: Flower2 },
+  { name: "Succulents", Icon: Sprout },
+  { name: "Trees", Icon: TreePine },
+  { name: "Houseplants", Icon: House },
+  { name: "Climbers", Icon: Leaf },
+  { name: "Carnivorous Plants", Icon: CircleDot },
+  { name: "Techniques", Icon: Scissors },
+];
 
 export default function HomePage() {
   const featuredPlants = plants.filter((plant) => featuredIds.includes(plant.id));
@@ -78,6 +98,36 @@ export default function HomePage() {
             A deterministic weekly feature chosen from the central Floraseek plant catalogue.
           </SectionHeader>
           <PlantOfWeek />
+        </div>
+      </section>
+
+      <section className="section muted">
+        <div className="container">
+          <SectionHeader eyebrow="Categories" title="Browse by category">
+            Choose a broad group and open the Plant Finder with that category already selected.
+          </SectionHeader>
+          <div className="broad-category-grid">
+            {homepageCategories.map(({ name, Icon }) => {
+              const count = plants.filter((plant) => plant.category === name).length;
+
+              return (
+                <Link
+                  key={name}
+                  className="broad-category-card"
+                  to={`/finder?category=${encodeURIComponent(name)}`}
+                >
+                  <span className="category-icon" aria-hidden="true">
+                    <Icon size={26} />
+                  </span>
+                  <span>
+                    <strong>{name}</strong>
+                    <small>{count} profiles</small>
+                  </span>
+                  <ArrowRight size={18} aria-hidden="true" />
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </section>
 

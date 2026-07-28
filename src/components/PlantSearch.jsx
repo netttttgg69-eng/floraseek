@@ -2,6 +2,7 @@ import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { searchPlants } from "../data/plants.js";
+import Badge from "./Badge.jsx";
 
 export default function PlantSearch({
   className = "",
@@ -72,7 +73,10 @@ export default function PlantSearch({
           {results.length > 0 ? (
             results.map((plant) => (
               <button key={plant.id} type="button" onClick={() => openPlant(plant)}>
-                <strong>{plant.name}</strong>
+                <span className="search-result-heading">
+                  <strong>{plant.name}</strong>
+                  <Badge category="category" value={plant.category} />
+                </span>
                 <span>{plant.shortDescription || plant.summary}</span>
               </button>
             ))

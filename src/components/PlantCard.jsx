@@ -16,6 +16,7 @@ export default function PlantCard({ plant }) {
         <div>
           <p className="eyebrow">{labelFor("type", plant.type)}</p>
           <h3>{plant.name}</h3>
+          <Badge category="category" value={plant.category} />
           <p>{description}</p>
         </div>
 

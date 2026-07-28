@@ -47,6 +47,7 @@ export default function PlantPage() {
             <h1>{plant.name}</h1>
             <p>{description}</p>
             <div className="profile-badges">
+              <Badge category="category" value={plant.category} />
               <Badge category="difficulty" value={plant.difficulty} />
               <span>{formatList(plant.climates, "climate")}</span>
               <span>{labelFor("type", plant.type)}</span>

@@ -20,6 +20,20 @@ export const filterOptions = {
     { label: "All types", value: ALL_VALUE },
     { label: "Flowers", value: "flower" },
     { label: "Plants", value: "plant" },
+    { label: "Techniques", value: "technique" },
+  ],
+  category: [
+    { label: "All categories", value: ALL_VALUE },
+    { label: "Flowers", value: "Flowers" },
+    { label: "Succulents", value: "Succulents" },
+    { label: "Trees", value: "Trees" },
+    { label: "Shrubs", value: "Shrubs" },
+    { label: "Houseplants", value: "Houseplants" },
+    { label: "Climbers", value: "Climbers" },
+    { label: "Bulbs", value: "Bulbs" },
+    { label: "Carnivorous Plants", value: "Carnivorous Plants" },
+    { label: "Desert Plants", value: "Desert Plants" },
+    { label: "Techniques", value: "Techniques" },
   ],
 };
 
@@ -40,6 +54,7 @@ export const labels = {
   type: {
     flower: "Flower",
     plant: "Plant",
+    technique: "Technique",
   },
 };
 
@@ -56,6 +71,7 @@ export const plants = [
     legacyPaths: ["/sunflower"],
     difficulty: "easy",
     type: "flower",
+    category: "Flowers",
     climates: ["temperate", "subtropical"],
     summary: "A bright flower profile from the original Floraseek finder.",
     shortDescription: "Sunflowers are tall flowering plants recognised for their large golden flower heads and dark central discs. They grow best in sunny locations and are often planted for decoration, pollinators, cut flowers, and their edible seeds.",
@@ -71,6 +87,7 @@ export const plants = [
     legacyPaths: ["/rose"],
     difficulty: "moderate",
     type: "flower",
+    category: "Shrubs",
     climates: ["temperate"],
     summary: "A classic flower profile from the original Floraseek finder.",
     shortDescription: "Roses are flowering shrubs known for their layered blooms, attractive colours, and often strong fragrance. They are widely grown in gardens and containers, with different varieties used for decoration, cut flowers, climbing displays, and ground cover.",
@@ -86,6 +103,7 @@ export const plants = [
     legacyPaths: ["/tulip"],
     difficulty: "easy",
     type: "flower",
+    category: "Bulbs",
     climates: ["temperate", "continental"],
     summary: "An easy flower profile from the original Floraseek finder.",
     shortDescription: "Tulips are spring-flowering bulb plants known for their smooth, cup-shaped blooms and wide variety of colours. They grow from bulbs planted before the flowering season and are commonly used in garden beds, pots, and cut-flower displays.",
@@ -101,6 +119,7 @@ export const plants = [
     legacyPaths: ["/lavender"],
     difficulty: "easy",
     type: "flower",
+    category: "Flowers",
     climates: ["temperate"],
     summary: "An easy flower profile from the original Floraseek finder.",
     shortDescription: "Lavender is an aromatic flowering plant known for its narrow grey-green leaves and spikes of purple flowers. It is valued for its fragrance, attractive blooms, ability to attract pollinators, and preference for sunny, well-drained conditions.",
@@ -116,6 +135,7 @@ export const plants = [
     legacyPaths: ["/cactus"],
     difficulty: "easy",
     type: "plant",
+    category: "Succulents",
     climates: ["subtropical", "desert"],
     summary: "A resilient plant profile from the original Floraseek finder.",
     shortDescription: "Cacti are plants adapted to survive in dry environments by storing water in thick stems. Many species have spines instead of leaves and are popular because of their unusual shapes, drought tolerance, and low watering requirements.",
@@ -131,6 +151,7 @@ export const plants = [
     legacyPaths: ["/aloevera", "/aloe-vera"],
     difficulty: "easy",
     type: "plant",
+    category: "Succulents",
     climates: ["tropical", "subtropical"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "Aloe vera is a succulent with thick, pointed leaves that store water and contain a clear gel. It is commonly grown indoors or in dry gardens because it needs little watering and prefers bright, warm conditions.",
@@ -146,6 +167,7 @@ export const plants = [
     legacyPaths: ["/snakeplant", "/snake-plant"],
     difficulty: "easy",
     type: "plant",
+    category: "Houseplants",
     climates: ["tropical", "subtropical"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "The snake plant is a tough houseplant with stiff, upright leaves that often have striped or patterned markings. It is popular because it tolerates lower light, dry indoor air, and longer periods between watering than many houseplants.",
@@ -161,6 +183,7 @@ export const plants = [
     legacyPaths: ["/peacelily", "/peace-lily"],
     difficulty: "easy",
     type: "flower",
+    category: "Houseplants",
     climates: ["tropical", "subtropical"],
     summary: "An easy flower profile from the original Floraseek finder.",
     shortDescription: "The peace lily is a tropical houseplant with dark green leaves and elegant white flower-like structures. It is popular in homes and offices because it can tolerate lower light, although it grows and flowers best in bright indirect light.",
@@ -176,6 +199,7 @@ export const plants = [
     legacyPaths: ["/spiderplant", "/spider-plant"],
     difficulty: "easy",
     type: "plant",
+    category: "Houseplants",
     climates: ["temperate"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "The spider plant is an adaptable houseplant with long, arching leaves that are often striped green and white. Mature plants produce hanging stems with small flowers and young plantlets that can be removed and grown as new plants.",
@@ -191,6 +215,7 @@ export const plants = [
     legacyPaths: ["/zzplant", "/zz-plant"],
     difficulty: "easy",
     type: "plant",
+    category: "Houseplants",
     climates: ["tropical", "subtropical"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "The ZZ plant is a durable indoor plant with thick stems, glossy leaves, and underground structures that store water. It is popular because it tolerates lower light, irregular watering, and indoor conditions that may challenge less resilient plants.",
@@ -206,6 +231,7 @@ export const plants = [
     legacyPaths: ["/chineseevergreen", "/chinese-evergreen"],
     difficulty: "easy",
     type: "plant",
+    category: "Houseplants",
     climates: ["tropical", "subtropical"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "Chinese evergreen is a hardy houseplant with broad leaves patterned in shades of green, silver, cream, or red. It is especially popular indoors because it tolerates lower light levels and requires less attention than many tropical plants.",
@@ -221,6 +247,7 @@ export const plants = [
     legacyPaths: ["/monsteradeliciosa", "/monstera-deliciosa"],
     difficulty: "moderate",
     type: "plant",
+    category: "Climbers",
     climates: ["tropical"],
     summary: "A moderate plant profile from the original Floraseek finder.",
     shortDescription: "Monstera deliciosa is a tropical climbing plant famous for its large leaves that develop natural splits and holes as they mature. It is widely grown indoors for its dramatic foliage and can become very large when given support.",
@@ -236,6 +263,7 @@ export const plants = [
     legacyPaths: ["/fiddleleaffig", "/fiddle-leaf-fig"],
     difficulty: "hard",
     type: "plant",
+    category: "Trees",
     climates: ["tropical", "subtropical"],
     summary: "A harder plant profile from the original Floraseek finder.",
     shortDescription: "The fiddle leaf fig is a popular indoor tree with large, glossy leaves shaped somewhat like violins. It is often used as a decorative feature plant, although it can be sensitive to changes in light, temperature, and watering.",
@@ -251,6 +279,7 @@ export const plants = [
     legacyPaths: ["/orchid"],
     difficulty: "hard",
     type: "flower",
+    category: "Flowers",
     climates: ["tropical", "subtropical"],
     summary: "A harder flower profile from the original Floraseek finder.",
     shortDescription: "Orchids are flowering plants admired for their detailed, long-lasting blooms and wide variety of colours and shapes. Many commonly grown orchids prefer bright indirect light, airflow, and a specialised growing medium rather than ordinary garden soil.",
@@ -266,6 +295,7 @@ export const plants = [
     legacyPaths: ["/pitcherplant", "/pitcher-plant"],
     difficulty: "moderate",
     type: "plant",
+    category: "Carnivorous Plants",
     climates: ["tropical", "subtropical"],
     summary: "A moderate plant profile from the original Floraseek finder.",
     shortDescription: "Pitcher plants are carnivorous plants with specialised leaves shaped like containers filled with digestive liquid. Insects are attracted inside, become trapped, and provide nutrients that help the plant survive in nutrient-poor soil.",
@@ -281,6 +311,7 @@ export const plants = [
     legacyPaths: ["/welwitschia"],
     difficulty: "extreme",
     type: "plant",
+    category: "Desert Plants",
     climates: ["desert"],
     summary: "An extreme plant profile from the original Floraseek finder.",
     shortDescription: "Welwitschia is an unusual desert plant native to parts of southern Africa and grows only two main leaves throughout its life. These leaves continue growing for many years, becoming split and twisted by harsh desert conditions.",
@@ -296,6 +327,7 @@ export const plants = [
     legacyPaths: ["/corpseflower", "/corpse-flower"],
     difficulty: "easy",
     type: "flower",
+    category: "Flowers",
     climates: ["tropical"],
     summary: "A tropical flower profile from the original Floraseek finder.",
     shortDescription: "The corpse flower is a rare tropical plant famous for producing one of the largest flowering structures in the world. When blooming, it releases a powerful smell resembling rotting material to attract insects that help with pollination.",
@@ -311,6 +343,7 @@ export const plants = [
     legacyPaths: ["/pothos"],
     difficulty: "easy",
     type: "plant",
+    category: "Climbers",
     climates: ["tropical", "subtropical"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "Pothos is a fast-growing trailing houseplant with heart-shaped leaves that may be green, yellow, white, or patterned. It is popular with beginners because it adapts to different indoor conditions and can grow in hanging pots or climb supports.",
@@ -326,6 +359,7 @@ export const plants = [
     legacyPaths: ["/anthurium"],
     difficulty: "moderate",
     type: "plant",
+    category: "Houseplants",
     climates: ["tropical", "subtropical"],
     summary: "A moderate plant profile from the original Floraseek finder.",
     shortDescription: "Anthurium is a tropical houseplant with glossy green leaves and colourful, heart-shaped structures surrounding its flowers. It is popular indoors because of its distinctive appearance and ability to flower for long periods in warm, humid conditions.",
@@ -341,6 +375,7 @@ export const plants = [
     legacyPaths: ["/kalanchoe"],
     difficulty: "easy",
     type: "flower",
+    category: "Succulents",
     climates: ["desert", "subtropical"],
     summary: "An easy flower profile from the original Floraseek finder.",
     shortDescription: "Kalanchoe is a compact succulent with thick leaves and clusters of small, brightly coloured flowers. It is commonly grown as an indoor flowering plant because it requires limited watering and can produce blooms that last for several weeks.",
@@ -356,6 +391,7 @@ export const plants = [
     legacyPaths: ["/jadeplant", "/jade-plant"],
     difficulty: "easy",
     type: "plant",
+    category: "Succulents",
     climates: ["desert", "subtropical"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "The jade plant is a slow-growing succulent with thick, rounded leaves and woody stems that can develop a miniature tree-like form. It is popular indoors because it stores water efficiently and can live for many years with proper care.",
@@ -371,6 +407,7 @@ export const plants = [
     legacyPaths: ["/croton"],
     difficulty: "moderate",
     type: "plant",
+    category: "Houseplants",
     climates: ["tropical", "subtropical"],
     summary: "A moderate plant profile from the original Floraseek finder.",
     shortDescription: "Croton is a tropical foliage plant known for its thick leaves marked with bright combinations of green, yellow, orange, red, and purple. It is grown mainly for its bold colours and becomes most vibrant when given strong light.",
@@ -385,7 +422,8 @@ export const plants = [
     shopUrl: "",
     legacyPaths: ["/bonsai"],
     difficulty: "hard",
-    type: "plant",
+    type: "technique",
+    category: "Techniques",
     climates: ["temperate", "subtropical"],
     summary: "A hard plant profile from the original Floraseek finder data.",
     shortDescription: "Bonsai is the technique of carefully training trees and shrubs to grow in miniature forms. Growers use pruning, wiring, root trimming, and controlled containers to shape the plant while maintaining the appearance of a full-sized mature tree.",
@@ -411,6 +449,7 @@ export function getPlantSearchText(plant) {
     plant.name,
     plant.summary,
     plant.shortDescription,
+    plant.category,
     plant.type,
     labelFor("type", plant.type),
     plant.difficulty,
@@ -444,13 +483,15 @@ export function filterPlants(filters) {
   const difficulty = normalizeFilter(filters.difficulty);
   const climate = normalizeFilter(filters.climate);
   const type = normalizeFilter(filters.type);
+  const category = normalizeFilter(filters.category);
 
   return plants.filter((plant) => {
     const matchesDifficulty = difficulty === ALL_VALUE || plant.difficulty === difficulty;
     const matchesClimate = climate === ALL_VALUE || plant.climates.includes(climate);
     const matchesType = type === ALL_VALUE || plant.type === type;
+    const matchesCategory = category === ALL_VALUE || normalizeFilter(plant.category) === category;
 
-    return matchesDifficulty && matchesClimate && matchesType;
+    return matchesDifficulty && matchesClimate && matchesType && matchesCategory;
   });
 }
 
