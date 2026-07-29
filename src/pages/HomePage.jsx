@@ -1,14 +1,16 @@
 import {
   ArrowRight,
-  CircleDot,
+  Apple,
   Filter,
   Flower2,
   House,
   Leaf,
-  Scissors,
   Sparkles,
   Sprout,
+  TreePalm,
   TreePine,
+  Waves,
+  Wheat,
 } from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -25,11 +27,14 @@ const featuredIds = ["monstera-deliciosa", "sunflower", "snake-plant"];
 const homepageCategories = [
   { name: "Flowers", Icon: Flower2 },
   { name: "Succulents", Icon: Sprout },
-  { name: "Trees", Icon: TreePine },
   { name: "Houseplants", Icon: House },
-  { name: "Climbers", Icon: Leaf },
-  { name: "Carnivorous Plants", Icon: CircleDot },
-  { name: "Techniques", Icon: Scissors },
+  { name: "Trees", Icon: TreePine },
+  { name: "Unique Plants", Icon: Sparkles },
+  { name: "Ferns", Icon: Leaf },
+  { name: "Herbs", Icon: Wheat },
+  { name: "Palms", Icon: TreePalm },
+  { name: "Aquatic Plants", Icon: Waves },
+  { name: "Fruit Plants", Icon: Apple },
 ];
 
 export default function HomePage() {
