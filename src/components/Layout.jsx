@@ -1,15 +1,83 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { GitCompareArrows, Heart, Leaf, Search, Sparkles, Sprout, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import {
+  GitCompareArrows,
+  Heart,
+  Leaf,
+  Menu,
+  Search,
+  Sparkles,
+  Sprout,
+  Users,
+  X,
+} from "lucide-react";
 import useComparison from "../hooks/useComparison.js";
 import PlantSearch from "./PlantSearch.jsx";
 
+const mainNavLinks = [
+  { to: "/", label: "Home", Icon: Leaf },
+  { to: "/finder", label: "Plant Finder", Icon: Search },
+  { to: "/find-my-plant", label: "Find My Plant", Icon: Sparkles },
+  { to: "/compare", label: "Compare", Icon: GitCompareArrows, showCount: true },
+  { to: "/saved-plants", label: "Saved Plants", Icon: Heart },
+];
+
+const mobileNavLinks = [
+  ...mainNavLinks,
+  { to: "/about", label: "About the Creator", Icon: Users },
+];
+
 export default function Layout() {
   const { comparisonCount, comparisonLimit } = useComparison();
+  const { pathname } = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+
+  function closeHeaderPanels() {
+    setIsMobileMenuOpen(false);
+    setIsMobileSearchOpen(false);
+  }
+
+  useEffect(() => {
+    closeHeaderPanels();
+  }, [pathname]);
+
+  useEffect(() => {
+    function closeOnEscape(event) {
+      if (event.key === "Escape") {
+        closeHeaderPanels();
+      }
+    }
+
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, []);
+
+  function renderNavLink({ to, label, Icon, showCount }) {
+    return (
+      <NavLink key={to} to={to} onClick={closeHeaderPanels}>
+        <Icon size={17} aria-hidden="true" />
+        <span>{label}</span>
+        {showCount && (
+          <span
+            className="nav-count"
+            aria-label={`${comparisonCount} of ${comparisonLimit} plants selected for comparison`}
+          >
+            {comparisonCount}
+          </span>
+        )}
+      </NavLink>
+    );
+  }
 
   return (
     <div className="site-shell">
       <header className="site-header">
-        <nav className="nav container" aria-label="Main navigation">
+        <div className="nav container">
           <NavLink to="/" className="brand" aria-label="Floraseek homepage">
             <span className="brand-mark" aria-hidden="true">
               <Sprout size={22} />
@@ -20,38 +88,63 @@ export default function Layout() {
             </span>
           </NavLink>
 
-          <PlantSearch className="nav-search" placeholder="Search Floraseek" />
+          <PlantSearch
+            className="nav-search desktop-search"
+            label="Search plants"
+            placeholder="Search plants"
+          />
 
-          <div className="nav-links">
-            <NavLink to="/">
-              <Leaf size={17} />
-              Home
-            </NavLink>
-            <NavLink to="/finder">
-              <Search size={17} />
-              Plant Finder
-            </NavLink>
-            <NavLink to="/find-my-plant">
-              <Sparkles size={17} />
-              Find My Plant
-            </NavLink>
-            <NavLink to="/compare" className="comparison-nav-link">
-              <GitCompareArrows size={17} />
-              Compare
-              <span className="nav-count" aria-label={`${comparisonCount} of ${comparisonLimit} plants selected for comparison`}>
-                {comparisonCount}
-              </span>
-            </NavLink>
-            <NavLink to="/saved-plants">
-              <Heart size={17} />
-              Saved Plants
-            </NavLink>
-            <NavLink to="/about">
-              <Users size={17} />
-              About the Creator
-            </NavLink>
+          <nav className="nav-links desktop-nav" aria-label="Main navigation">
+            {mainNavLinks.map(renderNavLink)}
+          </nav>
+
+          <div className="mobile-header-actions">
+            <button
+              className="header-icon-button"
+              type="button"
+              aria-label="Open plant search"
+              aria-controls="mobile-search-panel"
+              aria-expanded={isMobileSearchOpen}
+              onClick={() => {
+                setIsMobileSearchOpen((isOpen) => !isOpen);
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              {isMobileSearchOpen ? <X size={21} aria-hidden="true" /> : <Search size={21} aria-hidden="true" />}
+            </button>
+            <button
+              className="header-icon-button"
+              type="button"
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-controls="mobile-navigation"
+              aria-expanded={isMobileMenuOpen}
+              onClick={() => {
+                setIsMobileMenuOpen((isOpen) => !isOpen);
+                setIsMobileSearchOpen(false);
+              }}
+            >
+              {isMobileMenuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+            </button>
           </div>
-        </nav>
+        </div>
+
+        {isMobileSearchOpen && (
+          <div className="mobile-search-panel container" id="mobile-search-panel">
+            <PlantSearch
+              className="mobile-search"
+              label="Search plants"
+              placeholder="Search plants"
+              onEscape={closeHeaderPanels}
+              onSelect={closeHeaderPanels}
+            />
+          </div>
+        )}
+
+        {isMobileMenuOpen && (
+          <nav className="mobile-menu-panel container" id="mobile-navigation" aria-label="Mobile navigation">
+            {mobileNavLinks.map(renderNavLink)}
+          </nav>
+        )}
       </header>
 
       <main>

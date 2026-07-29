@@ -8,6 +8,8 @@ export default function PlantSearch({
   className = "",
   label = "Search plants",
   onChange,
+  onEscape,
+  onSelect,
   placeholder = "Search plants",
   value,
   variant = "nav",
@@ -34,6 +36,7 @@ export default function PlantSearch({
   function openPlant(plant) {
     updateQuery("");
     setIsOpen(false);
+    onSelect?.(plant);
     navigate(`/plants/${plant.slug}`);
   }
 
@@ -64,6 +67,12 @@ export default function PlantSearch({
             }}
             onChange={(event) => updateQuery(event.target.value)}
             onFocus={() => setIsOpen(true)}
+            onKeyDown={(event) => {
+              if (event.key === "Escape") {
+                setIsOpen(false);
+                onEscape?.();
+              }
+            }}
           />
         </div>
       </label>
