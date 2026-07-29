@@ -101,7 +101,7 @@ export default function HomePage() {
             </p>
             <h2>Not sure which plant to choose?</h2>
             <p>
-              Answer a few quick questions about climate, category, type, and challenge level to
+              Answer a few quick questions about experience, climate, category, and challenge level to
               get three recommendations from the Floraseek catalogue.
             </p>
           </div>

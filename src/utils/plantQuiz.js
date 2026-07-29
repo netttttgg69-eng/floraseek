@@ -34,17 +34,6 @@ export const quizQuestions = [
       .concat({ label: "No preference", value: ALL_VALUE }),
   },
   {
-    id: "type",
-    title: "What type are you looking for?",
-    fallbackValue: ALL_VALUE,
-    options: [
-      { label: "Flower", value: "flower" },
-      { label: "Plant", value: "plant" },
-      { label: "Technique", value: "technique" },
-      { label: "No preference", value: ALL_VALUE },
-    ],
-  },
-  {
     id: "difficulty",
     title: "How challenging should the plant be?",
     fallbackValue: ALL_VALUE,
@@ -114,10 +103,6 @@ export function scorePlantForQuiz(plant, answers) {
     score += 2.5;
   }
 
-  if (resolvedAnswers.type !== ALL_VALUE && plant.type === resolvedAnswers.type) {
-    score += 2;
-  }
-
   score += scoreExperience(plant, resolvedAnswers.experience);
 
   return score;
@@ -146,10 +131,6 @@ export function getQuizMatchReasons(plant, answers) {
     plant.difficulty === resolvedAnswers.difficulty
   ) {
     reasons.push(`Fits your ${labelFor("difficulty", plant.difficulty).toLowerCase()} challenge preference`);
-  }
-
-  if (resolvedAnswers.type !== ALL_VALUE && plant.type === resolvedAnswers.type) {
-    reasons.push(`Matches your ${labelFor("type", plant.type).toLowerCase()} type preference`);
   }
 
   if (resolvedAnswers.experience === "beginner" && plant.difficulty === "easy") {
