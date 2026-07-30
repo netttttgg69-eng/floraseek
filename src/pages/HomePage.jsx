@@ -18,6 +18,7 @@ import PlantCard from "../components/PlantCard.jsx";
 import PlantOfWeek from "../components/PlantOfWeek.jsx";
 import RandomPlantButton from "../components/RandomPlantButton.jsx";
 import SectionHeader from "../components/SectionHeader.jsx";
+import SiteIntro from "../components/SiteIntro.jsx";
 import { plants } from "../data/plants.js";
 import { setPageMeta } from "../utils/meta.js";
 
@@ -48,6 +49,7 @@ export default function HomePage() {
 
   return (
     <>
+      <SiteIntro />
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
