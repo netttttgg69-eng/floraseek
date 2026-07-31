@@ -2092,7 +2092,7 @@ p {
   position: relative;
   min-height: calc(100vh - 82px);
   overflow: hidden;
-  padding: 58px 0 0;
+  padding: 58px 0;
   background: #f7eedc;
 }
 
@@ -2128,14 +2128,14 @@ p {
   min-height: calc(100vh - 140px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   gap: 30px;
 }
 
 .editorial-hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(390px, 1.05fr);
-  gap: 76px;
+  grid-template-columns: minmax(0, 0.92fr) minmax(420px, 0.98fr);
+  gap: 84px;
   align-items: center;
   flex: 1;
 }
@@ -2145,9 +2145,7 @@ p {
 }
 
 .hero-index-label,
-.hero-index-summary,
-.annotation,
-.hero-strip-card small {
+.hero-index-summary {
   letter-spacing: 0;
   text-transform: uppercase;
 }
@@ -2175,85 +2173,36 @@ p {
   font-size: 1.12rem;
 }
 
-.hero-finder-panel {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(135px, 1fr)) auto;
-  gap: 10px;
-  align-items: end;
-  max-width: 760px;
-  margin-top: 36px;
-  padding: 16px 0;
-  border-block: 1px solid rgba(18, 54, 38, 0.2);
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
 }
 
-.hero-finder-panel label {
-  display: grid;
-  gap: 7px;
-}
-
-.hero-finder-panel label span {
-  color: var(--field-muted);
-  font-size: 0.76rem;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.hero-finder-panel select {
-  width: 100%;
-  min-height: 42px;
-  padding: 0 34px 0 11px;
-  border: 1px solid rgba(18, 54, 38, 0.22);
+.home-page .hero-cta-row .button {
   border-radius: 4px;
-  color: var(--field-ink);
-  background: rgba(255, 248, 233, 0.92);
-  box-shadow: inset 0 -1px 0 rgba(18, 54, 38, 0.08);
-  cursor: pointer;
 }
 
-.button.primary.hero-submit-button {
-  min-height: 42px;
-  padding: 10px 16px;
-  border-radius: 4px;
+.home-page .hero-cta-row .button.primary {
   color: #0f2d20;
   background: var(--field-lime);
   box-shadow: 0 10px 24px rgba(18, 54, 38, 0.14);
 }
 
-.button.primary.hero-submit-button:hover {
+.home-page .hero-cta-row .button.primary:hover {
   color: #0f2d20;
   background: #c6ff5f;
 }
 
-.hero-quiet-actions {
-  margin-top: 18px;
-}
-
-.hero-random-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0;
-  border: 0;
+.home-page .hero-cta-row .button.secondary {
   color: var(--field-ink);
-  background: transparent;
-  font-weight: 850;
-  text-decoration: underline;
-  text-decoration-color: rgba(18, 54, 38, 0.34);
-  text-underline-offset: 6px;
-  cursor: pointer;
-}
-
-.hero-random-link:hover {
-  color: var(--leaf);
-}
-
-.hero-random-link svg {
-  width: 16px;
-  height: 16px;
+  border-color: rgba(18, 54, 38, 0.22);
+  background: rgba(255, 248, 233, 0.9);
 }
 
 .hero-index-summary {
-  margin: 34px 0 0;
+  margin: 30px 0 0;
   color: var(--field-muted);
   font-size: 0.78rem;
   font-weight: 900;
@@ -2261,14 +2210,22 @@ p {
 
 .hero-collage {
   position: relative;
-  min-height: 640px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(190px, 0.82fr);
+  grid-template-rows: repeat(3, minmax(132px, 1fr));
+  gap: 16px;
+  min-height: 570px;
+  padding: 18px;
+  border: 1px solid rgba(18, 54, 38, 0.18);
+  background: rgba(255, 248, 233, 0.46);
+  box-shadow: 0 22px 54px rgba(18, 54, 38, 0.1);
   isolation: isolate;
 }
 
 .hero-specimen-number {
   position: absolute;
-  top: -42px;
-  right: 12px;
+  top: -54px;
+  right: -12px;
   z-index: -1;
   color: rgba(18, 54, 38, 0.08);
   font-family: "Fraunces", "Iowan Old Style", Georgia, serif;
@@ -2278,13 +2235,13 @@ p {
 }
 
 .collage-frame {
-  position: absolute;
+  position: relative;
   overflow: hidden;
   margin: 0;
   border: 1px solid rgba(18, 54, 38, 0.22);
   border-radius: 6px;
   background: var(--field-paper);
-  box-shadow: 0 24px 54px rgba(18, 54, 38, 0.18);
+  box-shadow: 0 16px 34px rgba(18, 54, 38, 0.12);
 }
 
 .collage-frame img {
@@ -2294,168 +2251,48 @@ p {
 }
 
 .collage-frame-main {
-  top: 42px;
-  right: -20px;
-  z-index: 2;
-  width: 62%;
-  height: 520px;
-  transform: rotate(-1.4deg);
+  grid-row: 1 / -1;
 }
 
-.collage-frame-main figcaption {
+.collage-frame-support {
+  min-height: 0;
+}
+
+.collage-frame figcaption {
   position: absolute;
-  left: 18px;
-  bottom: 18px;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
   display: grid;
   gap: 2px;
-  padding: 10px 12px;
+  padding: 10px 11px;
   border-left: 3px solid var(--field-lime);
   color: var(--field-paper);
   background: rgba(18, 54, 38, 0.78);
 }
 
-.collage-frame-main figcaption span {
-  font-weight: 900;
-}
-
-.collage-frame-main figcaption em {
-  font-family: "Fraunces", "Iowan Old Style", Georgia, serif;
-  font-size: 0.95rem;
-}
-
-.collage-frame-small {
-  z-index: 3;
-  width: 35%;
-  height: 230px;
-}
-
-.collage-frame-low {
-  top: 116px;
-  left: -22px;
-  transform: rotate(2deg);
-}
-
-.collage-frame-tropical {
-  right: 64px;
-  bottom: 24px;
-  transform: rotate(1.5deg);
-}
-
-.annotation {
-  position: absolute;
-  z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  color: var(--field-ink);
-  font-size: 0.72rem;
-  font-weight: 950;
-  white-space: nowrap;
-}
-
-.annotation::before {
-  width: 54px;
-  height: 1px;
-  margin-right: 10px;
-  background: rgba(18, 54, 38, 0.58);
-  content: "";
-}
-
-.annotation::after {
-  width: 7px;
-  height: 7px;
-  margin-left: 8px;
-  border-radius: 50%;
-  background: var(--field-lime);
-  content: "";
-}
-
-.annotation-low {
-  top: 76px;
-  left: 54px;
-}
-
-.annotation-beginner {
-  left: 26px;
-  bottom: 210px;
-}
-
-.annotation-tropical {
-  right: -6px;
-  bottom: 300px;
-}
-
-.hero-plant-strip {
-  display: flex;
-  gap: 14px;
-  overflow-x: auto;
-  margin: 10px -20px 0;
-  padding: 0 20px 22px;
-  scroll-snap-type: x proximity;
-}
-
-.hero-plant-strip::-webkit-scrollbar {
-  height: 8px;
-}
-
-.hero-plant-strip::-webkit-scrollbar-thumb {
-  background: rgba(18, 54, 38, 0.28);
-}
-
-.hero-strip-card {
-  flex: 0 0 228px;
-  display: grid;
-  grid-template-columns: 74px minmax(0, 1fr);
-  gap: 12px;
-  align-items: center;
-  min-height: 96px;
-  padding: 10px;
-  border: 1px solid rgba(18, 54, 38, 0.18);
-  border-radius: 6px;
-  background: rgba(255, 248, 233, 0.84);
-  box-shadow: 0 10px 22px rgba(18, 54, 38, 0.08);
-  scroll-snap-align: start;
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.hero-strip-card:hover {
-  transform: scale(1.035);
-  border-color: rgba(18, 54, 38, 0.42);
-  box-shadow: 0 18px 30px rgba(18, 54, 38, 0.14);
-}
-
-.hero-strip-card img {
-  width: 74px;
-  height: 76px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.hero-strip-card span {
-  min-width: 0;
-}
-
-.hero-strip-card strong,
-.hero-strip-card small {
-  display: block;
+.collage-frame figcaption span,
+.collage-frame figcaption strong,
+.collage-frame figcaption em {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.hero-strip-card strong {
-  color: var(--field-ink);
-  font-family: "Fraunces", "Iowan Old Style", Georgia, serif;
-  font-size: 1rem;
+.collage-frame figcaption span {
+  color: var(--field-lime);
+  font-size: 0.68rem;
+  font-weight: 950;
+  text-transform: uppercase;
 }
 
-.hero-strip-card small {
-  margin-top: 4px;
-  color: var(--field-muted);
-  font-size: 0.66rem;
+.collage-frame figcaption strong {
   font-weight: 900;
+}
+
+.collage-frame figcaption em {
+  font-family: "Fraunces", "Iowan Old Style", Georgia, serif;
+  font-size: 0.9rem;
 }
 
 .home-page .quiz-home-section {
@@ -2464,16 +2301,12 @@ p {
 
 @media (max-width: 1120px) {
   .editorial-hero-grid {
-    gap: 44px;
+    grid-template-columns: minmax(0, 0.95fr) minmax(380px, 1fr);
+    gap: 46px;
   }
 
-  .hero-finder-panel {
-    grid-template-columns: repeat(3, minmax(118px, 1fr));
-  }
-
-  .hero-submit-button {
-    grid-column: 1 / -1;
-    justify-self: start;
+  .hero-collage {
+    min-height: 520px;
   }
 }
 
@@ -2497,25 +2330,15 @@ p {
   }
 
   .hero-collage {
-    min-height: 560px;
-  }
-
-  .collage-frame-main {
-    right: 4px;
-  }
-
-  .collage-frame-low {
-    left: 12px;
-  }
-
-  .annotation-tropical {
-    right: 26px;
+    width: min(100%, 680px);
+    min-height: 540px;
+    margin-inline: auto;
   }
 }
 
 @media (max-width: 680px) {
   .editorial-hero {
-    padding: 40px 0 0;
+    padding: 40px 0;
   }
 
   .editorial-hero-grid {
@@ -2530,12 +2353,7 @@ p {
     font-size: 1rem;
   }
 
-  .hero-finder-panel {
-    grid-template-columns: 1fr;
-    margin-top: 28px;
-  }
-
-  .hero-submit-button {
+  .hero-cta-row .button {
     width: 100%;
   }
 
@@ -2544,67 +2362,25 @@ p {
   }
 
   .hero-collage {
-    min-height: 430px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 12px;
+    min-height: 0;
+    padding: 12px;
   }
 
   .hero-specimen-number {
-    top: -18px;
-    right: 4px;
+    top: -32px;
+    right: 8px;
     font-size: 7.5rem;
   }
 
   .collage-frame-main {
-    top: 32px;
-    right: -8px;
-    width: 70%;
-    height: 330px;
+    grid-row: auto;
+    min-height: 310px;
   }
 
-  .collage-frame-main figcaption {
-    left: 12px;
-    bottom: 12px;
-    padding: 8px 10px;
-  }
-
-  .collage-frame-small {
-    width: 42%;
-    height: 150px;
-  }
-
-  .collage-frame-low {
-    top: 78px;
-    left: 0;
-  }
-
-  .collage-frame-tropical {
-    right: 16px;
-    bottom: 4px;
-  }
-
-  .annotation::before {
-    width: 30px;
-  }
-
-  .annotation-low {
-    top: 28px;
-    left: 4px;
-  }
-
-  .annotation-beginner {
-    left: 0;
-    bottom: 160px;
-  }
-
-  .annotation-tropical {
-    right: 0;
-    bottom: 170px;
-  }
-
-  .hero-plant-strip {
-    margin-top: 0;
-  }
-
-  .hero-strip-card {
-    flex-basis: 210px;
+  .collage-frame-support {
+    min-height: 180px;
   }
 }

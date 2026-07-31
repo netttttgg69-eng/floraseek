@@ -8,36 +8,43 @@ import {
   Sprout,
   TreePine,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import CategoryCard from "../components/CategoryCard.jsx";
 import ClimateFinder from "../components/ClimateFinder.jsx";
 import PlantCard from "../components/PlantCard.jsx";
 import PlantOfWeek from "../components/PlantOfWeek.jsx";
-import RandomPlantButton from "../components/RandomPlantButton.jsx";
 import SectionHeader from "../components/SectionHeader.jsx";
 import SiteIntro from "../components/SiteIntro.jsx";
-import { ALL_VALUE, filterOptions, labels, plants } from "../data/plants.js";
+import { plants } from "../data/plants.js";
 import { setPageMeta } from "../utils/meta.js";
 
 const featuredIds = ["monstera-deliciosa", "sunflower", "snake-plant"];
-const heroPlantIds = ["monstera-deliciosa", "snake-plant", "venus-flytrap"];
-const heroStripIds = [
-  "sunflower",
-  "rubber-plant",
-  "cactus",
-  "orchid",
-  "strawberry-plant",
-  "butterwort",
-  "bonsai",
-  "fiddle-leaf-fig",
-];
-const experienceOptions = [
-  { label: "Any experience", value: ALL_VALUE },
-  { label: "Beginner", value: "easy" },
-  { label: "Some experience", value: "moderate" },
-  { label: "Experienced", value: "hard" },
-  { label: "Expert", value: "extreme" },
+const heroSpecimenData = [
+  {
+    id: "monstera-deliciosa",
+    scientificName: "Monstera deliciosa",
+    note: "Tropical",
+    size: "main",
+  },
+  {
+    id: "snake-plant",
+    scientificName: "Dracaena trifasciata",
+    note: "Low light",
+    size: "support",
+  },
+  {
+    id: "sunflower",
+    scientificName: "Helianthus annuus",
+    note: "Beginner friendly",
+    size: "support",
+  },
+  {
+    id: "butterwort",
+    scientificName: "Pinguicula spp.",
+    note: "Special plant",
+    size: "support",
+  },
 ];
 const homepageCategories = [
   { name: "Flowers", Icon: Flower2 },
@@ -50,26 +57,20 @@ const homepageCategories = [
 ];
 
 export default function HomePage() {
-  const navigate = useNavigate();
-  const [heroFilters, setHeroFilters] = useState({
-    climate: ALL_VALUE,
-    difficulty: ALL_VALUE,
-    type: ALL_VALUE,
-  });
   const featuredPlants = plants.filter((plant) => featuredIds.includes(plant.id));
   const flowerCount = plants.filter((plant) => plant.type === "flower").length;
   const plantCount = plants.filter((plant) => plant.type === "plant").length;
   const climateCount = new Set(plants.flatMap((plant) => plant.climates)).size;
   const difficultyCount = new Set(plants.map((plant) => plant.difficulty)).size;
-  const heroPlants = useMemo(
-    () => heroPlantIds.map((plantId) => plants.find((plant) => plant.id === plantId)).filter(Boolean),
+  const heroSpecimens = useMemo(
+    () => heroSpecimenData
+      .map((item) => ({
+        ...item,
+        plant: plants.find((plant) => plant.id === item.id),
+      }))
+      .filter((item) => item.plant),
     []
   );
-  const heroStripPlants = useMemo(
-    () => heroStripIds.map((plantId) => plants.find((plant) => plant.id === plantId)).filter(Boolean),
-    []
-  );
-  const [primaryHeroPlant, lowLightPlant, tropicalPlant] = heroPlants;
 
   useEffect(() => {
     setPageMeta(
@@ -77,27 +78,6 @@ export default function HomePage() {
       "Explore Floraseek, a polished plant and flower finder for difficulty, climate, and plant type."
     );
   }, []);
-
-  function updateHeroFilter(key, value) {
-    setHeroFilters((currentFilters) => ({
-      ...currentFilters,
-      [key]: value,
-    }));
-  }
-
-  function openFilteredFinder(event) {
-    event.preventDefault();
-
-    const searchParams = new URLSearchParams();
-    Object.entries(heroFilters).forEach(([key, value]) => {
-      if (value !== ALL_VALUE) {
-        searchParams.set(key, value);
-      }
-    });
-
-    const queryString = searchParams.toString();
-    navigate(queryString ? `/finder?${queryString}` : "/finder");
-  }
 
   return (
     <div className="home-page">
@@ -115,54 +95,14 @@ export default function HomePage() {
                 confidence level without losing the pleasure of discovery.
               </p>
 
-              <form className="hero-finder-panel" onSubmit={openFilteredFinder}>
-                <label>
-                  <span>Climate</span>
-                  <select
-                    value={heroFilters.climate}
-                    onChange={(event) => updateHeroFilter("climate", event.target.value)}
-                  >
-                    {filterOptions.climate.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label>
-                  <span>Experience</span>
-                  <select
-                    value={heroFilters.difficulty}
-                    onChange={(event) => updateHeroFilter("difficulty", event.target.value)}
-                  >
-                    {experienceOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label>
-                  <span>Plant type</span>
-                  <select
-                    value={heroFilters.type}
-                    onChange={(event) => updateHeroFilter("type", event.target.value)}
-                  >
-                    {filterOptions.type.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <button className="button primary hero-submit-button" type="submit">
-                  Find my plant
+              <div className="hero-cta-row">
+                <Link className="button primary" to="/finder">
+                  Open Plant Finder
                   <ArrowRight size={17} aria-hidden="true" />
-                </button>
-              </form>
-
-              <div className="hero-quiet-actions">
-                <RandomPlantButton className="hero-random-link" />
+                </Link>
+                <Link className="button secondary" to="/plants">
+                  Browse plants
+                </Link>
               </div>
 
               <p className="hero-index-summary">
@@ -172,43 +112,20 @@ export default function HomePage() {
 
             <div className="hero-collage" aria-label="Botanical plant specimen collage">
               <span className="hero-specimen-number" aria-hidden="true">01</span>
-              {primaryHeroPlant && (
-                <figure className="collage-frame collage-frame-main">
-                  <img src={primaryHeroPlant.image} alt={`${primaryHeroPlant.name} leaves`} />
+              {heroSpecimens.map(({ plant, scientificName, note, size }) => (
+                <figure
+                  className={`collage-frame ${size === "main" ? "collage-frame-main" : "collage-frame-support"}`}
+                  key={plant.id}
+                >
+                  <img src={plant.image} alt={`${plant.name} plant`} />
                   <figcaption>
-                    <span>{primaryHeroPlant.name}</span>
-                    <em>Monstera deliciosa</em>
+                    <span>{note}</span>
+                    <strong>{plant.name}</strong>
+                    <em>{scientificName}</em>
                   </figcaption>
                 </figure>
-              )}
-              {lowLightPlant && (
-                <figure className="collage-frame collage-frame-small collage-frame-low">
-                  <img src={lowLightPlant.image} alt={`${lowLightPlant.name} plant`} />
-                </figure>
-              )}
-              {tropicalPlant && (
-                <figure className="collage-frame collage-frame-small collage-frame-tropical">
-                  <img src={tropicalPlant.image} alt={`${tropicalPlant.name} plant`} />
-                </figure>
-              )}
-              <span className="annotation annotation-low">LOW LIGHT</span>
-              <span className="annotation annotation-beginner">BEGINNER FRIENDLY</span>
-              <span className="annotation annotation-tropical">TROPICAL</span>
+              ))}
             </div>
-          </div>
-
-          <div className="hero-plant-strip" aria-label="Featured plant profiles">
-            {heroStripPlants.map((plant) => (
-              <Link className="hero-strip-card" key={plant.id} to={`/plants/${plant.slug}`}>
-                <img src={plant.image} alt={`${plant.name} plant`} loading="lazy" />
-                <span>
-                  <strong>{plant.name}</strong>
-                  <small>
-                    {plant.category} · {labels.difficulty[plant.difficulty]}
-                  </small>
-                </span>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
