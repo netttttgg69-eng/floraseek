@@ -31,6 +31,8 @@ export default function PlantPage() {
   const relatedPlants = getRelatedPlants(plant);
   const shopUrl = (plant.shopUrl || "").trim();
   const description = plant.shortDescription || plant.summary;
+  const isTechniqueProfile = plant.category === "Techniques" || plant.type === "technique";
+  const shopCardLabel = isTechniqueProfile ? "Learn how to do this" : "Shop seeds here";
 
   return (
     <>
@@ -96,23 +98,27 @@ export default function PlantPage() {
             <div>
               <p className="eyebrow">
                 <ShoppingBag size={16} aria-hidden="true" />
-                Seeds
+                {isTechniqueProfile ? "Technique" : "Seeds"}
               </p>
-              <h2>Shop seeds here</h2>
-              {!shopUrl && <p className="shop-note">Coming soon</p>}
+              <h2>{shopCardLabel}</h2>
+              {!shopUrl && !isTechniqueProfile && <p className="shop-note">Coming soon</p>}
             </div>
-            {shopUrl ? (
+            {isTechniqueProfile ? (
+              <a className="button primary shop-button" href="#">
+                {shopCardLabel}
+              </a>
+            ) : shopUrl ? (
               <a
                 className="button primary shop-button"
                 href={shopUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Shop seeds here
+                {shopCardLabel}
               </a>
             ) : (
               <button className="button primary shop-button" type="button" disabled>
-                Shop seeds here
+                {shopCardLabel}
               </button>
             )}
           </article>
