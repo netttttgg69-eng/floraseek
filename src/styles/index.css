@@ -484,8 +484,8 @@ img {
   min-height: 82px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 22px;
+  justify-content: flex-start;
+  gap: 16px;
 }
 
 .brand {
@@ -533,7 +533,7 @@ img {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 8px;
   flex-wrap: nowrap;
 }
 
@@ -542,7 +542,7 @@ img {
   align-items: center;
   gap: 8px;
   min-height: 42px;
-  padding: 9px 14px;
+  padding: 9px 10px;
   color: rgba(243, 240, 232, 0.78);
   border-radius: var(--radius);
   white-space: nowrap;
@@ -571,10 +571,14 @@ img {
 }
 
 .nav-search {
-  flex: 0 0 clamp(220px, 20vw, 280px);
-  width: clamp(220px, 20vw, 280px);
-  max-width: 280px;
-  min-width: 220px;
+  flex: 0 0 clamp(180px, 16vw, 240px);
+  width: clamp(180px, 16vw, 240px);
+  max-width: 240px;
+  min-width: 180px;
+}
+
+.desktop-nav {
+  margin-left: auto;
 }
 
 .mobile-header-actions,
@@ -2131,7 +2135,7 @@ p {
 }
 
 .site-shell:has(.home-page) .brand {
-  order: 1;
+  order: 0;
 }
 
 .site-shell:has(.home-page) .brand-mark {
@@ -2149,17 +2153,17 @@ p {
 }
 
 .site-shell:has(.home-page) .desktop-nav {
-  order: 2;
-  margin-inline: auto;
+  order: 0;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .site-shell:has(.home-page) .desktop-search {
-  order: 3;
+  order: 0;
 }
 
 .site-shell:has(.home-page) .nav-links {
-  gap: 18px;
-  margin-left: 0;
+  gap: 8px;
 }
 
 .site-shell:has(.home-page) .nav-links a {
