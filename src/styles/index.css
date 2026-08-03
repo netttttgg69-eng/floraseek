@@ -1277,7 +1277,7 @@ p {
 
 .finder-panel {
   display: grid;
-  grid-template-columns: minmax(220px, 1.35fr) repeat(4, minmax(140px, 1fr)) minmax(110px, 0.7fr);
+  grid-template-columns: minmax(220px, 1.25fr) repeat(3, minmax(150px, 1fr)) minmax(120px, 0.75fr);
   gap: 14px;
   align-items: end;
   margin-bottom: 34px;

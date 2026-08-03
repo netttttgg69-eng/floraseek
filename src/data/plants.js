@@ -2031,16 +2031,14 @@ export function normalizeFilter(value) {
 export function filterPlants(filters) {
   const difficulty = normalizeFilter(filters.difficulty);
   const climate = normalizeFilter(filters.climate);
-  const type = normalizeFilter(filters.type);
   const category = normalizeFilter(filters.category);
 
   return plants.filter((plant) => {
     const matchesDifficulty = difficulty === ALL_VALUE || plant.difficulty === difficulty;
     const matchesClimate = climate === ALL_VALUE || plant.climates.includes(climate);
-    const matchesType = type === ALL_VALUE || plant.type === type;
     const matchesCategory = category === ALL_VALUE || normalizeFilter(plant.category) === category;
 
-    return matchesDifficulty && matchesClimate && matchesType && matchesCategory;
+    return matchesDifficulty && matchesClimate && matchesCategory;
   });
 }
 

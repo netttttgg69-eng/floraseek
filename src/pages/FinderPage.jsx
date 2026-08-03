@@ -14,7 +14,6 @@ import { setPageMeta } from "../utils/meta.js";
 const initialFilters = {
   difficulty: ALL_VALUE,
   climate: ALL_VALUE,
-  type: ALL_VALUE,
   category: ALL_VALUE,
 };
 
@@ -29,11 +28,18 @@ export default function FinderPage() {
   useEffect(() => {
     setPageMeta(
       "Plant Finder",
-      "Filter Floraseek plants by difficulty, climate, and type."
+      "Filter Floraseek plants by difficulty, climate, and category."
     );
   }, []);
 
   useEffect(() => {
+    if (searchParams.has("type")) {
+      const nextParams = new URLSearchParams(searchParams);
+      nextParams.delete("type");
+      setSearchParams(nextParams, { replace: true });
+      return;
+    }
+
     const urlFilters = Object.keys(initialFilters).reduce((nextFilters, key) => {
       const value = searchParams.get(key);
       const isValidValue = filterOptions[key].some((option) => option.value === value);
@@ -48,7 +54,7 @@ export default function FinderPage() {
       const filtersChanged = Object.keys(initialFilters).some((key) => current[key] !== urlFilters[key]);
       return filtersChanged ? urlFilters : current;
     });
-  }, [searchParams]);
+  }, [searchParams, setSearchParams]);
 
   function updateFilter(key, value) {
     setFilters((current) => ({
@@ -93,7 +99,7 @@ export default function FinderPage() {
           </p>
           <h1>Filter every Floraseek plant.</h1>
           <p>
-            Combine difficulty, climate, category, and type to narrow the project catalogue without
+            Combine difficulty, climate, and category to narrow the project catalogue without
             refreshing the page.
           </p>
           <div className="page-heading-actions">
@@ -104,7 +110,7 @@ export default function FinderPage() {
         <form className="finder-panel" onSubmit={(event) => event.preventDefault()}>
           <PlantSearch
             label="Search"
-            placeholder="Search by name, category, climate, type"
+            placeholder="Search by name, category, climate"
             value={searchQuery}
             variant="finder"
             onChange={setSearchQuery}
@@ -129,13 +135,6 @@ export default function FinderPage() {
             value={filters.category}
             options={filterOptions.category}
             onChange={(value) => updateFilter("category", value)}
-          />
-          <FilterSelect
-            id="type"
-            label="Plant type"
-            value={filters.type}
-            options={filterOptions.type}
-            onChange={(value) => updateFilter("type", value)}
           />
           <button className="button secondary reset-button" type="button" onClick={resetFilters}>
             Reset
