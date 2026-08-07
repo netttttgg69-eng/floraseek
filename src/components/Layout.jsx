@@ -13,6 +13,7 @@ import {
   X,
 } from "lucide-react";
 import useComparison from "../hooks/useComparison.js";
+import FlowerBuckDisplay from "./FlowerBuckDisplay.jsx";
 import PlantSearch from "./PlantSearch.jsx";
 
 const mainNavLinks = [
@@ -97,6 +98,8 @@ export default function Layout() {
           <nav className="nav-links desktop-nav" aria-label="Main navigation">
             {mainNavLinks.map(renderNavLink)}
           </nav>
+
+          <FlowerBuckDisplay />
 
           <div className="mobile-header-actions">
             <button

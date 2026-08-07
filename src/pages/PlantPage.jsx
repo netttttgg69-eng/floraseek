@@ -1,4 +1,4 @@
-import { ArrowLeft, Compass, Leaf, ShoppingBag, ThermometerSun } from "lucide-react";
+import { ArrowLeft, Compass, Flower2, Leaf, ShoppingBag, ThermometerSun } from "lucide-react";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Badge from "../components/Badge.jsx";
@@ -60,7 +60,18 @@ export default function PlantPage() {
               <ComparePlantButton plant={plant} className="profile-compare-button" />
             </div>
           </div>
-          <PlantImage plant={plant} size="hero" />
+          <div className="plant-hero-image-frame">
+            <PlantImage plant={plant} size="hero" />
+            {plant.id === "hydrangea" && (
+              <Link
+                className="hydrangea-field-trigger"
+                to="/flower-field"
+                aria-label="Open the hidden Flower Field"
+              >
+                <Flower2 size={14} aria-hidden="true" />
+              </Link>
+            )}
+          </div>
         </div>
       </section>
 
