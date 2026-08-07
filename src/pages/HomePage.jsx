@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import CategoryCard from "../components/CategoryCard.jsx";
 import ClimateFinder from "../components/ClimateFinder.jsx";
 import PlantCard from "../components/PlantCard.jsx";
 import PlantOfWeek from "../components/PlantOfWeek.jsx";
@@ -57,10 +56,6 @@ const homepageCategories = [
 
 export default function HomePage() {
   const featuredPlants = plants.filter((plant) => featuredIds.includes(plant.id));
-  const flowerCount = plants.filter((plant) => plant.type === "flower").length;
-  const plantCount = plants.filter((plant) => plant.type === "plant").length;
-  const climateCount = new Set(plants.flatMap((plant) => plant.climates)).size;
-  const difficultyCount = new Set(plants.map((plant) => plant.difficulty)).size;
 
   useEffect(() => {
     setPageMeta(
@@ -91,10 +86,6 @@ export default function HomePage() {
               Explore Plants
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
-
-            <p className="hero-index-summary">
-              {plants.length} plant profiles · {climateCount} climates · {difficultyCount} difficulty levels
-            </p>
           </div>
 
           <div className="hero-feature-row" aria-label="Floraseek highlights">
@@ -224,18 +215,6 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <ClimateFinder />
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <SectionHeader eyebrow="Categories" title="Browse by plant type">
-            Jump straight to flowers or general plant profiles.
-          </SectionHeader>
-          <div className="category-grid">
-            <CategoryCard type="flower" count={flowerCount} />
-            <CategoryCard type="plant" count={plantCount} />
-          </div>
         </div>
       </section>
     </div>

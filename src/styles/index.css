@@ -956,6 +956,11 @@ p {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.finder-card-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
 .plant-card {
   position: relative;
   min-height: 100%;
@@ -970,6 +975,31 @@ p {
     transform 180ms ease,
     box-shadow 180ms ease,
     border-color 180ms ease;
+}
+
+.plant-card-clickable {
+  cursor: pointer;
+}
+
+.plant-card-link-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  cursor: pointer;
+}
+
+.plant-card-clickable:hover {
+  background: color-mix(in srgb, var(--surface-green), var(--surface-green-hover) 34%);
+}
+
+.plant-card-clickable:has(.plant-card-link-overlay:focus-visible) {
+  outline: 3px solid color-mix(in srgb, var(--focus), white 22%);
+  outline-offset: 3px;
+}
+
+.plant-card-link-overlay:focus-visible {
+  outline: none;
 }
 
 .save-plant-button,
@@ -1031,6 +1061,15 @@ p {
   z-index: 2;
 }
 
+.plant-card-clickable .compare-plant-button {
+  position: relative;
+  z-index: 2;
+}
+
+.plant-card-clickable .save-plant-button {
+  z-index: 2;
+}
+
 .profile-save-button {
   margin-top: 18px;
 }
@@ -1075,6 +1114,78 @@ p {
 
 .plant-card-actions .text-link {
   margin-top: 0;
+}
+
+.plant-card-compact .plant-image,
+.plant-card-compact .plant-placeholder {
+  aspect-ratio: 5 / 3;
+}
+
+.plant-card-compact .plant-card-body {
+  gap: 14px;
+  padding: 16px;
+}
+
+.plant-card-compact .eyebrow {
+  margin-bottom: 8px;
+  font-size: 0.72rem;
+}
+
+.plant-card-compact h3 {
+  font-size: 1.18rem;
+}
+
+.plant-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.plant-card-chip {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 24px;
+  padding: 4px 8px;
+  border: 1px solid rgba(200, 221, 169, 0.22);
+  border-radius: 999px;
+  color: var(--cream);
+  background: rgba(200, 221, 169, 0.10);
+  font-size: 0.74rem;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.plant-card-chip-difficulty {
+  color: var(--background-deep);
+  background: color-mix(in srgb, var(--sage), var(--cream) 14%);
+}
+
+.plant-card-chip-climate {
+  color: var(--sage);
+  background: rgba(200, 221, 169, 0.12);
+}
+
+.plant-card-chip-category {
+  color: rgba(243, 240, 232, 0.92);
+  background: rgba(243, 240, 232, 0.08);
+}
+
+.plant-card-actions-compact {
+  justify-content: flex-end;
+}
+
+.plant-card-compact .save-plant-button,
+.plant-card-compact .compare-plant-button {
+  min-height: 32px;
+  padding: 7px 10px;
+  font-size: 0.78rem;
+}
+
+.plant-card-compact .plant-card-save {
+  top: 10px;
+  right: 10px;
 }
 
 .plant-image,
@@ -2260,8 +2371,7 @@ p {
   animation: hero-copy-fade 520ms ease both;
 }
 
-.hero-index-label,
-.hero-index-summary {
+.hero-index-label {
   letter-spacing: 0;
   text-transform: uppercase;
 }
@@ -2320,13 +2430,6 @@ p {
 .home-page .hero-explore-button.button.primary:hover {
   color: var(--background-deep);
   background: color-mix(in srgb, var(--sage), var(--cream) 18%);
-}
-
-.hero-index-summary {
-  margin: 22px 0 0;
-  color: rgba(243, 240, 232, 0.7);
-  font-size: 0.78rem;
-  font-weight: 900;
 }
 
 .hero-feature-row {

@@ -150,9 +150,9 @@ export default function FinderPage() {
         </div>
 
         {results.length > 0 ? (
-          <div className="card-grid">
+          <div className="card-grid finder-card-grid">
             {results.map((plant) => (
-              <PlantCard key={plant.id} plant={plant} />
+              <PlantCard key={plant.id} plant={plant} variant="finder" />
             ))}
           </div>
         ) : (
