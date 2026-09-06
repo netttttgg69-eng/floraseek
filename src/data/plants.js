@@ -479,7 +479,7 @@ export const plants = [
     id: "water-lily",
     name: "Water Lily",
     slug: "water-lily",
-    image: "/images/new-plants/water-lily.webp",
+    image: "/images/plants/placeholder.png",
     shopUrl: "",
     legacyPaths: ["/water-lily"],
     difficulty: "moderate",

@@ -170,6 +170,7 @@ export default function Layout() {
             <NavLink to="/flowers">Flowers</NavLink>
             <NavLink to="/plants">Plants</NavLink>
             <NavLink to="/about">About the Creator</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
             <NavLink to="/ai-policy">AI Policy</NavLink>
           </div>
         </div>

@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage.jsx";
 import FinderPage from "./pages/FinderPage.jsx";
 import CategoryPage from "./pages/CategoryPage.jsx";
 import ComparePage from "./pages/ComparePage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
 import FindMyPlantPage from "./pages/FindMyPlantPage.jsx";
 import PlantPage from "./pages/PlantPage.jsx";
 import SavedPlantsPage from "./pages/SavedPlantsPage.jsx";
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="saved-plants" element={<SavedPlantsPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="ai-policy" element={<AiPolicyPage />} />
+          <Route path="contact" element={<ContactPage />} />
           <Route path="flowers" element={<CategoryPage type="flower" />} />
           <Route path="plants" element={<CategoryPage type="plant" />} />
           <Route path="plants/:slug" element={<PlantPage />} />
