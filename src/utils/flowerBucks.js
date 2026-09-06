@@ -150,20 +150,6 @@ export function updateFlowerBuckState(updater) {
   return writeFlowerBuckState(updater(currentState));
 }
 
-export function awardFlowerBucks(amount) {
-  const earned = toSafeInteger(amount);
-
-  if (earned <= 0) {
-    return readFlowerBuckState();
-  }
-
-  return updateFlowerBuckState((state) => ({
-    ...state,
-    balance: state.balance + earned,
-    totalEarned: state.totalEarned + earned,
-  }));
-}
-
 export function recordActiveFlowerBuckTime(milliseconds) {
   const activeMilliseconds = toSafeInteger(milliseconds);
 

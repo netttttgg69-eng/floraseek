@@ -4,7 +4,6 @@ import {
   clearComparisonPlantIds,
   COMPARISON_EVENT,
   COMPARISON_KEY,
-  MAX_COMPARISON_PLANTS,
   readComparisonPlantIds,
   removeComparisonPlantId,
 } from "../utils/comparison.js";
@@ -36,9 +35,7 @@ export default function useComparison() {
 
   return useMemo(() => ({
     comparisonCount: comparisonPlantIds.length,
-    comparisonLimit: MAX_COMPARISON_PLANTS,
     comparisonPlantIds,
-    canAddToComparison: comparisonPlantIds.length < MAX_COMPARISON_PLANTS,
     isCompared: (plantId) => comparisonPlantIds.includes(plantId),
     addToComparison: (plantId) => {
       setComparisonPlantIds(addComparisonPlantId(plantId));

@@ -111,15 +111,15 @@ export default function HomePage() {
             </p>
             <h2>Not sure which plant to choose?</h2>
             <p>
-              Answer a few quick questions about climate, category, and difficulty to get three
-              recommendations from the Floraseek catalogue.
+              Open the Plant Finder to search, filter, or take the plant quiz for recommendations
+              from the Floraseek catalogue.
             </p>
           </div>
           <div className="quiz-home-panel">
             <strong>{plants.length}</strong>
             <span>plants and techniques can be scored for your preferences</span>
-            <Link className="button primary" to="/find-my-plant">
-              Take the plant quiz
+            <Link className="button primary" to="/finder">
+              Open Plant Finder
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>

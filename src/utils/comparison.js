@@ -1,6 +1,5 @@
 export const COMPARISON_KEY = "floraseek-comparison";
 export const COMPARISON_EVENT = "floraseek-comparison-change";
-export const MAX_COMPARISON_PLANTS = 3;
 
 function hasStorage() {
   return typeof window !== "undefined" && typeof window.localStorage !== "undefined";
@@ -11,7 +10,7 @@ export function sanitizeComparisonPlantIds(ids) {
     return [];
   }
 
-  return [...new Set(ids.filter((id) => typeof id === "string"))].slice(0, MAX_COMPARISON_PLANTS);
+  return [...new Set(ids.filter((id) => typeof id === "string"))];
 }
 
 export function readComparisonPlantIds() {
@@ -43,7 +42,7 @@ export function writeComparisonPlantIds(ids) {
 export function addComparisonPlantId(plantId) {
   const comparedIds = readComparisonPlantIds();
 
-  if (comparedIds.includes(plantId) || comparedIds.length >= MAX_COMPARISON_PLANTS) {
+  if (comparedIds.includes(plantId)) {
     return comparedIds;
   }
 

@@ -11,7 +11,6 @@ import { setPageMeta } from "../utils/meta.js";
 export default function ComparePage() {
   const {
     clearComparison,
-    comparisonLimit,
     comparisonPlantIds,
     removeFromComparison,
   } = useComparison();
@@ -29,7 +28,7 @@ export default function ComparePage() {
   useEffect(() => {
     setPageMeta(
       "Plant Comparison",
-      "Compare up to three Floraseek plants by description, difficulty, climate, type, and category."
+      "Compare Floraseek plants by description, difficulty, climate, type, and category."
     );
   }, []);
 
@@ -43,7 +42,7 @@ export default function ComparePage() {
           </p>
           <h1>Compare your shortlist.</h1>
           <p>
-            Add up to {comparisonLimit} plants and compare the details Floraseek already tracks.
+            Add any plants you want to compare and review the details Floraseek already tracks.
             Differences are highlighted so each choice is easier to scan.
           </p>
           <div className="page-heading-actions">
@@ -76,14 +75,12 @@ export default function ComparePage() {
           <>
             <div className="comparison-summary" aria-live="polite">
               <strong>
-                {selectedPlants.length} of {comparisonLimit} selected
+                {selectedPlants.length} selected
               </strong>
-              {selectedPlants.length < comparisonLimit && (
-                <Link className="text-link" to="/finder">
-                  Add another plant
-                  <ArrowRight size={17} aria-hidden="true" />
-                </Link>
-              )}
+              <Link className="text-link" to="/finder">
+                Add another plant
+                <ArrowRight size={17} aria-hidden="true" />
+              </Link>
             </div>
 
             <div className="comparison-scroller" role="region" aria-label="Selected plant comparison">

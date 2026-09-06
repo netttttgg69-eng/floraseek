@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import {
-  awardFlowerBucks,
   claimAvailableDailyFlowerBuckReward,
   FLOWERBUCKS_EVENT,
   FLOWERBUCKS_STORAGE_KEY,
@@ -96,7 +95,6 @@ export default function useFlowerBucks({ trackActivity = false } = {}) {
 
   return useMemo(() => ({
     ...flowerBuckState,
-    awardFlowerBucks,
     selectTheme: selectFlowerBuckTheme,
     unlockTheme: unlockFlowerBuckTheme,
   }), [flowerBuckState]);

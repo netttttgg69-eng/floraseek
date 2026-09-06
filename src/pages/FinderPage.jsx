@@ -1,6 +1,6 @@
-import { SlidersHorizontal } from "lucide-react";
+import { SlidersHorizontal, Sparkles } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import ClimateFinder from "../components/ClimateFinder.jsx";
 import EmptyState from "../components/EmptyState.jsx";
 import FilterSelect from "../components/FilterSelect.jsx";
@@ -103,6 +103,10 @@ export default function FinderPage() {
             refreshing the page.
           </p>
           <div className="page-heading-actions">
+            <Link className="button primary" to="/find-my-plant">
+              Take the Plant Quiz
+              <Sparkles size={18} aria-hidden="true" />
+            </Link>
             <RandomPlantButton />
           </div>
         </div>

@@ -7,7 +7,6 @@ import {
   Leaf,
   Menu,
   Search,
-  Sparkles,
   Sprout,
   Users,
   X,
@@ -19,7 +18,6 @@ import PlantSearch from "./PlantSearch.jsx";
 const mainNavLinks = [
   { to: "/", label: "Home", Icon: Leaf },
   { to: "/finder", label: "Plant Finder", Icon: Search },
-  { to: "/find-my-plant", label: "Find My Plant", Icon: Sparkles },
   { to: "/compare", label: "Compare", Icon: GitCompareArrows, showCount: true },
   { to: "/saved-plants", label: "Saved Plants", Icon: Heart },
 ];
@@ -30,7 +28,7 @@ const mobileNavLinks = [
 ];
 
 export default function Layout() {
-  const { comparisonCount, comparisonLimit } = useComparison();
+  const { comparisonCount } = useComparison();
   const { pathname } = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
@@ -66,7 +64,7 @@ export default function Layout() {
         {showCount && (
           <span
             className="nav-count"
-            aria-label={`${comparisonCount} of ${comparisonLimit} plants selected for comparison`}
+            aria-label={`${comparisonCount} plants selected for comparison`}
           >
             {comparisonCount}
           </span>
@@ -167,7 +165,6 @@ export default function Layout() {
           </div>
           <div className="footer-links" aria-label="Footer navigation">
             <NavLink to="/finder">Plant Finder</NavLink>
-            <NavLink to="/find-my-plant">Find My Plant</NavLink>
             <NavLink to="/compare">Compare</NavLink>
             <NavLink to="/saved-plants">Saved Plants</NavLink>
             <NavLink to="/flowers">Flowers</NavLink>
