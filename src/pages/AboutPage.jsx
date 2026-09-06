@@ -25,7 +25,7 @@ export default function AboutPage() {
           </p>
           <p>
             Lincoln designed the website to help people discover plants based on their climate,
-            experience level, and preferences. While building Floraseek, he developed skills in
+            difficulty, and preferences. While building Floraseek, he developed skills in
             website design, coding, research, organisation, and using feedback to improve a digital
             product.
           </p>

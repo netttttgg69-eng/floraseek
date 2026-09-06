@@ -79,7 +79,7 @@ export default function HomePage() {
               <span>Plant</span>
             </h1>
             <p className="hero-lede">
-              Discover plants suited to your climate, space and experience.
+              Discover plants suited to your climate, space and preferences.
             </p>
 
             <Link className="button primary hero-explore-button" to="/finder">
@@ -111,8 +111,8 @@ export default function HomePage() {
             </p>
             <h2>Not sure which plant to choose?</h2>
             <p>
-              Answer a few quick questions about experience, climate, category, and challenge level to
-              get three recommendations from the Floraseek catalogue.
+              Answer a few quick questions about climate, category, and difficulty to get three
+              recommendations from the Floraseek catalogue.
             </p>
           </div>
           <div className="quiz-home-panel">

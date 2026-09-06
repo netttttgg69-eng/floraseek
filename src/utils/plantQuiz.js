@@ -2,17 +2,6 @@ import { ALL_VALUE, filterOptions, labelFor, plants } from "../data/plants.js";
 
 export const quizQuestions = [
   {
-    id: "experience",
-    title: "What is your gardening experience?",
-    fallbackValue: ALL_VALUE,
-    options: [
-      { label: "Beginner", value: "beginner" },
-      { label: "Some experience", value: "some" },
-      { label: "Experienced", value: "experienced" },
-      { label: "No preference", value: ALL_VALUE },
-    ],
-  },
-  {
     id: "climate",
     title: "Which climate best matches your location?",
     fallbackValue: "not-sure",
@@ -35,14 +24,12 @@ export const quizQuestions = [
   },
   {
     id: "difficulty",
-    title: "How challenging should the plant be?",
+    title: "How difficult should your plant be to grow and keep alive?",
     fallbackValue: ALL_VALUE,
     options: [
       { label: "Easy", value: "easy" },
       { label: "Moderate", value: "moderate" },
       { label: "Hard", value: "hard" },
-      { label: "Extreme", value: "extreme" },
-      { label: "No preference", value: ALL_VALUE },
     ],
   },
 ];
@@ -52,30 +39,6 @@ export function getResolvedQuizAnswers(answers) {
     ...resolvedAnswers,
     [question.id]: answers[question.id] || question.fallbackValue,
   }), {});
-}
-
-function scoreExperience(plant, experience) {
-  if (experience === "beginner") {
-    return plant.difficulty === "easy" ? 1.5 : 0;
-  }
-
-  if (experience === "some") {
-    if (["easy", "moderate"].includes(plant.difficulty)) {
-      return 1.3;
-    }
-
-    return plant.difficulty === "hard" ? 0.4 : 0;
-  }
-
-  if (experience === "experienced") {
-    if (["hard", "extreme"].includes(plant.difficulty)) {
-      return 1.3;
-    }
-
-    return plant.difficulty === "moderate" ? 0.7 : 0;
-  }
-
-  return 0;
 }
 
 export function scorePlantForQuiz(plant, answers) {
@@ -103,8 +66,6 @@ export function scorePlantForQuiz(plant, answers) {
     score += 2.5;
   }
 
-  score += scoreExperience(plant, resolvedAnswers.experience);
-
   return score;
 }
 
@@ -131,20 +92,6 @@ export function getQuizMatchReasons(plant, answers) {
     plant.difficulty === resolvedAnswers.difficulty
   ) {
     reasons.push(`Fits your ${labelFor("difficulty", plant.difficulty).toLowerCase()} challenge preference`);
-  }
-
-  if (resolvedAnswers.experience === "beginner" && plant.difficulty === "easy") {
-    reasons.push("Suitable for beginners");
-  } else if (
-    resolvedAnswers.experience === "some" &&
-    ["easy", "moderate"].includes(plant.difficulty)
-  ) {
-    reasons.push("Fits some gardening experience");
-  } else if (
-    resolvedAnswers.experience === "experienced" &&
-    ["hard", "extreme"].includes(plant.difficulty)
-  ) {
-    reasons.push("Offers a more experienced challenge");
   }
 
   return reasons.length ? reasons.slice(0, 3) : ["A strong match from the Floraseek catalogue"];
