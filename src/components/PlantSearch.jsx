@@ -2,7 +2,6 @@ import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { searchPlants } from "../data/plants.js";
-import Badge from "./Badge.jsx";
 
 export default function PlantSearch({
   className = "",
@@ -53,6 +52,11 @@ export default function PlantSearch({
       className={`plant-search plant-search-${variant} ${className}`.trim()}
       role="search"
       onSubmit={handleSubmit}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          setIsOpen(false);
+        }
+      }}
     >
       <label>
         <span>{label}</span>
@@ -62,9 +66,6 @@ export default function PlantSearch({
             type="search"
             value={query}
             placeholder={placeholder}
-            onBlur={() => {
-              window.setTimeout(() => setIsOpen(false), 120);
-            }}
             onChange={(event) => updateQuery(event.target.value)}
             onFocus={() => setIsOpen(true)}
             onKeyDown={(event) => {
@@ -81,12 +82,17 @@ export default function PlantSearch({
         <div className="search-results" aria-live="polite">
           {results.length > 0 ? (
             results.map((plant) => (
-              <button key={plant.id} type="button" onClick={() => openPlant(plant)}>
-                <span className="search-result-heading">
-                  <strong>{plant.name}</strong>
-                  <Badge category="category" value={plant.category} />
-                </span>
-                <span>{plant.shortDescription || plant.summary}</span>
+              <button
+                key={plant.id}
+                type="button"
+                aria-label={`Open ${plant.name}`}
+                onMouseDown={(event) => {
+                  event.preventDefault();
+                  openPlant(plant);
+                }}
+                onClick={() => openPlant(plant)}
+              >
+                <span className="search-result-name">{plant.name}</span>
               </button>
             ))
           ) : (

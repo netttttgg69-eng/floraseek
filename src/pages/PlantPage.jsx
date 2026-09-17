@@ -134,7 +134,7 @@ export default function PlantPage() {
           </SectionHeader>
           <div className="card-grid three">
             {relatedPlants.map((relatedPlant) => (
-              <PlantCard key={relatedPlant.id} plant={relatedPlant} />
+              <PlantCard key={relatedPlant.id} plant={relatedPlant} variant="related" />
             ))}
           </div>
         </div>

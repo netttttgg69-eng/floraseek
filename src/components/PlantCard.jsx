@@ -22,8 +22,14 @@ function getCompactCategoryLabel(plant) {
 
 export default function PlantCard({ plant, variant = "default" }) {
   const isFinderCard = variant === "finder";
+  const isRelatedCard = variant === "related";
   const description = plant.shortDescription || plant.summary;
   const profilePath = `/plants/${plant.slug}`;
+  const cardClassName = [
+    "plant-card",
+    isFinderCard ? "plant-card-compact plant-card-clickable" : "",
+    isRelatedCard ? "plant-card-related" : "",
+  ].filter(Boolean).join(" ");
   const compactTags = [
     { kind: "difficulty", label: labelFor("difficulty", plant.difficulty) },
     { kind: "climate", label: plant.climates?.[0] ? labelFor("climate", plant.climates[0]) : "" },
@@ -31,16 +37,28 @@ export default function PlantCard({ plant, variant = "default" }) {
   ].filter((tag) => tag.label);
 
   return (
-    <article className={`plant-card ${isFinderCard ? "plant-card-compact plant-card-clickable" : ""}`.trim()}>
+    <article className={cardClassName}>
       {isFinderCard && (
         <Link className="plant-card-link-overlay" to={profilePath} aria-label={`View ${plant.name}`} />
       )}
       <SavePlantButton plant={plant} className="plant-card-save" />
-      <PlantImage plant={plant} />
+      {isRelatedCard ? (
+        <Link className="plant-image-link" to={profilePath} aria-label={`View ${plant.name}`}>
+          <PlantImage plant={plant} />
+        </Link>
+      ) : (
+        <PlantImage plant={plant} />
+      )}
       <div className="plant-card-body">
         <div>
           <p className="eyebrow">{labelFor("type", plant.type)}</p>
-          <h3>{plant.name}</h3>
+          <h3>
+            {isRelatedCard ? (
+              <Link className="plant-title-link" to={profilePath}>
+                {plant.name}
+              </Link>
+            ) : plant.name}
+          </h3>
           {isFinderCard ? (
             <div className="plant-card-tags" aria-label={`${plant.name} key details`}>
               {compactTags.map((tag) => (
@@ -69,11 +87,11 @@ export default function PlantCard({ plant, variant = "default" }) {
               <dt>Climate</dt>
               <dd>{formatList(plant.climates, "climate")}</dd>
             </div>
-          </dl>
+        </dl>
         )}
 
         <div className={`plant-card-actions ${isFinderCard ? "plant-card-actions-compact" : ""}`.trim()}>
-          {!isFinderCard && (
+          {!isFinderCard && !isRelatedCard && (
             <Link className="text-link" to={profilePath} aria-label={`View ${plant.name}`}>
               View plant
               <ArrowRight size={17} aria-hidden="true" />

@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, ListChecks, MapPin, RotateCcw, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, ListChecks, MapPin, RotateCcw, Sparkles } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Badge from "../components/Badge.jsx";
@@ -69,8 +69,12 @@ export default function FindMyPlantPage() {
 
           {!isResultsStep ? (
             <div className="quiz-question">
-              <h2>{currentQuestion.title}</h2>
-              <div className="quiz-options">
+              <h2 id={`quiz-question-${currentQuestion.id}`}>{currentQuestion.title}</h2>
+              <div
+                className="quiz-options"
+                role="radiogroup"
+                aria-labelledby={`quiz-question-${currentQuestion.id}`}
+              >
                 {currentQuestion.options.map((option) => {
                   const selected = answers[currentQuestion.id] === option.value;
 
@@ -79,10 +83,14 @@ export default function FindMyPlantPage() {
                       className={`quiz-option ${selected ? "selected" : ""}`.trim()}
                       key={option.value}
                       type="button"
-                      aria-pressed={selected}
+                      role="radio"
+                      aria-checked={selected}
                       onClick={() => chooseAnswer(currentQuestion.id, option.value)}
                     >
-                      {option.label}
+                      <span className="quiz-option-label">{option.label}</span>
+                      <span className="quiz-option-check" aria-hidden="true">
+                        {selected && <Check size={17} />}
+                      </span>
                     </button>
                   );
                 })}
