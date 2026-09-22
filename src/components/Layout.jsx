@@ -2,6 +2,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {
+  BookOpen,
   GitCompareArrows,
   Heart,
   Leaf,
@@ -18,6 +19,7 @@ import PlantSearch from "./PlantSearch.jsx";
 const mainNavLinks = [
   { to: "/", label: "Home", Icon: Leaf },
   { to: "/finder", label: "Plant Finder", Icon: Search },
+  { to: "/blog", label: "Blog", Icon: BookOpen },
   { to: "/compare", label: "Compare", Icon: GitCompareArrows, showCount: true },
   { to: "/saved-plants", label: "Saved Plants", Icon: Heart },
 ];
@@ -165,6 +167,7 @@ export default function Layout() {
           </div>
           <div className="footer-links" aria-label="Footer navigation">
             <NavLink to="/finder">Plant Finder</NavLink>
+            <NavLink to="/blog">Blog</NavLink>
             <NavLink to="/compare">Compare</NavLink>
             <NavLink to="/saved-plants">Saved Plants</NavLink>
             <NavLink to="/flowers">Flowers</NavLink>

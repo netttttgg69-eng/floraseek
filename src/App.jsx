@@ -3,6 +3,8 @@ import Layout from "./components/Layout.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import AiPolicyPage from "./pages/AiPolicyPage.jsx";
+import BlogArticlePage from "./pages/BlogArticlePage.jsx";
+import BlogPage from "./pages/BlogPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import FinderPage from "./pages/FinderPage.jsx";
 import CategoryPage from "./pages/CategoryPage.jsx";
@@ -24,6 +26,8 @@ export default function App() {
           <Route path="compare" element={<ComparePage />} />
           <Route path="find-my-plant" element={<FindMyPlantPage />} />
           <Route path="saved-plants" element={<SavedPlantsPage />} />
+          <Route path="blog" element={<BlogPage />} />
+          <Route path="blog/:slug" element={<BlogArticlePage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="ai-policy" element={<AiPolicyPage />} />
           <Route path="contact" element={<ContactPage />} />
