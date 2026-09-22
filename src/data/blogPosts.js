@@ -14,8 +14,9 @@ export const blogPosts = [
       "A practical starter guide to seven forgiving houseplants and the simple care habits that help them thrive.",
     category: "Plant Guides",
     date: "2026-09-22",
-    coverImage: "",
-    coverImageAlt: "A collection of beginner-friendly houseplants in simple pots",
+    coverImage: "/images/blog/beginner-houseplants.webp",
+    coverImageAlt:
+      "A collection of leafy houseplants in terracotta pots arranged on and around a wooden cabinet",
     featured: true,
     status: "published",
     topics: [
@@ -170,8 +171,9 @@ export const blogPosts = [
       "A room-by-room way to choose plants by light, space, care style, humidity, and household safety.",
     category: "Plant Care",
     date: "2026-09-15",
-    coverImage: "",
-    coverImageAlt: "A bright room with space set aside for indoor plants",
+    coverImage: "/images/blog/choosing-plants.webp",
+    coverImageAlt:
+      "Several indoor plants arranged on a table beside a glass water carafe and a white mug",
     status: "published",
     topics: [
       "plant finder",
@@ -308,8 +310,9 @@ export const blogPosts = [
       "An editable founder-story draft with placeholders for the origins, build process, and future plans for Floraseek.",
     category: "Floraseek Updates",
     date: "2026-09-08",
-    coverImage: "",
-    coverImageAlt: "A workspace prepared for writing the Floraseek founder story",
+    coverImage: "/images/blog/floraseek-story.webp",
+    coverImageAlt:
+      "An open laptop on a round table framed by large green indoor plants",
     status: "published",
     topics: [
       "Floraseek",
