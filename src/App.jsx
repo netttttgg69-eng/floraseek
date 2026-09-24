@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
@@ -19,6 +20,7 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      <Analytics />
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
