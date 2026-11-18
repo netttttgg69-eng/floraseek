@@ -521,15 +521,17 @@ img {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  flex: none;
-  padding: 6px 10px 6px 6px;
-  border: 1px solid rgba(200, 221, 169, 0.18);
-  border-radius: calc(var(--radius) + 4px);
-  background: rgba(41, 77, 62, 0.42);
+  flex: 0 1 198px;
+  min-width: 0;
+  min-height: 44px;
+  border-radius: var(--radius);
 }
 
-.brand-mark,
+.brand-logo {
+  width: 198px;
+  height: auto;
+}
+
 .category-icon {
   width: 42px;
   height: 42px;
@@ -542,22 +544,10 @@ img {
   box-shadow: var(--soft-shadow);
 }
 
-.brand strong,
 .footer-brand {
   display: block;
   color: var(--text-primary);
   font-size: 1.05rem;
-}
-
-.brand strong {
-  white-space: nowrap;
-}
-
-.brand small {
-  display: block;
-  color: var(--text-secondary);
-  font-size: 0.78rem;
-  white-space: nowrap;
 }
 
 .nav-links {
@@ -2961,12 +2951,12 @@ p {
 }
 
 @media (max-width: 460px) {
-  .brand {
-    padding-right: 8px;
+  .nav {
+    gap: 8px;
   }
 
-  .brand small {
-    display: none;
+  .mobile-header-actions {
+    gap: 6px;
   }
 
   .flowerbuck-balance-button {
@@ -3007,20 +2997,6 @@ p {
 
 .site-shell:has(.home-page) .brand {
   order: 0;
-}
-
-.site-shell:has(.home-page) .brand-mark {
-  border: 1px solid rgba(200, 221, 169, 0.48);
-  color: var(--cream);
-  background: var(--surface-green-hover);
-}
-
-.site-shell:has(.home-page) .brand strong {
-  color: var(--cream);
-}
-
-.site-shell:has(.home-page) .brand small {
-  color: var(--text-secondary);
 }
 
 .site-shell:has(.home-page) .desktop-nav {

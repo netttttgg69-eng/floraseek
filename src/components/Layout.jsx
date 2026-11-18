@@ -8,7 +8,6 @@ import {
   Leaf,
   Menu,
   Search,
-  Sprout,
   Users,
   X,
 } from "lucide-react";
@@ -80,13 +79,13 @@ export default function Layout() {
       <header className="site-header">
         <div className="nav container">
           <NavLink to="/" className="brand" aria-label="Floraseek homepage">
-            <span className="brand-mark" aria-hidden="true">
-              <Sprout size={22} />
-            </span>
-            <span>
-              <strong>Floraseek</strong>
-              <small>Plant discovery guide</small>
-            </span>
+            <img
+              className="brand-logo"
+              src="/images/floraseek-logo.svg"
+              alt="Floraseek"
+              width="224"
+              height="48"
+            />
           </NavLink>
 
           <PlantSearch
