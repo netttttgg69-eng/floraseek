@@ -4,6 +4,11 @@ node_modules/
 # production build
 dist/
 
+# Local ad projects and exported videos
+/ads/
+/Floraseek Instagram Reel.mp4
+/Floraseek Interface Tour.mp4
+
 # local settings and logs
 .env
 .env.*
