@@ -233,8 +233,8 @@ export function selectFlowerBuckTheme(themeId) {
   ));
 }
 
-export function formatFlowerBucks(amount) {
-  return new Intl.NumberFormat("en").format(toSafeInteger(amount));
+export function formatFlowerBucks(amount, locale = "en") {
+  return new Intl.NumberFormat(locale).format(toSafeInteger(amount));
 }
 
 export function getLocalDateKey(date = new Date()) {

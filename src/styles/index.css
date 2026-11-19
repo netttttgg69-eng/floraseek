@@ -427,3 +427,13 @@ select { appearance: none; padding-right: 2.3rem; background-image: url("data:im
 .guide-references span { color: var(--muted); }
 .guide-references ul { display: flex; flex-wrap: wrap; gap: .35rem 1.2rem; list-style: none; padding: 0; margin: 0; }
 .guide-references a { color: var(--theme-accent); text-decoration: underline; text-underline-offset: .2em; }
+
+.language-selector { position: relative; flex: none; }
+.language-selector button, .language-selector a { color: #eef4ed; display: flex; align-items: center; gap: .35rem; }
+.language-selector button { background: transparent; border: 1px solid #20543b; border-radius: .55rem; padding: .45rem .5rem; cursor: pointer; font: inherit; font-size: .8rem; }
+.language-selector ul { position: absolute; z-index: 20; top: 100%; right: 0; min-width: 9rem; padding: .3rem; margin: .35rem 0 0; list-style: none; border-radius: .6rem; background: #102b20; border: 1px solid #20543b; }
+.language-selector a { text-decoration: none; padding: .5rem .7rem; border-radius: .35rem; }
+.language-selector a:is(:hover, :focus-visible, [aria-current="true"]) { background: #20543b; color: #a7d4a0; }
+html:lang(fr) .hero-words { font-size: .76em; }
+html:not(:lang(en)) .hero-words { min-width: 0; max-width: 100%; }
+html:not(:lang(en)) .hero-title { overflow-wrap: anywhere; }

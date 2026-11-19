@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context.js";
 import { Sprout } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { plants } from "../data/plants.js";
@@ -91,6 +92,7 @@ function useMediaQuery(query) {
 }
 
 export default function SiteIntro() {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(() => !readIntroShown());
   const isMobileIntro = useMediaQuery(mobileIntroQuery);
   const prefersReducedMotion = useMediaQuery(reducedMotionQuery);
@@ -151,15 +153,15 @@ export default function SiteIntro() {
   return (
     <div
       className={`site-intro ${prefersReducedMotion ? "site-intro-reduced" : ""}`}
-      aria-label="Floraseek intro"
+      aria-label={t("Floraseek intro")}
     >
       <button
         className="site-intro-skip"
         type="button"
-        aria-label="Skip intro animation"
+        aria-label={t("Skip intro animation")}
         onClick={skipIntro}
       >
-        Skip
+        {t("Skip")}
       </button>
 
       <div className="site-intro-stage">
@@ -190,7 +192,7 @@ export default function SiteIntro() {
               >
                 <img
                   src={plant.image}
-                  alt=""
+                  alt={t("")}
                   loading="lazy"
                   onError={(event) => {
                     if (!event.currentTarget.src.endsWith(fallbackPlantImage)) {
@@ -199,8 +201,8 @@ export default function SiteIntro() {
                   }}
                 />
                 <span>
-                  <strong>{plant.name}</strong>
-                  <small>{plant.category}</small>
+                  <strong>{t(plant.name)}</strong>
+                  <small>{t(plant.category)}</small>
                 </span>
               </article>
             );
@@ -208,8 +210,8 @@ export default function SiteIntro() {
         </div>
 
         <div className="site-intro-message">
-          <h2>Find the plant that fits you.</h2>
-          <p>Explore plants by climate, difficulty and category.</p>
+          <h2>{t("Find the plant that fits you.")}</h2>
+          <p>{t("Explore plants by climate, difficulty and category.")}</p>
         </div>
       </div>
     </div>

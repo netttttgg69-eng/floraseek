@@ -1,8 +1,10 @@
+import { useLanguage } from "../i18n/context.js";
 import { Shuffle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { plants } from "../data/plants.js";
 
 export default function RandomPlantButton({ className = "button secondary" }) {
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   function openRandomPlant() {
@@ -15,7 +17,7 @@ export default function RandomPlantButton({ className = "button secondary" }) {
 
   return (
     <button className={className} type="button" onClick={openRandomPlant}>
-      Discover a random plant
+      {t("Discover a random plant")}
       <Shuffle size={18} aria-hidden="true" />
     </button>
   );

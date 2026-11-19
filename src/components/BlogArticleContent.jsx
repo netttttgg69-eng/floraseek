@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context.js";
 import { ArrowRight, Sprout } from "lucide-react";
 import { Link } from "react-router-dom";
 import { plants } from "../data/plants.js";
@@ -6,28 +7,30 @@ import BlogCoverImage from "./BlogCoverImage.jsx";
 const plantsBySlug = new Map(plants.map((plant) => [plant.slug, plant]));
 
 function InlineContent({ children }) {
+  const { t } = useLanguage();
   return children.map((child, index) => {
     if (typeof child === "string") {
-      return child;
+      return t(child);
     }
 
     if (child.type === "link") {
       return (
         <Link key={`${child.to}-${index}`} to={child.to}>
-          {child.text}
+          {t(child.text)}
         </Link>
       );
     }
 
     if (child.type === "strong") {
-      return <strong key={`${child.text}-${index}`}>{child.text}</strong>;
+      return <strong key={`${child.text}-${index}`}>{t(child.text)}</strong>;
     }
 
-    return child.text || "";
+    return t(child.text || "");
   });
 }
 
 function PlantLinks({ block }) {
+  const { t } = useLanguage();
   const linkedPlants = block.plantSlugs
     .map((slug) => plantsBySlug.get(slug))
     .filter(Boolean);
@@ -38,12 +41,12 @@ function PlantLinks({ block }) {
 
   return (
     <aside className="blog-profile-links">
-      <h3>{block.title}</h3>
+      <h3>{t(block.title)}</h3>
       <div>
         {linkedPlants.map((plant) => (
           <Link key={plant.slug} to={`/plants/${plant.slug}`}>
             <Sprout size={16} aria-hidden="true" />
-            {plant.name}
+            {t(plant.name)}
           </Link>
         ))}
       </div>
@@ -51,15 +54,15 @@ function PlantLinks({ block }) {
   );
 }
 
-function renderBlock(block, index, post) {
+function renderBlock(block, index, post, t) {
   if (block.type === "heading") {
-    return <h2 key={`${block.text}-${index}`}>{block.text}</h2>;
+    return <h2 key={`${block.text}-${index}`}>{t(block.text)}</h2>;
   }
 
   if (block.type === "paragraph") {
     return (
       <p key={`${block.text || index}-${index}`}>
-        {block.children ? <InlineContent>{block.children}</InlineContent> : block.text}
+        {block.children ? <InlineContent>{block.children}</InlineContent> : t(block.text)}
       </p>
     );
   }
@@ -68,7 +71,7 @@ function renderBlock(block, index, post) {
     return (
       <ul key={`list-${index}`}>
         {block.items.map((item) => (
-          <li key={item}>{item}</li>
+          <li key={item}>{t(item)}</li>
         ))}
       </ul>
     );
@@ -78,14 +81,14 @@ function renderBlock(block, index, post) {
     return (
       <figure className="blog-figure" key={`image-${index}`}>
         <BlogCoverImage
-          alt={block.alt}
+          alt={t(block.alt)}
           category={post.category}
           className="blog-figure-cover"
-          label={block.label}
+          label={t(block.label)}
           src={block.src}
-          title={post.title}
+          title={t(post.title)}
         />
-        {block.caption && <figcaption>{block.caption}</figcaption>}
+        {block.caption && <figcaption>{t(block.caption)}</figcaption>}
       </figure>
     );
   }
@@ -93,8 +96,8 @@ function renderBlock(block, index, post) {
   if (block.type === "callout") {
     return (
       <aside className="blog-callout" key={`${block.title}-${index}`}>
-        <h3>{block.title}</h3>
-        <p>{block.text}</p>
+        <h3>{t(block.title)}</h3>
+        <p>{t(block.text)}</p>
       </aside>
     );
   }
@@ -107,11 +110,11 @@ function renderBlock(block, index, post) {
     return (
       <aside className="blog-inline-cta" key={`${block.title}-${index}`}>
         <div>
-          <h3>{block.title}</h3>
-          <p>{block.text}</p>
+          <h3>{t(block.title)}</h3>
+          <p>{t(block.text)}</p>
         </div>
         <Link className="button primary" to={block.to}>
-          Open Plant Finder
+          {t("Open Plant Finder")}
           <ArrowRight size={18} aria-hidden="true" />
         </Link>
       </aside>
@@ -122,9 +125,10 @@ function renderBlock(block, index, post) {
 }
 
 export default function BlogArticleContent({ post }) {
+  const { t } = useLanguage();
   return (
     <div className="blog-article-content">
-      {post.content.map((block, index) => renderBlock(block, index, post))}
+      {post.content.map((block, index) => renderBlock(block, index, post, t))}
     </div>
   );
 }

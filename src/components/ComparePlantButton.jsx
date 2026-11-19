@@ -1,7 +1,9 @@
+import { useLanguage } from "../i18n/context.js";
 import { GitCompareArrows } from "lucide-react";
 import useComparison from "../hooks/useComparison.js";
 
 export default function ComparePlantButton({ plant, className = "" }) {
+  const { t } = useLanguage();
   const {
     addToComparison,
     isCompared,
@@ -16,9 +18,7 @@ export default function ComparePlantButton({ plant, className = "" }) {
       type="button"
       aria-pressed={compared}
       aria-label={
-        compared
-          ? `Remove ${plant.name} from comparison`
-          : `Add ${plant.name} to comparison`
+        compared ? t("Remove {name} from comparison", { name: t(plant.name) }) : t("Add {name} to comparison", { name: t(plant.name) })
       }
       onClick={(event) => {
         event.preventDefault();
@@ -32,7 +32,7 @@ export default function ComparePlantButton({ plant, className = "" }) {
       }}
     >
       <GitCompareArrows size={17} aria-hidden="true" />
-      <span>{label}</span>
+      <span>{t(label)}</span>
     </button>
   );
 }

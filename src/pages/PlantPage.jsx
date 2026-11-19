@@ -1,5 +1,5 @@
+import { useLanguage } from "../i18n/context.js";
 import { ArrowLeft, Compass, Leaf, ShoppingBag, ThermometerSun } from "lucide-react";
-import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Badge from "../components/Badge.jsx";
 import ComparePlantButton from "../components/ComparePlantButton.jsx";
@@ -9,21 +9,12 @@ import PlantImage from "../components/PlantImage.jsx";
 import SavePlantButton from "../components/SavePlantButton.jsx";
 import SectionHeader from "../components/SectionHeader.jsx";
 import { formatList, getPlantBySlug, getRelatedPlants, labelFor } from "../data/plants.js";
-import { setPageMeta } from "../utils/meta.js";
 import NotFoundPage from "./NotFoundPage.jsx";
 
 export default function PlantPage() {
+  const { t } = useLanguage();
   const { slug, legacySlug } = useParams();
   const plant = getPlantBySlug(slug || legacySlug);
-
-  useEffect(() => {
-    if (plant) {
-      setPageMeta(
-        plant.name,
-        plant.shortDescription || `${plant.name} profile in Floraseek: ${labelFor("difficulty", plant.difficulty)} ${labelFor("type", plant.type).toLowerCase()} for ${formatList(plant.climates, "climate")} climates.`
-      );
-    }
-  }, [plant]);
 
   if (!plant) {
     return <NotFoundPage />;
@@ -42,19 +33,19 @@ export default function PlantPage() {
           <div className="plant-hero-copy">
             <Link className="back-link" to="/finder">
               <ArrowLeft size={17} aria-hidden="true" />
-              Back to Plant Finder
+              {t("Back to Plant Finder")}
             </Link>
             <p className="eyebrow">
               <Leaf size={16} aria-hidden="true" />
-              {labelFor("type", plant.type)} profile
+              {t("{type} profile", { type: t(labelFor("type", plant.type)) })}
             </p>
-            <h1>{plant.name}</h1>
-            <p>{description}</p>
+            <h1>{t(plant.name)}</h1>
+            <p>{t(description)}</p>
             <div className="profile-badges">
               <Badge category="category" value={plant.category} />
               <Badge category="difficulty" value={plant.difficulty} />
-              <span>{formatList(plant.climates, "climate")}</span>
-              <span>{labelFor("type", plant.type)}</span>
+              <span>{formatList(plant.climates, "climate", t)}</span>
+              <span>{t(labelFor("type", plant.type))}</span>
             </div>
             <div className="profile-actions">
               <SavePlantButton plant={plant} className="profile-save-button" />
@@ -70,28 +61,28 @@ export default function PlantPage() {
       <section className="section">
         <div className="container plant-detail-grid">
           <article className="detail-card">
-            <h2>Growing conditions</h2>
+            <h2>{t("Growing conditions")}</h2>
             <dl className="plant-facts">
               <div>
                 <dt>
                   <Compass size={17} aria-hidden="true" />
-                  Difficulty
+                  {t("Difficulty")}
                 </dt>
-                <dd>{labelFor("difficulty", plant.difficulty)}</dd>
+                <dd>{t(labelFor("difficulty", plant.difficulty))}</dd>
               </div>
               <div>
                 <dt>
                   <ThermometerSun size={17} aria-hidden="true" />
-                  Climate
+                  {t("Climate")}
                 </dt>
-                <dd>{formatList(plant.climates, "climate")}</dd>
+                <dd>{formatList(plant.climates, "climate", t)}</dd>
               </div>
               <div>
                 <dt>
                   <Leaf size={17} aria-hidden="true" />
-                  Type
+                  {t("Type")}
                 </dt>
-                <dd>{labelFor("type", plant.type)}</dd>
+                <dd>{t(labelFor("type", plant.type))}</dd>
               </div>
             </dl>
           </article>
@@ -100,14 +91,14 @@ export default function PlantPage() {
             <div>
               <p className="eyebrow">
                 <ShoppingBag size={16} aria-hidden="true" />
-                {isTechniqueProfile ? "Technique" : "Seeds"}
+                {isTechniqueProfile ? t("Technique") : t("Seeds")}
               </p>
-              <h2>{isTechniqueProfile ? "Technique guide" : "Seed availability"}</h2>
-              {!shopUrl && !isTechniqueProfile && <p className="shop-note">Coming soon</p>}
+              <h2>{isTechniqueProfile ? t("Technique guide") : t("Seed availability")}</h2>
+              {!shopUrl && !isTechniqueProfile && <p className="shop-note">{t("Coming soon")}</p>}
             </div>
             {isTechniqueProfile ? (
               <a className="button primary shop-button" href="#growing-guide">
-                {shopCardLabel}
+                {t(shopCardLabel)}
               </a>
             ) : shopUrl ? (
               <a
@@ -116,11 +107,11 @@ export default function PlantPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {shopCardLabel}
+                {t(shopCardLabel)}
               </a>
             ) : (
               <button className="button primary shop-button" type="button" disabled>
-                {shopCardLabel}
+                {t(shopCardLabel)}
               </button>
             )}
           </article>
@@ -131,9 +122,7 @@ export default function PlantPage() {
 
       <section className="section muted">
         <div className="container">
-          <SectionHeader eyebrow="Related" title="Explore similar profiles">
-            Related plants share a type, climate, or difficulty with {plant.name}.
-          </SectionHeader>
+          <SectionHeader eyebrow={t("Related")} title={t("Explore similar profiles")}>{t("Related plants share a type, climate, or difficulty with {name}.", { name: t(plant.name) })}</SectionHeader>
           <div className="card-grid three">
             {relatedPlants.map((relatedPlant) => (
               <PlantCard key={relatedPlant.id} plant={relatedPlant} variant="related" />

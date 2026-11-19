@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context.js";
 import { Leaf } from "lucide-react";
 
 export default function BlogCoverImage({
@@ -9,6 +10,7 @@ export default function BlogCoverImage({
   src,
   title,
 }) {
+  const { t } = useLanguage();
   const coverClassName = ["blog-cover", className].filter(Boolean).join(" ");
 
   if (src) {
@@ -16,7 +18,7 @@ export default function BlogCoverImage({
       <img
         className={`${coverClassName} blog-cover-image`}
         src={src}
-        alt={alt || ""}
+        alt={t(alt || "")}
         loading={loading}
       />
     );
@@ -26,13 +28,13 @@ export default function BlogCoverImage({
     <div
       className={`${coverClassName} blog-cover-placeholder`}
       role="img"
-      aria-label={alt || `${title} cover image placeholder`}
+      aria-label={alt ? t(alt) : t("{title} cover image placeholder", { title: t(title) })}
     >
       <span className="blog-cover-icon" aria-hidden="true">
         <Leaf size={28} />
       </span>
-      {category && <span className="blog-cover-category">{category}</span>}
-      <strong>{label || title}</strong>
+      {category && <span className="blog-cover-category">{t(category)}</span>}
+      <strong>{t(label || title)}</strong>
     </div>
   );
 }

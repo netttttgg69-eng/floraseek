@@ -1,0 +1,50 @@
+{
+  "404": [
+    "Page not found",
+    "This Floraseek page could not be found."
+  ],
+  "/about": [
+    "About the Creator",
+    "Learn about Lincoln Zhang, the creator of Floraseek."
+  ],
+  "/ai-policy": [
+    "Our AI Policy",
+    "Read Floraseek's AI policy, privacy notes, and accuracy limitations."
+  ],
+  "/blog": [
+    "The Floraseek Journal",
+    "Explore plant care guides, gardening tips, and everything you need to know about growing plants."
+  ],
+  "/compare": [
+    "Plant Comparison",
+    "Compare Floraseek plants by description, difficulty, climate, type, and category."
+  ],
+  "/contact": [
+    "Contact Floraseek",
+    "Contact Floraseek for questions, feedback, bug reports, or suggestions."
+  ],
+  "/find-my-plant": [
+    "Find My Plant Quiz",
+    "Answer a few Floraseek questions to get plant recommendations from the existing catalogue."
+  ],
+  "/finder": [
+    "Plant Finder",
+    "Filter Floraseek plants by difficulty, climate, and category."
+  ],
+  "/": [
+    "Plant Finder",
+    "Explore Floraseek, a polished plant and flower finder for difficulty, climate, and plant type."
+  ],
+  "/saved-plants": [
+    "Saved Plants",
+    "View the Floraseek plant profiles you have saved in this browser."
+  ],
+  "/plants": [
+    "Plants",
+    "Browse Floraseek plants from the original project catalogue."
+  ],
+  "/flowers": [
+    "Flowers",
+    "Browse Floraseek flowers from the original project catalogue."
+  ]
+}

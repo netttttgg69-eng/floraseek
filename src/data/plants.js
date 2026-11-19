@@ -1867,17 +1867,28 @@ export function labelFor(category, value) {
   return labels[category]?.[value] ?? value;
 }
 
-export function formatList(values, category) {
-  return values.map((value) => labelFor(category, value)).join(", ");
+export function formatList(values, category, translate = value => value) {
+  return values.map((value) => translate(labelFor(category, value))).join(", ");
 }
 
 export function normalizeSearchQuery(query) {
-  return String(query || "").trim().toLowerCase();
+  return String(query || "").trim().normalize("NFD").replace(/\p{M}/gu, "").replace(/œ/g, "oe").toLowerCase();
 }
 
-export function getPlantSearchText(plant) {
+// Alternate names for profiles whose reference titles use a common name.
+const botanicalSearchAliases = {
+  rose: "Rosa", "chinese-evergreen": "Aglaonema", welwitschia: "Welwitschia mirabilis",
+  "corpse-flower": "Amorphophallus titanum", geranium: "Pelargonium", sundew: "Drosera capensis",
+  "sensitive-plant": "Mimosa pudica", "resurrection-plant": "Selaginella lepidophylla",
+  peony: "Paeonia", "flapjack-plant": "Kalanchoe luciae", aeonium: "Aeonium arboreum",
+  gasteria: "Gasteria bicolor var. liliputana", "elephant-bush": "Portulacaria afra",
+  frangipani: "Plumeria", rafflesia: "Rafflesia speciosa", "snake-plant": "Sansevieria trifasciata",
+};
+
+export function getPlantSearchText(plant, translate = value => value) {
   return [
     plant.name,
+    botanicalSearchAliases[plant.id] || "",
     plant.summary,
     plant.shortDescription,
     plant.category,
@@ -1887,10 +1898,11 @@ export function getPlantSearchText(plant) {
     labelFor("difficulty", plant.difficulty),
     ...plant.climates,
     ...plant.climates.map((climate) => labelFor("climate", climate)),
-  ].join(" ").toLowerCase();
+    ...(plant.growingGuide?.references || []).filter(ref => ref.title.startsWith("NC State Extension · ")).map(ref => ref.title.split(" · ")[1]),
+  ].flatMap(value => [value, translate(value)]).map(normalizeSearchQuery).join(" ");
 }
 
-export function searchPlants(query, sourcePlants = plants) {
+export function searchPlants(query, sourcePlants = plants, translate) {
   const normalizedQuery = normalizeSearchQuery(query);
 
   if (!normalizedQuery) {
@@ -1900,7 +1912,7 @@ export function searchPlants(query, sourcePlants = plants) {
   const terms = normalizedQuery.split(/\s+/).filter(Boolean);
 
   return sourcePlants.filter((plant) => {
-    const searchableText = getPlantSearchText(plant);
+    const searchableText = getPlantSearchText(plant, translate);
     return terms.every((term) => searchableText.includes(term));
   });
 }

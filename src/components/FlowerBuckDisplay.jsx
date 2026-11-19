@@ -1,9 +1,11 @@
+import { useLanguage } from "../i18n/context.js";
 import { Check, ChevronDown, Flower2, Lock, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import useFlowerBucks from "../hooks/useFlowerBucks.js";
 import { FLOWERBUCK_THEMES, formatFlowerBucks } from "../utils/flowerBucks.js";
 
 export default function FlowerBuckDisplay() {
+  const { t, locale } = useLanguage();
   const {
     balance,
     selectedTheme,
@@ -50,23 +52,23 @@ export default function FlowerBuckDisplay() {
       <button
         className="flowerbuck-balance-button"
         type="button"
-        aria-label={`${formatFlowerBucks(balance)} FlowerBucks. Open theme garden.`}
+        aria-label={t("{balance} FlowerBucks. Open theme garden.", { balance: formatFlowerBucks(balance, locale) })}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         onClick={() => setIsOpen((open) => !open)}
       >
         <Flower2 size={17} aria-hidden="true" />
-        <span>{formatFlowerBucks(balance)}</span>
+        <span>{formatFlowerBucks(balance, locale)}</span>
         <ChevronDown size={14} aria-hidden="true" />
       </button>
 
       {isOpen && (
-        <div className="flowerbuck-panel" role="dialog" aria-label="FlowerBuck theme garden">
+        <div className="flowerbuck-panel" role="dialog" aria-label={t("FlowerBuck theme garden")}>
           <div className="flowerbuck-panel-heading">
             <Sparkles size={16} aria-hidden="true" />
             <div>
-              <strong>Theme Garden</strong>
-              <span>FlowerBuck colour themes</span>
+              <strong>{t("Theme Garden")}</strong>
+              <span>{t("FlowerBuck colour themes")}</span>
             </div>
           </div>
 
@@ -85,8 +87,8 @@ export default function FlowerBuckDisplay() {
                   onClick={() => handleThemeClick(theme)}
                 >
                   <span className="theme-card-copy">
-                    <strong>{theme.name}</strong>
-                    <small>{theme.description}</small>
+                    <strong>{t(theme.name)}</strong>
+                    <small>{t(theme.description)}</small>
                   </span>
                   <span className="theme-swatches" aria-hidden="true">
                     {theme.swatches.map((swatch) => (
@@ -97,16 +99,16 @@ export default function FlowerBuckDisplay() {
                     {isSelected ? (
                       <>
                         <Check size={14} aria-hidden="true" />
-                        Selected
+                        {t("Selected")}
                       </>
                     ) : isUnlocked ? (
-                      "Use"
+                      t("Use")
                     ) : canUnlock ? (
-                      `Unlock ${formatFlowerBucks(theme.cost)}`
+                      t("Unlock {amount}", { amount: formatFlowerBucks(theme.cost, locale) })
                     ) : (
                       <>
                         <Lock size={13} aria-hidden="true" />
-                        {formatFlowerBucks(theme.cost)}
+                        {formatFlowerBucks(theme.cost, locale)}
                       </>
                     )}
                   </span>
@@ -116,7 +118,7 @@ export default function FlowerBuckDisplay() {
           </div>
 
           <p className="flowerbuck-panel-note">
-            FlowerBucks are local cosmetic rewards only and have no real-world monetary value.
+            {t("FlowerBucks are local cosmetic rewards only and have no real-world monetary value.")}
           </p>
         </div>
       )}

@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context.js";
 import { Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -16,6 +17,7 @@ function selectPlants() {
 }
 
 export default function ExplorePlants({ playing, reduced, onToggle }) {
+  const { t } = useLanguage();
   const [selection] = useState(selectPlants);
   const viewport = useRef(null);
   const group = useRef(null);
@@ -69,16 +71,16 @@ export default function ExplorePlants({ playing, reduced, onToggle }) {
   return (
     <section className="explore-section" aria-labelledby="explore-title">
       <div className="container explore-heading">
-        <h2 id="explore-title">Explore Plants</h2>
+        <h2 id="explore-title">{t("Explore Plants")}</h2>
         <div className="explore-controls">
           {!reduced && (
             <button className="motion-control" type="button" onClick={onToggle}
-              aria-label={playing ? "Pause homepage animations" : "Play homepage animations"}
-              title={playing ? "Pause animations" : "Play animations"}>
+              aria-label={playing ? t("Pause homepage animations") : t("Play homepage animations")}
+              title={playing ? t("Pause animations") : t("Play animations")}>
               {playing ? <Pause size={15} /> : <Play size={15} />}
             </button>
           )}
-          <Link className="text-link" to="/finder">Browse All Plants</Link>
+          <Link className="text-link" to="/finder">{t("Browse All Plants")}</Link>
         </div>
       </div>
       <div className="gallery-viewport" ref={viewport}
@@ -94,8 +96,8 @@ export default function ExplorePlants({ playing, reduced, onToggle }) {
               {selection.map((plant) => (
                 <Link key={plant.id} className="gallery-tile" tabIndex={copy ? -1 : undefined} to={`/plants/${plant.slug}`}>
                   <PlantImage plant={plant} />
-                  <strong>{plant.name}</strong>
-                  <small>{plant.scientificName || plant.category}</small>
+                  <strong>{t(plant.name)}</strong>
+                  <small>{t(plant.scientificName || plant.category)}</small>
                 </Link>
               ))}
             </div>

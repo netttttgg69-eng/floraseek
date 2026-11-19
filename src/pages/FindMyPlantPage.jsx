@@ -1,5 +1,6 @@
+import { useLanguage } from "../i18n/context.js";
 import { ArrowLeft, ArrowRight, Check, ListChecks, MapPin, RotateCcw, Sparkles } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Badge from "../components/Badge.jsx";
 import ComparePlantButton from "../components/ComparePlantButton.jsx";
@@ -12,9 +13,9 @@ import {
   getResolvedQuizAnswers,
   quizQuestions,
 } from "../utils/plantQuiz.js";
-import { setPageMeta } from "../utils/meta.js";
 
 export default function FindMyPlantPage() {
+  const { t } = useLanguage();
   const [answers, setAnswers] = useState({});
   const [stepIndex, setStepIndex] = useState(0);
   const isResultsStep = stepIndex >= quizQuestions.length;
@@ -24,13 +25,6 @@ export default function FindMyPlantPage() {
     : Math.round(((stepIndex + 1) / quizQuestions.length) * 100);
   const recommendations = useMemo(() => getQuizRecommendations(answers), [answers]);
   const resolvedAnswers = useMemo(() => getResolvedQuizAnswers(answers), [answers]);
-
-  useEffect(() => {
-    setPageMeta(
-      "Find My Plant Quiz",
-      "Answer a few Floraseek questions to get plant recommendations from the existing catalogue."
-    );
-  }, []);
 
   function chooseAnswer(questionId, value) {
     setAnswers((currentAnswers) => ({
@@ -50,17 +44,17 @@ export default function FindMyPlantPage() {
         <div className="page-heading">
           <p className="eyebrow">
             <Sparkles size={16} aria-hidden="true" />
-            Find My Plant
+            {t("Find My Plant")}
           </p>
-          <h1>Find a plant that fits you.</h1>
+          <h1>{t("Find a plant that fits you.")}</h1>
           <p>
-            Answer a few questions about your space and preferences to find your closest matches.
+            {t("Answer a few questions about your space and preferences to find your closest matches.")}
           </p>
         </div>
 
         <div className="quiz-shell">
-          <div className="quiz-progress" aria-label={`Quiz progress: ${progress}% complete`}>
-            <span>{isResultsStep ? "Results" : `Question ${stepIndex + 1} of ${quizQuestions.length}`}</span>
+          <div className="quiz-progress" aria-label={t("Quiz progress: {progress}% complete", { progress })}>
+            <span>{isResultsStep ? t("Results") : t("Question {current} of {total}", { current: stepIndex + 1, total: quizQuestions.length })}</span>
             <div className="quiz-progress-track">
               <span style={{ width: `${progress}%` }} />
             </div>
@@ -68,7 +62,7 @@ export default function FindMyPlantPage() {
 
           {!isResultsStep ? (
             <div className="quiz-question" key={currentQuestion.id}>
-              <h2 id={`quiz-question-${currentQuestion.id}`}>{currentQuestion.title}</h2>
+              <h2 id={`quiz-question-${currentQuestion.id}`}>{t(currentQuestion.title)}</h2>
               <div
                 className="quiz-options"
                 role="radiogroup"
@@ -86,7 +80,7 @@ export default function FindMyPlantPage() {
                       aria-checked={selected}
                       onClick={() => chooseAnswer(currentQuestion.id, option.value)}
                     >
-                      <span className="quiz-option-label">{option.label}</span>
+                      <span className="quiz-option-label">{t(option.label)}</span>
                       <span className="quiz-option-check" aria-hidden="true">
                         {selected && <Check size={17} />}
                       </span>
@@ -103,37 +97,36 @@ export default function FindMyPlantPage() {
                   onClick={() => setStepIndex((currentStep) => Math.max(currentStep - 1, 0))}
                 >
                   <ArrowLeft size={18} aria-hidden="true" />
-                  Back
+                  {t("Back")}
                 </button>
                 <button className="button secondary" type="button" onClick={restartQuiz}>
                   <RotateCcw size={17} aria-hidden="true" />
-                  Restart
+                  {t("Restart")}
                 </button>
                 <button
                   className="button primary"
                   type="button"
                   onClick={() => setStepIndex((currentStep) => currentStep + 1)}
                 >
-                  {stepIndex === quizQuestions.length - 1 ? "See results" : "Next"}
+                  {stepIndex === quizQuestions.length - 1 ? t("See results") : t("Next")}
                   <ArrowRight size={18} aria-hidden="true" />
                 </button>
               </div>
             </div>
           ) : (
             <div className="quiz-results">
-              <SectionHeader eyebrow="Recommendations" title="Your top matches">
-                These plants are the closest matches for your answers.
+              <SectionHeader eyebrow={t("Recommendations")} title={t("Your top matches")}>
+                {t("These plants are the closest matches for your answers.")}
               </SectionHeader>
 
               {resolvedAnswers.climate === "not-sure" && (
                 <div className="climate-prompt">
                   <MapPin size={18} aria-hidden="true" />
                   <p>
-                    Not sure about climate? Use the existing Find Your Climate feature before
-                    narrowing the finder.
+                    {t("Not sure about climate? Use the existing Find Your Climate feature before narrowing the finder.")}
                   </p>
                   <Link className="text-link" to="/finder#climate-finder">
-                    Find your climate
+                    {t("Find your climate")}
                     <ArrowRight size={17} aria-hidden="true" />
                   </Link>
                 </div>
@@ -147,25 +140,25 @@ export default function FindMyPlantPage() {
                       <div>
                         <p className="eyebrow">
                           <ListChecks size={16} aria-hidden="true" />
-                          Match
+                          {t("Match")}
                         </p>
-                        <h3>{plant.name}</h3>
+                        <h3>{t(plant.name)}</h3>
                         <div className="profile-badges plant-week-badges">
                           <Badge category="category" value={plant.category} />
                           <Badge category="difficulty" value={plant.difficulty} />
-                          <span>{labelFor("type", plant.type)}</span>
+                          <span>{t(labelFor("type", plant.type))}</span>
                         </div>
                       </div>
 
                       <ul className="match-reasons">
                         {reasons.map((reason) => (
-                          <li key={reason}>{reason}</li>
+                          <li key={reason}>{t(reason)}</li>
                         ))}
                       </ul>
 
                       <div className="plant-card-actions">
                         <Link className="text-link" to={`/plants/${plant.slug}`}>
-                          View plant
+                          {t("View plant")}
                           <ArrowRight size={17} aria-hidden="true" />
                         </Link>
                         <SavePlantButton plant={plant} />
@@ -179,10 +172,10 @@ export default function FindMyPlantPage() {
               <div className="quiz-actions results-actions">
                 <button className="button secondary" type="button" onClick={restartQuiz}>
                   <RotateCcw size={17} aria-hidden="true" />
-                  Retake the quiz
+                  {t("Retake the quiz")}
                 </button>
                 <Link className="button primary" to="/finder">
-                  Browse all plants
+                  {t("Browse all plants")}
                   <ArrowRight size={18} aria-hidden="true" />
                 </Link>
               </div>

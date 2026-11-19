@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context.js";
 import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,7 @@ export default function PlantSearch({
   value,
   variant = "nav",
 }) {
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [internalValue, setInternalValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -20,8 +22,8 @@ export default function PlantSearch({
   const trimmedQuery = query.trim();
 
   const results = useMemo(() => (
-    trimmedQuery ? searchPlants(trimmedQuery).slice(0, 6) : []
-  ), [trimmedQuery]);
+    trimmedQuery ? searchPlants(trimmedQuery, undefined, t).slice(0, 6) : []
+  ), [trimmedQuery, t]);
 
   function updateQuery(nextValue) {
     if (value === undefined) {
@@ -59,13 +61,13 @@ export default function PlantSearch({
       }}
     >
       <label>
-        <span>{label}</span>
+        <span>{t(label)}</span>
         <div className="search-field">
           <Search size={17} aria-hidden="true" />
           <input
             type="search"
             value={query}
-            placeholder={placeholder}
+            placeholder={t(placeholder)}
             onChange={(event) => updateQuery(event.target.value)}
             onFocus={() => setIsOpen(true)}
             onKeyDown={(event) => {
@@ -85,18 +87,18 @@ export default function PlantSearch({
               <button
                 key={plant.id}
                 type="button"
-                aria-label={`Open ${plant.name}`}
+                aria-label={t("Open {name}", { name: t(plant.name) })}
                 onMouseDown={(event) => {
                   event.preventDefault();
                   openPlant(plant);
                 }}
                 onClick={() => openPlant(plant)}
               >
-                <span className="search-result-name">{plant.name}</span>
+                <span className="search-result-name">{t(plant.name)}</span>
               </button>
             ))
           ) : (
-            <p>No plants found for &quot;{trimmedQuery}&quot;.</p>
+            <p>{t("No plants found for \"{trimmedQuery}\".", { trimmedQuery })}</p>
           )}
         </div>
       )}

@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context.js";
 import { ArrowRight, CalendarDays, Leaf } from "lucide-react";
 import { Link } from "react-router-dom";
 import { formatList, labelFor } from "../data/plants.js";
@@ -6,6 +7,7 @@ import Badge from "./Badge.jsx";
 import PlantImage from "./PlantImage.jsx";
 
 export default function PlantOfWeek() {
+  const { t } = useLanguage();
   const { plant, week, year } = getPlantOfWeek();
   const description = plant.shortDescription || plant.summary;
 
@@ -15,21 +17,21 @@ export default function PlantOfWeek() {
       <div className="plant-week-copy">
         <p className="eyebrow">
           <CalendarDays size={16} aria-hidden="true" />
-          Week {week}, {year}
+          {t("Week {week}, {year}", { week, year })}
         </p>
-        <h3>{plant.name}</h3>
-        <p>{description}</p>
+        <h3>{t(plant.name)}</h3>
+        <p>{t(description)}</p>
         <div className="profile-badges plant-week-badges">
           <Badge category="category" value={plant.category} />
           <Badge category="difficulty" value={plant.difficulty} />
-          <span>{formatList(plant.climates, "climate")}</span>
+          <span>{formatList(plant.climates, "climate", t)}</span>
           <span>
             <Leaf size={14} aria-hidden="true" />
-            {labelFor("type", plant.type)}
+            {t(labelFor("type", plant.type))}
           </span>
         </div>
         <Link className="button primary" to={`/plants/${plant.slug}`}>
-          Open plant page
+          {t("Open plant page")}
           <ArrowRight size={18} aria-hidden="true" />
         </Link>
       </div>

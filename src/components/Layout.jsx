@@ -1,3 +1,5 @@
+import { useLanguage } from "../i18n/context.js";
+import LanguageSelector from "./LanguageSelector.jsx";
 import { NavLink, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -21,6 +23,7 @@ const mobileNavLinks = [
 ];
 
 export default function Layout() {
+  const { t } = useLanguage();
   const { comparisonCount } = useComparison();
   const { pathname } = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -52,11 +55,11 @@ export default function Layout() {
   function renderNavLink({ to, label, showCount }) {
     return (
       <NavLink key={to} to={to} onClick={closeHeaderPanels}>
-        <span>{label}</span>
+        <span>{t(label)}</span>
         {showCount && comparisonCount > 0 && (
           <span
             className="nav-count"
-            aria-label={`${comparisonCount} plants selected for comparison`}
+            aria-label={t("{comparisonCount} plants selected for comparison", { comparisonCount })}
           >
             {comparisonCount}
           </span>
@@ -69,7 +72,7 @@ export default function Layout() {
     <div className="site-shell">
       <header className="site-header">
         <div className="nav container">
-          <NavLink to="/" className="brand" aria-label="Floraseek homepage">
+          <NavLink to="/" className="brand" aria-label={t("Floraseek homepage")}>
             <img
               className="brand-logo"
               src="/images/floraseek-logo.svg"
@@ -79,24 +82,25 @@ export default function Layout() {
             />
           </NavLink>
 
-          <nav className="nav-links desktop-nav" aria-label="Main navigation">
-            {mainNavLinks.map(renderNavLink)}
+          <nav className="nav-links desktop-nav" aria-label={t("Main navigation")}>
+            {t(mainNavLinks.map(renderNavLink))}
           </nav>
 
           <PlantSearch
             className="nav-search desktop-search"
-            label="Search plants"
-            placeholder="Search plants"
+            label={t("Search plants")}
+            placeholder={t("Search plants")}
           />
 
+          <LanguageSelector />
           <FlowerBuckDisplay />
-          <NavLink className="nav-contact" to="/contact">Contact</NavLink>
+          <NavLink className="nav-contact" to="/contact">{t("Contact")}</NavLink>
 
           <div className="mobile-header-actions">
             <button
               className="header-icon-button"
               type="button"
-              aria-label="Open plant search"
+              aria-label={t("Open plant search")}
               aria-controls="mobile-search-panel"
               aria-expanded={isMobileSearchOpen}
               onClick={() => {
@@ -109,7 +113,7 @@ export default function Layout() {
             <button
               className="header-icon-button"
               type="button"
-              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-label={isMobileMenuOpen ? t("Close navigation menu") : t("Open navigation menu")}
               aria-controls="mobile-navigation"
               aria-expanded={isMobileMenuOpen}
               onClick={() => {
@@ -126,8 +130,8 @@ export default function Layout() {
           <div className="mobile-search-panel container" id="mobile-search-panel">
             <PlantSearch
               className="mobile-search"
-              label="Search plants"
-              placeholder="Search plants"
+              label={t("Search plants")}
+              placeholder={t("Search plants")}
               onEscape={closeHeaderPanels}
               onSelect={closeHeaderPanels}
             />
@@ -135,8 +139,8 @@ export default function Layout() {
         )}
 
         {isMobileMenuOpen && (
-          <nav className="mobile-menu-panel container" id="mobile-navigation" aria-label="Mobile navigation">
-            {mobileNavLinks.map(renderNavLink)}
+          <nav className="mobile-menu-panel container" id="mobile-navigation" aria-label={t("Mobile navigation")}>
+            {t(mobileNavLinks.map(renderNavLink))}
           </nav>
         )}
       </header>
@@ -147,15 +151,15 @@ export default function Layout() {
 
       <footer className="site-footer">
         <div className="container footer-grid">
-          <NavLink to="/" className="brand" aria-label="Floraseek homepage">
+          <NavLink to="/" className="brand" aria-label={t("Floraseek homepage")}>
             <img className="brand-logo" src="/images/floraseek-logo.svg" alt="Floraseek" width="224" height="48" />
           </NavLink>
-          <nav className="footer-links" aria-label="Footer navigation">
-            <NavLink to="/flowers">Flowers</NavLink>
-            <NavLink to="/plants">Plants</NavLink>
-            <NavLink to="/about">About the Creator</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
-            <NavLink to="/ai-policy">AI Policy</NavLink>
+          <nav className="footer-links" aria-label={t("Footer navigation")}>
+            <NavLink to="/flowers">{t("Flowers")}</NavLink>
+            <NavLink to="/plants">{t("Plants")}</NavLink>
+            <NavLink to="/about">{t("About the Creator")}</NavLink>
+            <NavLink to="/contact">{t("Contact")}</NavLink>
+            <NavLink to="/ai-policy">{t("AI Policy")}</NavLink>
           </nav>
         </div>
       </footer>

@@ -1,14 +1,15 @@
+import { useLanguage } from "../i18n/context.js";
 import { ArrowRight, GitCompareArrows, Trash2, X } from "lucide-react";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import Badge from "../components/Badge.jsx";
 import PlantImage from "../components/PlantImage.jsx";
 import useComparison from "../hooks/useComparison.js";
 import { formatList, labelFor, plants } from "../data/plants.js";
 import { getComparisonRows } from "../utils/comparison.js";
-import { setPageMeta } from "../utils/meta.js";
 
 export default function ComparePage() {
+  const { t } = useLanguage();
   const {
     clearComparison,
     comparisonPlantIds,
@@ -22,15 +23,8 @@ export default function ComparePage() {
   ), [comparisonPlantIds]);
 
   const comparisonRows = useMemo(() => (
-    getComparisonRows(selectedPlants, { formatList, labelFor })
-  ), [selectedPlants]);
-
-  useEffect(() => {
-    setPageMeta(
-      "Plant Comparison",
-      "Compare Floraseek plants by description, difficulty, climate, type, and category."
-    );
-  }, []);
+    getComparisonRows(selectedPlants, { formatList: (values, category) => formatList(values, category, t), labelFor })
+  ), [selectedPlants, t]);
 
   return (
     <section className="page-section compare-page">
@@ -38,20 +32,20 @@ export default function ComparePage() {
         <div className="page-heading">
           <p className="eyebrow">
             <GitCompareArrows size={16} aria-hidden="true" />
-            Plant Comparison
+            {t("Plant Comparison")}
           </p>
-          <h1>Compare your shortlist.</h1>
+          <h1>{t("Compare your shortlist.")}</h1>
           <p>
-            Review plant characteristics side by side. Highlighted rows show where your plants differ.
+            {t("Review plant characteristics side by side. Highlighted rows show where your plants differ.")}
           </p>
           <div className="page-heading-actions">
             <Link className="button secondary" to="/finder">
-              Back to Plant Finder
+              {t("Back to Plant Finder")}
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
             {selectedPlants.length > 0 && (
               <button className="button secondary" type="button" onClick={clearComparison}>
-                Clear all
+                {t("Clear all")}
                 <Trash2 size={17} aria-hidden="true" />
               </button>
             )}
@@ -61,44 +55,42 @@ export default function ComparePage() {
         {selectedPlants.length === 0 ? (
           <div className="empty-state">
             <GitCompareArrows size={42} aria-hidden="true" />
-            <h2>No plants selected yet</h2>
+            <h2>{t("No plants selected yet")}</h2>
             <p>
-              Use Compare on plant cards or profile pages to build a side-by-side shortlist.
+              {t("Use Compare on plant cards or profile pages to build a side-by-side shortlist.")}
             </p>
             <Link className="button primary" to="/finder">
-              Open Plant Finder
+              {t("Open Plant Finder")}
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
         ) : (
           <>
             <div className="comparison-summary" aria-live="polite">
-              <strong>
-                {selectedPlants.length} selected
-              </strong>
+              <strong>{t("{selectedPlantsCount} selected", { selectedPlantsCount: selectedPlants.length })}</strong>
               <Link className="text-link" to="/finder">
-                Add another plant
+                {t("Add another plant")}
                 <ArrowRight size={17} aria-hidden="true" />
               </Link>
             </div>
 
-            <div className="comparison-scroller" role="region" tabIndex={0} aria-label="Selected plant comparison">
+            <div className="comparison-scroller" role="region" tabIndex={0} aria-label={t("Selected plant comparison")}>
               <table className="comparison-table">
-                <caption className="sr-only">Selected plants and their characteristics</caption>
+                <caption className="sr-only">{t("Selected plants and their characteristics")}</caption>
                 <thead>
                   <tr>
-                    <th scope="col">Characteristic</th>
+                    <th scope="col">{t("Characteristic")}</th>
                     {selectedPlants.map((plant) => (
                       <th scope="col" key={plant.id}>
                         <div className="comparison-plant-header">
                           <PlantImage plant={plant} />
                           <button className="icon-button comparison-remove" type="button"
-                            aria-label={`Remove ${plant.name} from comparison`}
+                            aria-label={t("Remove {name} from comparison", { name: t(plant.name) })}
                             onClick={() => removeFromComparison(plant.id)}>
                             <X size={17} aria-hidden="true" />
                           </button>
                           <Badge category="category" value={plant.category} />
-                          <Link to={`/plants/${plant.slug}`}>{plant.name}</Link>
+                          <Link to={`/plants/${plant.slug}`}>{t(plant.name)}</Link>
                         </div>
                       </th>
                     ))}
@@ -107,8 +99,8 @@ export default function ComparePage() {
                 <tbody>
                   {comparisonRows.map((row) => (
                     <tr key={row.key} className={row.isDifferent ? "different" : ""}>
-                      <th scope="row">{row.label}</th>
-                      {row.values.map((value, index) => <td key={selectedPlants[index].id}>{value}</td>)}
+                      <th scope="row">{t(row.label)}</th>
+                      {row.values.map((value, index) => <td key={selectedPlants[index].id}>{t(value)}</td>)}
                     </tr>
                   ))}
                 </tbody>

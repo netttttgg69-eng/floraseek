@@ -1,7 +1,9 @@
+import { useLanguage } from "../i18n/context.js";
 export default function FilterSelect({ id, label, value, options, onChange }) {
+  const { t } = useLanguage();
   return (
     <label className="filter-control" htmlFor={id}>
-      <span>{label}</span>
+      <span>{t(label)}</span>
       <select
         id={id}
         value={value}
@@ -9,7 +11,7 @@ export default function FilterSelect({ id, label, value, options, onChange }) {
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
-            {option.label}
+            {t(option.label)}
           </option>
         ))}
       </select>

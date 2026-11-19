@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context.js";
 import { Sparkles } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
@@ -9,7 +10,6 @@ import PlantSearch from "../components/PlantSearch.jsx";
 import RandomPlantButton from "../components/RandomPlantButton.jsx";
 import SectionHeader from "../components/SectionHeader.jsx";
 import { ALL_VALUE, filterOptions, filterPlants, plants, searchPlants } from "../data/plants.js";
-import { setPageMeta } from "../utils/meta.js";
 
 const initialFilters = {
   difficulty: ALL_VALUE,
@@ -18,19 +18,13 @@ const initialFilters = {
 };
 
 export default function FinderPage() {
+  const { t } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState(initialFilters);
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredPlants = useMemo(() => filterPlants(filters), [filters]);
-  const results = useMemo(() => searchPlants(searchQuery, filteredPlants), [filteredPlants, searchQuery]);
-
-  useEffect(() => {
-    setPageMeta(
-      "Plant Finder",
-      "Filter Floraseek plants by difficulty, climate, and category."
-    );
-  }, []);
+  const results = useMemo(() => searchPlants(searchQuery, filteredPlants, t), [filteredPlants, searchQuery, t]);
 
   useEffect(() => {
     if (searchParams.has("type")) {
@@ -93,62 +87,60 @@ export default function FinderPage() {
     <section className="page-section">
       <div className="container">
         <div className="page-heading">
-          <h1>Plant Finder</h1>
+          <h1>{t("Plant Finder")}</h1>
           <p>
-            Browse the catalogue by growing difficulty, climate and plant category.
+            {t("Browse the catalogue by growing difficulty, climate and plant category.")}
           </p>
           <div className="page-heading-actions">
             <Link className="button primary" to="/find-my-plant">
-              Take the Plant Quiz
+              {t("Take the Plant Quiz")}
               <Sparkles size={18} aria-hidden="true" />
             </Link>
             <RandomPlantButton />
           </div>
         </div>
 
-        <div className="finder-panel" role="group" aria-label="Plant filters">
+        <div className="finder-panel" role="group" aria-label={t("Plant filters")}>
           <PlantSearch
-            label="Search"
-            placeholder="Search by name, category, climate"
+            label={t("Search")}
+            placeholder={t("Search by name, category, climate")}
             value={searchQuery}
             variant="finder"
             onChange={setSearchQuery}
           />
           <FilterSelect
             id="difficulty"
-            label="Difficulty"
+            label={t("Difficulty")}
             value={filters.difficulty}
             options={filterOptions.difficulty}
             onChange={(value) => updateFilter("difficulty", value)}
           />
           <FilterSelect
             id="climate"
-            label="Climate"
+            label={t("Climate")}
             value={filters.climate}
             options={filterOptions.climate}
             onChange={(value) => updateFilter("climate", value)}
           />
           <FilterSelect
             id="category"
-            label="Category"
+            label={t("Category")}
             value={filters.category}
             options={filterOptions.category}
             onChange={(value) => updateFilter("category", value)}
           />
           <button className="button secondary reset-button" type="button" onClick={resetFilters}>
-            Reset
+            {t("Reset")}
           </button>
         </div>
 
-        <details className="finder-climate" open={window.location.hash === "#climate-finder" || undefined}>
-          <summary>Find your climate by city</summary>
+        <details className="finder-climate" open={typeof window !== "undefined" && window.location.hash === "#climate-finder" || undefined}>
+          <summary>{t("Find your climate by city")}</summary>
           <ClimateFinder onApplyClimate={(climate) => updateFilter("climate", climate)} />
         </details>
 
         <div className="results-header" aria-live="polite">
-          <SectionHeader title={results.length === 1 ? "1 matching plant" : `${results.length} matching plants`}>
-            Showing {results.length} of {plants.length} total Floraseek profiles.
-          </SectionHeader>
+          <SectionHeader title={results.length === 1 ? t("1 matching plant") : t("{length} matching plants", { length: results.length })}>{t("Showing {resultsCount} of {plantsCount} total Floraseek profiles.", { resultsCount: results.length, plantsCount: plants.length })}</SectionHeader>
         </div>
 
         {results.length > 0 ? (
@@ -159,8 +151,8 @@ export default function FinderPage() {
           </div>
         ) : (
           <EmptyState
-            title="No plants match that search"
-            message="Try a different search term, choose All in one category, or reset the finder to see every Floraseek plant."
+            title={t("No plants match that search")}
+            message={t("Try a different search term, choose All in one category, or reset the finder to see every Floraseek plant.")}
             onReset={resetFilters}
           />
         )}

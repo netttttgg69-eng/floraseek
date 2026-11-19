@@ -1,6 +1,5 @@
+import { useLanguage } from "../i18n/context.js";
 import { Bot, CheckCircle2, Database, Shield } from "lucide-react";
-import { useEffect } from "react";
-import { setPageMeta } from "../utils/meta.js";
 
 const policySections = [
   {
@@ -26,22 +25,16 @@ const policySections = [
 ];
 
 export default function AiPolicyPage() {
-  useEffect(() => {
-    setPageMeta(
-      "Our AI Policy",
-      "Read Floraseek's AI policy, privacy notes, and accuracy limitations."
-    );
-  }, []);
+  const { t } = useLanguage();
 
   return (
     <section className="page-section">
       <div className="container">
         <div className="page-heading">
-          <p className="eyebrow">Responsible use</p>
-          <h1>Our AI Policy</h1>
+          <p className="eyebrow">{t("Responsible use")}</p>
+          <h1>{t("Our AI Policy")}</h1>
           <p>
-            This page explains how AI assistance fits into Floraseek and where human judgement,
-            privacy, and plant-information limits matter.
+            {t("This page explains how AI assistance fits into Floraseek and where human judgement, privacy, and plant-information limits matter.")}
           </p>
         </div>
 
@@ -49,22 +42,20 @@ export default function AiPolicyPage() {
           {policySections.map(({ body, icon: Icon, title }) => (
             <article className="detail-card" key={title}>
               <Icon size={24} aria-hidden="true" />
-              <h2>{title}</h2>
-              <p>{body}</p>
+              <h2>{t(title)}</h2>
+              <p>{t(body)}</p>
             </article>
           ))}
           <article className="detail-card">
-            <h2>Limitations of AI-generated assistance</h2>
+            <h2>{t("Limitations of AI-generated assistance")}</h2>
             <p>
-              AI-generated assistance can miss context or make mistakes. Floraseek does not claim
-              every plant fact has been professionally reviewed.
+              {t("AI-generated assistance can miss context or make mistakes. Floraseek does not claim every plant fact has been professionally reviewed.")}
             </p>
           </article>
           <article className="detail-card">
-            <h2>No automated safety decisions</h2>
+            <h2>{t("No automated safety decisions")}</h2>
             <p>
-              Floraseek does not currently use an AI chatbot and does not make automated
-              personalised safety decisions.
+              {t("Floraseek does not currently use an AI chatbot and does not make automated personalised safety decisions.")}
             </p>
           </article>
         </div>

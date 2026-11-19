@@ -401,38 +401,38 @@ function getComparableDate(date) {
   return Date.UTC(year, month - 1, day);
 }
 
-function getTextFromChildren(children = []) {
+function getTextFromChildren(children = [], translate = value => value) {
   return children
     .map((child) => {
       if (typeof child === "string") {
-        return child;
+        return translate(child);
       }
 
-      return child.text || "";
+      return translate(child.text || "");
     })
     .join(" ");
 }
 
-function getTextFromBlock(block) {
+function getTextFromBlock(block, translate = value => value) {
   if (block.text) {
-    return block.text;
+    return translate(block.text);
   }
 
   if (block.children) {
-    return getTextFromChildren(block.children);
+    return getTextFromChildren(block.children, translate);
   }
 
   if (block.items) {
-    return block.items.join(" ");
+    return block.items.map(item => translate(item)).join(" ");
   }
 
-  return [block.title, block.caption, block.label].filter(Boolean).join(" ");
+  return [block.title, block.caption, block.label].filter(Boolean).map(text => translate(text)).join(" ");
 }
 
-export function formatBlogDate(date) {
+export function formatBlogDate(date, locale = "en") {
   const [year, month, day] = getDateParts(date);
 
-  return new Intl.DateTimeFormat("en", {
+  return new Intl.DateTimeFormat(locale, {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -454,20 +454,16 @@ export function getBlogPostBySlug(slug) {
   return getPublishedBlogPosts().find((post) => post.slug === slug);
 }
 
-export function getBlogSearchText(post) {
+export function getBlogSearchText(post, translate = value => value) {
+  const headings = [post.title, post.description, post.category, ...(post.topics || [])];
   return [
-    post.title,
-    post.description,
-    post.category,
-    ...(post.topics || []),
-    ...post.content.map(getTextFromBlock),
-  ]
-    .join(" ")
-    .toLowerCase();
+    ...headings.flatMap(text => [text, translate(text)]),
+    ...post.content.flatMap(block => [getTextFromBlock(block), getTextFromBlock(block, translate)]),
+  ].join(" ").toLowerCase();
 }
 
 export function getReadingTimeMinutes(post) {
-  const text = [post.title, post.description, ...post.content.map(getTextFromBlock)].join(" ");
+  const text = [post.title, post.description, ...post.content.map(block => getTextFromBlock(block))].join(" ");
   const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
 
   return Math.max(1, Math.ceil(wordCount / 220));

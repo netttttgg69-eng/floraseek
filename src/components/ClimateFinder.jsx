@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context.js";
 import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -5,6 +6,7 @@ import { labelFor } from "../data/plants.js";
 import { estimateClimateForLocation, formatLocationName, searchCities } from "../utils/openMeteo.js";
 
 export default function ClimateFinder({ onApplyClimate }) {
+  const { t, locale } = useLanguage();
   const navigate = useNavigate();
   const [city, setCity] = useState("");
   const [locations, setLocations] = useState([]);
@@ -39,7 +41,7 @@ export default function ClimateFinder({ onApplyClimate }) {
     setLocations([]);
 
     try {
-      const matches = await searchCities(city);
+      const matches = await searchCities(city, locale);
 
       if (!matches.length) {
         throw new Error("No matching cities were found. Try a nearby larger city.");
@@ -73,25 +75,24 @@ export default function ClimateFinder({ onApplyClimate }) {
   return (
     <div className="climate-tool" id="climate-finder">
       <div>
-        <h2>Find your climate</h2>
+        <h2>{t("Find your climate")}</h2>
         <p>
-          Search for a city to estimate a broad Floraseek climate category using historical
-          temperature and precipitation patterns.
+          {t("Search for a city to estimate a broad Floraseek climate category using historical temperature and precipitation patterns.")}
         </p>
       </div>
 
       <form className="climate-search" onSubmit={handleSearch}>
         <label>
-          <span>City search</span>
+          <span>{t("City search")}</span>
           <input
             type="search"
             value={city}
-            placeholder="Enter a city"
+            placeholder={t("Enter a city")}
             onChange={(event) => setCity(event.target.value)}
           />
         </label>
         <button className="button primary" type="submit" disabled={isLoading}>
-          {isLoading ? "Searching..." : "Search"}
+          {isLoading ? t("Searching...") : t("Search")}
           <Search size={17} aria-hidden="true" />
         </button>
       </form>
@@ -99,7 +100,7 @@ export default function ClimateFinder({ onApplyClimate }) {
       {locations.length > 1 && !result && (
         <div className="location-picker">
           <label>
-            <span>Select a location</span>
+            <span>{t("Select a location")}</span>
             <select
               value={selectedLocationId}
               onChange={(event) => setSelectedLocationId(event.target.value)}
@@ -117,29 +118,28 @@ export default function ClimateFinder({ onApplyClimate }) {
             disabled={isLoading || !selectedLocation}
             onClick={() => estimateForLocation(selectedLocation)}
           >
-            Use this location
+            {t("Use this location")}
           </button>
         </div>
       )}
 
-      {error && <p className="climate-error">{error}</p>}
+      {error && <p className="climate-error">{t(error)}</p>}
 
       {result && (
         <div className="climate-result" aria-live="polite">
           <span>{result.locationName}</span>
-          <strong>Suggested climate: {labelFor("climate", result.climate)}</strong>
+          <strong>{t("Suggested climate: {climate}", { climate: t(labelFor("climate", result.climate)) })}</strong>
           <p>
-            This is an estimate based on broad historical climate conditions. You can still change
-            the climate filter manually afterward.
+            {t("This is an estimate based on broad historical climate conditions. You can still change the climate filter manually afterward.")}
           </p>
           <button className="button secondary" type="button" onClick={applyClimate}>
-            Apply climate to Plant Finder
+            {t("Apply climate to Plant Finder")}
           </button>
         </div>
       )}
 
       <p className="climate-attribution">
-        Geocoding and historical climate data provided by Open-Meteo.
+        {t("Geocoding and historical climate data provided by Open-Meteo.")}
       </p>
     </div>
   );

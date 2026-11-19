@@ -1,5 +1,6 @@
+import { useLanguage } from "../i18n/context.js";
 import { BookOpen, Search, X } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import BlogCard from "../components/BlogCard.jsx";
 import {
   blogCategories,
@@ -7,11 +8,11 @@ import {
   getFeaturedBlogPost,
   getPublishedBlogPosts,
 } from "../data/blogPosts.js";
-import { absoluteSiteUrl, setPageMeta } from "../utils/meta.js";
 
 const allCategory = "All";
 
 export default function BlogPage() {
+  const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(allCategory);
   const [searchQuery, setSearchQuery] = useState("");
   const posts = useMemo(() => getPublishedBlogPosts(), []);
@@ -22,36 +23,11 @@ export default function BlogPage() {
 
     return posts.filter((post) => {
       const matchesCategory = activeCategory === allCategory || post.category === activeCategory;
-      const matchesSearch = !query || getBlogSearchText(post).includes(query);
+      const matchesSearch = !query || getBlogSearchText(post, t).includes(query);
 
       return matchesCategory && matchesSearch;
     });
-  }, [activeCategory, posts, searchQuery]);
-
-  useEffect(() => {
-    setPageMeta(
-      "The Floraseek Journal",
-      "Explore plant care guides, gardening tips, and everything you need to know about growing plants.",
-      {
-        canonicalPath: "/blog",
-        structuredData: {
-          "@context": "https://schema.org",
-          "@type": "Blog",
-          name: "The Floraseek Journal",
-          description:
-            "Explore plant care guides, gardening tips, and everything you need to know about growing plants.",
-          url: absoluteSiteUrl("/blog"),
-          blogPost: posts.map((post) => ({
-            "@type": "BlogPosting",
-            headline: post.title,
-            description: post.description,
-            datePublished: post.date,
-            url: absoluteSiteUrl(`/blog/${post.slug}`),
-          })),
-        },
-      }
-    );
-  }, [posts]);
+  }, [activeCategory, posts, searchQuery, t]);
 
   function resetFilters() {
     setActiveCategory(allCategory);
@@ -64,19 +40,18 @@ export default function BlogPage() {
         <div className="page-heading blog-heading">
           <p className="eyebrow">
             <BookOpen size={16} aria-hidden="true" />
-            Blog
+            {t("Blog")}
           </p>
-          <h1>The Floraseek Journal</h1>
+          <h1>{t("The Floraseek Journal")}</h1>
           <p>
-            Explore plant care guides, gardening tips, and everything you need to know about
-            growing plants.
+            {t("Explore plant care guides, gardening tips, and everything you need to know about growing plants.")}
           </p>
         </div>
 
         {featuredPost && (
           <section className="blog-featured" aria-labelledby="featured-article-title">
             <div className="section-header">
-              <h2 id="featured-article-title">Featured article</h2>
+              <h2 id="featured-article-title">{t("Featured article")}</h2>
             </div>
             <BlogCard post={featuredPost} variant="featured" />
           </section>
@@ -85,28 +60,28 @@ export default function BlogPage() {
         <section className="blog-browser" aria-labelledby="all-articles-title">
           <div className="blog-browser-heading">
             <div>
-              <h2 id="all-articles-title">All articles</h2>
+              <h2 id="all-articles-title">{t("All articles")}</h2>
             </div>
             <p aria-live="polite">
-              {filteredPosts.length} {filteredPosts.length === 1 ? "article" : "articles"}
+              {filteredPosts.length} {filteredPosts.length === 1 ? t("article") : t("articles")}
             </p>
           </div>
 
           <form className="blog-controls" onSubmit={(event) => event.preventDefault()}>
             <label className="blog-search-control">
-              <span>Search articles</span>
+              <span>{t("Search articles")}</span>
               <span className="search-field">
                 <Search size={18} aria-hidden="true" />
                 <input
                   type="search"
                   value={searchQuery}
-                  placeholder="Search by title or topic"
+                  placeholder={t("Search by title or topic")}
                   onChange={(event) => setSearchQuery(event.target.value)}
                 />
               </span>
             </label>
 
-            <div className="blog-category-filters" aria-label="Filter articles by category">
+            <div className="blog-category-filters" aria-label={t("Filter articles by category")}>
               {[allCategory, ...blogCategories].map((category) => (
                 <button
                   key={category}
@@ -114,7 +89,7 @@ export default function BlogPage() {
                   aria-pressed={activeCategory === category}
                   onClick={() => setActiveCategory(category)}
                 >
-                  {category}
+                  {t(category)}
                 </button>
               ))}
             </div>
@@ -128,11 +103,11 @@ export default function BlogPage() {
             </div>
           ) : (
             <div className="blog-empty-state">
-              <h3>No journal articles match that search.</h3>
-              <p>Try a different topic or reset the filters to view every article.</p>
+              <h3>{t("No journal articles match that search.")}</h3>
+              <p>{t("Try a different topic or reset the filters to view every article.")}</p>
               <button className="button secondary" type="button" onClick={resetFilters}>
                 <X size={17} aria-hidden="true" />
-                Reset filters
+                {t("Reset filters")}
               </button>
             </div>
           )}

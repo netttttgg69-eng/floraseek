@@ -37,7 +37,7 @@ export function formatLocationName(location) {
   ].filter(Boolean).join(", ");
 }
 
-export async function searchCities(city) {
+export async function searchCities(city, language = "en") {
   const query = city.trim();
 
   if (!query) {
@@ -47,7 +47,7 @@ export async function searchCities(city) {
   const url = new URL("https://geocoding-api.open-meteo.com/v1/search");
   url.searchParams.set("name", query);
   url.searchParams.set("count", "8");
-  url.searchParams.set("language", "en");
+  url.searchParams.set("language", language);
   url.searchParams.set("format", "json");
 
   const response = await fetch(url);
@@ -75,6 +75,7 @@ export async function estimateClimateForLocation(location) {
   if (cache[cacheKey]) {
     return {
       ...cache[cacheKey],
+      locationName: formatLocationName(location),
       cached: true,
     };
   }

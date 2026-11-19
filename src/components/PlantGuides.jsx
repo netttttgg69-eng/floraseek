@@ -1,7 +1,9 @@
+import { useLanguage } from "../i18n/context.js";
 import { ChevronDown } from "lucide-react";
 import { useId, useState } from "react";
 
 function GuideSection({ title, steps }) {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const id = useId();
 
@@ -10,8 +12,8 @@ function GuideSection({ title, steps }) {
       <h2>
         <button type="button" id={id} aria-expanded={open} aria-controls={id + "-steps"}
           onClick={() => setOpen(!open)}>
-          <span>{title}</span>
-          <small>{steps.length} {steps.length === 1 ? "step" : "steps"}</small>
+          <span>{t(title)}</span>
+          <small>{steps.length} {steps.length === 1 ? t("step") : t("steps")}</small>
           <ChevronDown size={19} aria-hidden="true" />
         </button>
       </h2>
@@ -20,9 +22,9 @@ function GuideSection({ title, steps }) {
           <ol className="guide-steps">
             {steps.map(({ title, instruction, note }) => (
               <li key={title}>
-                <h3>{title}</h3>
-                <p>{instruction}</p>
-                {note && <p className="guide-note"><strong>Note</strong> {note}</p>}
+                <h3>{t(title)}</h3>
+                <p>{t(instruction)}</p>
+                {note && <p className="guide-note"><strong>{t("Note")}</strong> {t(note)}</p>}
               </li>
             ))}
           </ol>
@@ -33,15 +35,16 @@ function GuideSection({ title, steps }) {
 }
 
 export default function PlantGuides({ guide }) {
+  const { t } = useLanguage();
   if (!guide) return null;
   return (
     <div className="container plant-guides" id="growing-guide">
-      <GuideSection title="How to Plant" steps={guide.planting} />
-      <GuideSection title="How to Care for Your Plant" steps={guide.care} />
+      <GuideSection title={t("How to Plant")} steps={guide.planting} />
+      <GuideSection title={t("How to Care for Your Plant")} steps={guide.care} />
       <div className="guide-references">
-        <span>Sources</span>
+        <span>{t("Sources")}</span>
         <ul>{guide.references.map(({ title, url }) => (
-          <li key={url}><a href={url}>{title}</a></li>
+          <li key={url}><a href={url}>{t(title)}</a></li>
         ))}</ul>
       </div>
     </div>
