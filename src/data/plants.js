@@ -1,3 +1,5 @@
+import { growingGuides } from "./guides/index.js";
+
 export const ALL_VALUE = "all";
 
 export const filterOptions = {
@@ -55,9 +57,6 @@ export const labels = {
   },
 };
 
-const noteUnavailable =
-  "Detailed care notes were not included in the Wix export. This profile preserves the original category information and is ready for researched notes to be added.";
-
 export const plants = [
   {
     id: "sunflower",
@@ -72,7 +71,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A bright flower profile from the original Floraseek finder.",
     shortDescription: "Sunflowers are tall flowering plants recognised for their large golden flower heads and dark central discs. They grow best in sunny locations and are often planted for decoration, pollinators, cut flowers, and their edible seeds.",
-    care: noteUnavailable,
     accent: "gold",
   },
   {
@@ -88,7 +86,6 @@ export const plants = [
     climates: ["temperate"],
     summary: "A classic flower profile from the original Floraseek finder.",
     shortDescription: "Roses are flowering shrubs known for their layered blooms, attractive colours, and often strong fragrance. They are widely grown in gardens and containers, with different varieties used for decoration, cut flowers, climbing displays, and ground cover.",
-    care: noteUnavailable,
     accent: "rose",
   },
   {
@@ -104,7 +101,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "An easy flower profile from the original Floraseek finder.",
     shortDescription: "Tulips are spring-flowering bulb plants known for their smooth, cup-shaped blooms and wide variety of colours. They grow from bulbs planted before the flowering season and are commonly used in garden beds, pots, and cut-flower displays.",
-    care: noteUnavailable,
     accent: "coral",
   },
   {
@@ -120,7 +116,6 @@ export const plants = [
     climates: ["temperate"],
     summary: "An easy flower profile from the original Floraseek finder.",
     shortDescription: "Lavender is an aromatic flowering plant known for its narrow grey-green leaves and spikes of purple flowers. It is valued for its fragrance, attractive blooms, ability to attract pollinators, and preference for sunny, well-drained conditions.",
-    care: noteUnavailable,
     accent: "lavender",
   },
   {
@@ -136,7 +131,6 @@ export const plants = [
     climates: ["subtropical", "desert"],
     summary: "A resilient plant profile from the original Floraseek finder.",
     shortDescription: "Cacti are plants adapted to survive in dry environments by storing water in thick stems. Many species have spines instead of leaves and are popular because of their unusual shapes, drought tolerance, and low watering requirements.",
-    care: noteUnavailable,
     accent: "sage",
   },
   {
@@ -152,7 +146,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "Aloe vera is a succulent with thick, pointed leaves that store water and contain a clear gel. It is commonly grown indoors or in dry gardens because it needs little watering and prefers bright, warm conditions.",
-    care: noteUnavailable,
     accent: "mint",
   },
   {
@@ -168,7 +161,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "The snake plant is a tough houseplant with stiff, upright leaves that often have striped or patterned markings. It is popular because it tolerates lower light, dry indoor air, and longer periods between watering than many houseplants.",
-    care: noteUnavailable,
     accent: "forest",
   },
   {
@@ -184,7 +176,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "An easy flower profile from the original Floraseek finder.",
     shortDescription: "The peace lily is a tropical houseplant with dark green leaves and elegant white flower-like structures. It is popular in homes and offices because it can tolerate lower light, although it grows and flowers best in bright indirect light.",
-    care: noteUnavailable,
     accent: "ivory",
   },
   {
@@ -200,7 +191,6 @@ export const plants = [
     climates: ["temperate"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "The spider plant is an adaptable houseplant with long, arching leaves that are often striped green and white. Mature plants produce hanging stems with small flowers and young plantlets that can be removed and grown as new plants.",
-    care: noteUnavailable,
     accent: "lime",
   },
   {
@@ -216,7 +206,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "The ZZ plant is a durable indoor plant with thick stems, glossy leaves, and underground structures that store water. It is popular because it tolerates lower light, irregular watering, and indoor conditions that may challenge less resilient plants.",
-    care: noteUnavailable,
     accent: "emerald",
   },
   {
@@ -232,7 +221,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "Chinese evergreen is a hardy houseplant with broad leaves patterned in shades of green, silver, cream, or red. It is especially popular indoors because it tolerates lower light levels and requires less attention than many tropical plants.",
-    care: noteUnavailable,
     accent: "teal",
   },
   {
@@ -248,7 +236,6 @@ export const plants = [
     climates: ["tropical"],
     summary: "A moderate plant profile from the original Floraseek finder.",
     shortDescription: "Monstera deliciosa is a tropical climbing plant famous for its large leaves that develop natural splits and holes as they mature. It is widely grown indoors for its dramatic foliage and can become very large when given support.",
-    care: noteUnavailable,
     accent: "forest",
   },
   {
@@ -264,7 +251,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A harder plant profile from the original Floraseek finder.",
     shortDescription: "The fiddle leaf fig is a popular indoor tree with large, glossy leaves shaped somewhat like violins. It is often used as a decorative feature plant, although it can be sensitive to changes in light, temperature, and watering.",
-    care: noteUnavailable,
     accent: "olive",
   },
   {
@@ -280,7 +266,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A harder flower profile from the original Floraseek finder.",
     shortDescription: "Orchids are flowering plants admired for their detailed, long-lasting blooms and wide variety of colours and shapes. Many commonly grown orchids prefer bright indirect light, airflow, and a specialised growing medium rather than ordinary garden soil.",
-    care: noteUnavailable,
     accent: "orchid",
   },
   {
@@ -296,7 +281,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A moderate plant profile from the original Floraseek finder.",
     shortDescription: "Pitcher plants are carnivorous plants with specialised leaves shaped like containers filled with digestive liquid. Insects are attracted inside, become trapped, and provide nutrients that help the plant survive in nutrient-poor soil.",
-    care: noteUnavailable,
     accent: "moss",
   },
   {
@@ -312,7 +296,6 @@ export const plants = [
     climates: ["desert"],
     summary: "An extreme plant profile from the original Floraseek finder.",
     shortDescription: "Welwitschia is an unusual desert plant native to parts of southern Africa and grows only two main leaves throughout its life. These leaves continue growing for many years, becoming split and twisted by harsh desert conditions.",
-    care: noteUnavailable,
     accent: "sand",
   },
   {
@@ -328,7 +311,6 @@ export const plants = [
     climates: ["tropical"],
     summary: "A tropical flower profile from the original Floraseek finder.",
     shortDescription: "The corpse flower is a rare tropical plant famous for producing one of the largest flowering structures in the world. When blooming, it releases a powerful smell resembling rotting material to attract insects that help with pollination.",
-    care: noteUnavailable,
     accent: "plum",
   },
   {
@@ -344,7 +326,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "Pothos is a fast-growing trailing houseplant with heart-shaped leaves that may be green, yellow, white, or patterned. It is popular with beginners because it adapts to different indoor conditions and can grow in hanging pots or climb supports.",
-    care: noteUnavailable,
     accent: "lime",
   },
   {
@@ -360,7 +341,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A moderate plant profile from the original Floraseek finder.",
     shortDescription: "Anthurium is a tropical houseplant with glossy green leaves and colourful, heart-shaped structures surrounding its flowers. It is popular indoors because of its distinctive appearance and ability to flower for long periods in warm, humid conditions.",
-    care: noteUnavailable,
     accent: "red",
   },
   {
@@ -376,7 +356,6 @@ export const plants = [
     climates: ["desert", "subtropical"],
     summary: "An easy flower profile from the original Floraseek finder.",
     shortDescription: "Kalanchoe is a compact succulent with thick leaves and clusters of small, brightly coloured flowers. It is commonly grown as an indoor flowering plant because it requires limited watering and can produce blooms that last for several weeks.",
-    care: noteUnavailable,
     accent: "coral",
   },
   {
@@ -392,7 +371,6 @@ export const plants = [
     climates: ["desert", "subtropical"],
     summary: "An easy plant profile from the original Floraseek finder.",
     shortDescription: "The jade plant is a slow-growing succulent with thick, rounded leaves and woody stems that can develop a miniature tree-like form. It is popular indoors because it stores water efficiently and can live for many years with proper care.",
-    care: noteUnavailable,
     accent: "jade",
   },
   {
@@ -408,7 +386,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A moderate plant profile from the original Floraseek finder.",
     shortDescription: "Croton is a tropical foliage plant known for its thick leaves marked with bright combinations of green, yellow, orange, red, and purple. It is grown mainly for its bold colours and becomes most vibrant when given strong light.",
-    care: noteUnavailable,
     accent: "amber",
   },
   {
@@ -424,7 +401,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A hard plant profile from the original Floraseek finder data.",
     shortDescription: "Bonsai is the technique of carefully training trees and shrubs to grow in miniature forms. Growers use pruning, wiring, root trimming, and controlled containers to shape the plant while maintaining the appearance of a full-sized mature tree.",
-    care: noteUnavailable,
     accent: "bark",
   },
   {
@@ -440,7 +416,6 @@ export const plants = [
     climates: ["tropical", "subtropical", "temperate"],
     summary: "A decorative fern with soft, arching green fronds.",
     shortDescription: "Boston fern is a leafy plant known for its long, arching fronds and dense green appearance. It is commonly grown in hanging baskets or indoor pots and prefers humid conditions with bright indirect light.",
-    care: noteUnavailable,
     accent: "fern",
   },
   {
@@ -456,7 +431,6 @@ export const plants = [
     climates: ["temperate", "tropical", "subtropical"],
     summary: "A popular edible herb with fragrant green leaves.",
     shortDescription: "Basil is a fast-growing herb with soft, aromatic leaves commonly used in cooking. It grows well in pots or garden beds and is popular with beginners because it develops quickly in warm, sunny conditions.",
-    care: noteUnavailable,
     accent: "herb",
   },
   {
@@ -472,7 +446,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A graceful palm with long, feathery green leaves.",
     shortDescription: "Areca palm is a tropical plant with multiple stems and long, feather-like leaves. It is often grown indoors as a decorative feature plant and can create a lush appearance when provided with warmth, humidity, and bright indirect light.",
-    care: noteUnavailable,
     accent: "palm",
   },
   {
@@ -488,7 +461,6 @@ export const plants = [
     climates: ["temperate", "tropical", "subtropical"],
     summary: "A floating aquatic plant with broad leaves and colourful flowers.",
     shortDescription: "Water lilies are aquatic flowering plants with round floating leaves and flowers that rise above the water. They are commonly grown in ponds and water gardens, where they provide colour, shade, and shelter for aquatic wildlife.",
-    care: noteUnavailable,
     accent: "water",
   },
   {
@@ -504,7 +476,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A compact fruit plant that produces sweet red strawberries.",
     shortDescription: "Strawberry plants are low-growing fruit plants with white flowers, spreading runners, and sweet red berries. They can be grown in garden beds, pots, or hanging containers and are popular for small edible gardens.",
-    care: noteUnavailable,
     accent: "fruit",
   },
   {
@@ -520,7 +491,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A tropical flowering shrub with large, colourful blooms.",
     shortDescription: "Hibiscus is a flowering plant known for large, trumpet-shaped blooms in bright colours. It is grown in warm gardens and containers for bold seasonal flowers, glossy foliage, and a strong tropical look.",
-    care: noteUnavailable,
     accent: "coral",
   },
   {
@@ -536,7 +506,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "An easy flowering plant with warm orange or yellow blooms.",
     shortDescription: "Marigold is a compact flowering plant with ferny leaves and cheerful yellow, orange, or gold blooms. Gardeners often grow it in beds, borders, and pots because it flowers freely and adds bright colour quickly.",
-    care: noteUnavailable,
     accent: "gold",
   },
   {
@@ -552,7 +521,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A flowering shrub with rounded clusters of showy blooms.",
     shortDescription: "Hydrangea is a flowering shrub recognised for large clusters of blue, pink, white, or purple blooms. It is planted in gardens and containers for long-lasting flower displays and soft, leafy structure.",
-    care: noteUnavailable,
     accent: "lavender",
   },
   {
@@ -568,7 +536,6 @@ export const plants = [
     climates: ["temperate"],
     summary: "A showy flowering plant with layered blooms in many colours.",
     shortDescription: "Dahlia is a flowering plant known for layered blooms that range from neat pompons to large decorative flowers. It is grown for colourful garden displays, late-season interest, and cut flowers.",
-    care: noteUnavailable,
     accent: "rose",
   },
   {
@@ -584,7 +551,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A popular flowering plant for pots, beds, and balconies.",
     shortDescription: "Geranium is a flowering plant with rounded leaves and clusters of red, pink, white, or purple blooms. It is popular in containers, window boxes, and garden borders because it flowers reliably in bright conditions.",
-    care: noteUnavailable,
     accent: "red",
   },
   {
@@ -600,7 +566,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A bold indoor plant with thick, glossy leaves.",
     shortDescription: "Rubber plant is an indoor tree-like plant with broad, glossy leaves and sturdy upright stems. It is grown as a decorative houseplant because it adds height, structure, and deep green colour to bright rooms.",
-    care: noteUnavailable,
     accent: "forest",
   },
   {
@@ -616,7 +581,6 @@ export const plants = [
     climates: ["tropical"],
     summary: "A patterned tropical houseplant with decorative leaves.",
     shortDescription: "Calathea is a tropical houseplant admired for patterned leaves with stripes, spots, or contrasting undersides. It is grown indoors for its decorative foliage and works best where warmth, humidity, and filtered light are available.",
-    care: noteUnavailable,
     accent: "teal",
   },
   {
@@ -632,7 +596,6 @@ export const plants = [
     climates: ["tropical"],
     summary: "A tropical houseplant with patterned leaves that fold upward.",
     shortDescription: "Prayer plant is a compact tropical houseplant with patterned leaves that can fold upward at night. It is kept indoors for its colourful foliage, gentle movement, and suitability for shelves, desks, and small plant displays.",
-    care: noteUnavailable,
     accent: "jade",
   },
   {
@@ -648,7 +611,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A resilient indoor plant with upright stems and strappy leaves.",
     shortDescription: "Dracaena is an indoor plant with upright stems and narrow leaves that may be green, striped, or edged with colour. It is popular because it brings height to rooms and adapts well to typical household conditions.",
-    care: noteUnavailable,
     accent: "emerald",
   },
   {
@@ -664,7 +626,6 @@ export const plants = [
     climates: ["tropical"],
     summary: "A trailing houseplant with glossy heart-shaped leaves.",
     shortDescription: "Heartleaf philodendron is a trailing tropical houseplant with glossy, heart-shaped green leaves. It is grown indoors because it can trail from shelves, climb supports, and create a lush look with relatively simple care.",
-    care: noteUnavailable,
     accent: "lime",
   },
   {
@@ -680,7 +641,6 @@ export const plants = [
     climates: ["subtropical", "desert"],
     summary: "A rosette-forming succulent with compact, sculptural leaves.",
     shortDescription: "Echeveria is a compact succulent that forms neat rosettes of thick, fleshy leaves. It is grown in pots, succulent bowls, and dry gardens for its sculptural shape, soft colours, and low watering needs.",
-    care: noteUnavailable,
     accent: "mint",
   },
   {
@@ -696,7 +656,6 @@ export const plants = [
     climates: ["subtropical", "desert"],
     summary: "A small succulent with firm leaves and striped markings.",
     shortDescription: "Haworthia is a small succulent with firm pointed leaves that often show stripes, spots, or translucent tips. It is commonly grown on windowsills and desks because it stays compact and needs limited watering.",
-    care: noteUnavailable,
     accent: "sage",
   },
   {
@@ -712,7 +671,6 @@ export const plants = [
     climates: ["subtropical", "desert"],
     summary: "A trailing succulent with bead-like leaves.",
     shortDescription: "String of pearls is a trailing succulent with slender stems covered in round bead-like leaves. It is grown in hanging pots and shelf displays because its cascading stems create an unusual, delicate texture.",
-    care: noteUnavailable,
     accent: "jade",
   },
   {
@@ -728,7 +686,6 @@ export const plants = [
     climates: ["desert", "subtropical"],
     summary: "A bold succulent with rosettes of thick pointed leaves.",
     shortDescription: "Agave is a succulent that forms strong rosettes of thick, pointed leaves, often with sharp tips or edges. It is used in dry gardens and containers for bold structure, drought tolerance, and architectural shape.",
-    care: noteUnavailable,
     accent: "olive",
   },
   {
@@ -744,7 +701,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "A hardy succulent often used as ground cover or edging.",
     shortDescription: "Sedum is a group of succulents with fleshy leaves and small starry flowers on many varieties. Gardeners use it for ground cover, edging, rock gardens, and containers because many types handle dry conditions well.",
-    care: noteUnavailable,
     accent: "moss",
   },
   {
@@ -760,7 +716,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "A small ornamental tree with delicate leaves and seasonal colour.",
     shortDescription: "Japanese maple is a small ornamental tree known for fine branching and delicate leaves that may turn vivid colours. It is grown as a garden feature, container tree, or focal point in calm landscape designs.",
-    care: noteUnavailable,
     accent: "red",
   },
   {
@@ -776,7 +731,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "An ornamental tree or shrub with large showy flowers.",
     shortDescription: "Magnolia is an ornamental tree or shrub with broad leaves and large flowers that can be white, pink, purple, or cream. It is planted for dramatic seasonal blooms, shade, and graceful garden structure.",
-    care: noteUnavailable,
     accent: "ivory",
   },
   {
@@ -792,7 +746,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "An evergreen shrub with glossy leaves and rose-like flowers.",
     shortDescription: "Camellia is an evergreen shrub with glossy dark leaves and layered flowers in shades of white, pink, or red. It is grown for elegant blooms, year-round foliage, and a refined look in sheltered gardens.",
-    care: noteUnavailable,
     accent: "rose",
   },
   {
@@ -808,7 +761,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A silvery-leaved tree often grown in sunny gardens and pots.",
     shortDescription: "Olive tree is a woody plant with narrow silver-green leaves and a naturally sculptural form. It is grown in sunny gardens and large containers for Mediterranean character, evergreen structure, and edible fruit where conditions suit.",
-    care: noteUnavailable,
     accent: "olive",
   },
   {
@@ -824,7 +776,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A glossy evergreen shrub with fragrant white flowers.",
     shortDescription: "Gardenia is an evergreen shrub with glossy leaves and creamy white flowers known for their strong fragrance. It is grown in warm gardens and containers for polished foliage, scented blooms, and formal planting schemes.",
-    care: noteUnavailable,
     accent: "ivory",
   },
   {
@@ -840,7 +791,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A vigorous edible herb with fragrant leaves.",
     shortDescription: "Mint is a fast-spreading edible herb with square stems and fragrant green leaves. It is grown in pots and garden beds for cooking, drinks, and fresh scent, especially where gardeners can manage its vigorous growth.",
-    care: noteUnavailable,
     accent: "herb",
   },
   {
@@ -856,7 +806,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A woody edible herb with needle-like aromatic leaves.",
     shortDescription: "Rosemary is a woody edible herb with narrow, needle-like leaves and a strong aromatic scent. It is grown in sunny beds and pots for cooking, evergreen texture, and a neat shrub-like form.",
-    care: noteUnavailable,
     accent: "sage",
   },
   {
@@ -872,7 +821,6 @@ export const plants = [
     climates: ["temperate", "subtropical", "tropical"],
     summary: "A productive edible plant grown for colourful tomatoes.",
     shortDescription: "Tomato plant is an edible garden plant with branching stems, yellow flowers, and fruit that ripens in many sizes and colours. It is grown in beds, pots, and supports for fresh harvests during warm seasons.",
-    care: noteUnavailable,
     accent: "red",
   },
   {
@@ -888,7 +836,6 @@ export const plants = [
     climates: ["temperate"],
     summary: "A fruiting shrub grown for sweet blue berries.",
     shortDescription: "Blueberry bush is a fruiting shrub with small bell-shaped flowers, green leaves, and clusters of blue berries. It is grown in edible gardens and containers for seasonal harvests, attractive foliage, and compact shrub form.",
-    care: noteUnavailable,
     accent: "plum",
   },
   {
@@ -904,7 +851,6 @@ export const plants = [
     climates: ["tropical", "subtropical", "temperate"],
     summary: "An edible plant grown for colourful spicy peppers.",
     shortDescription: "Chilli pepper plant is an edible plant with small flowers and colourful fruits that can ripen green, yellow, orange, red, or purple. It is grown in warm gardens and pots for compact harvests and ornamental colour.",
-    care: noteUnavailable,
     accent: "amber",
   },
   {
@@ -920,7 +866,6 @@ export const plants = [
     climates: ["subtropical", "temperate"],
     summary: "A carnivorous plant with hinged trapping leaves.",
     shortDescription: "Venus flytrap is a carnivorous plant with hinged leaves that can close around small insects. It is grown by collectors and curious gardeners for its unusual movement, compact size, and distinctive trap-like foliage.",
-    care: noteUnavailable,
     accent: "moss",
   },
   {
@@ -936,7 +881,6 @@ export const plants = [
     climates: ["temperate", "tropical", "subtropical"],
     summary: "A carnivorous plant with sticky, glistening leaf hairs.",
     shortDescription: "Sundew is a carnivorous plant with leaves covered in sticky, glistening hairs that help trap small insects. It is grown for its sparkling appearance, compact habit, and fascinating adaptation to nutrient-poor habitats.",
-    care: noteUnavailable,
     accent: "red",
   },
   {
@@ -952,7 +896,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A special plant with delicate leaves that fold when touched.",
     shortDescription: "Sensitive plant is a tropical plant with delicate leaflets that fold inward when touched or disturbed. It is grown as a curiosity plant because its visible movement makes it memorable in pots, classrooms, and collections.",
-    care: noteUnavailable,
     accent: "teal",
   },
   {
@@ -968,7 +911,6 @@ export const plants = [
     climates: ["desert", "subtropical"],
     summary: "A special plant known for curling dry and reopening with moisture.",
     shortDescription: "Resurrection plant is known for curling into a dry-looking ball and reopening when moisture returns. It is grown as a special display plant because its dramatic change shows how some plants cope with harsh dry conditions.",
-    care: noteUnavailable,
     accent: "sand",
   },
   {
@@ -984,7 +926,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A compact carnivorous plant with sticky rosette leaves.",
     shortDescription: "Butterwort is a small carnivorous plant with smooth leaves that form a low rosette and produce sticky surfaces. It is grown by enthusiasts for its unusual feeding strategy, tidy shape, and occasional delicate flowers.",
-    care: noteUnavailable,
     accent: "lavender",
   },
   {
@@ -1000,7 +941,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A gardening technique that displays plants in moss-covered soil balls.",
     shortDescription: "Kokedama is a gardening technique where a plant grows from a moss-covered ball of soil instead of a standard pot. It is used for decorative displays that can sit on trays or hang as living ornaments.",
-    care: noteUnavailable,
     accent: "moss",
   },
   {
@@ -1016,7 +956,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A pruning technique for shaping plants into defined forms.",
     shortDescription: "Topiary is a gardening technique that shapes trees or shrubs into neat geometric, formal, or playful forms. It is used in gardens and containers for structure, visual interest, and carefully maintained living sculpture.",
-    care: noteUnavailable,
     accent: "bark",
   },
   {
@@ -1032,7 +971,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A training technique for growing woody plants flat against supports.",
     shortDescription: "Espalier is a gardening technique that trains woody plants to grow flat against a wall, fence, or frame. It is used to save space, create formal patterns, and grow productive or decorative plants in narrow areas.",
-    care: noteUnavailable,
     accent: "olive",
   },
   {
@@ -1048,7 +986,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A growing technique that raises plants without traditional soil.",
     shortDescription: "Hydroponics is a growing technique where plants receive water and nutrients without ordinary garden soil. It is used for controlled indoor or small-space growing, especially when gardeners want tidy systems and close control.",
-    care: noteUnavailable,
     accent: "water",
   },
   {
@@ -1064,7 +1001,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A container gardening technique for small enclosed plant displays.",
     shortDescription: "Terrarium gardening is a technique for arranging small plants inside glass containers or miniature display environments. It is used to create compact indoor gardens, decorative table pieces, and controlled displays for humidity-loving plants.",
-    care: noteUnavailable,
     accent: "mint",
   },
   {
@@ -1080,7 +1016,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "A flowering plant known for its large, layered blooms.",
     shortDescription: "Peonies produce large, layered flowers in shades of pink, white, red, and yellow. They are popular in gardens and floral displays because of their impressive blooms, long lifespan, and attractive green foliage.",
-    care: noteUnavailable,
     accent: "rose",
   },
   {
@@ -1096,7 +1031,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A colourful annual flower that grows quickly in sunny gardens.",
     shortDescription: "Zinnias are bright annual flowers available in many colours, shapes, and sizes. They grow quickly from seed and are popular with beginner gardeners because they tolerate heat, attract pollinators, and flower throughout the warmer months.",
-    care: noteUnavailable,
     accent: "coral",
   },
   {
@@ -1112,7 +1046,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "A recognisable spring flower with trumpet-shaped blooms.",
     shortDescription: "Daffodils are spring-flowering plants known for their yellow or white trumpet-shaped blooms. They are commonly planted in garden beds and borders because they return each year and provide early colour after winter.",
-    care: noteUnavailable,
     accent: "gold",
   },
   {
@@ -1128,7 +1061,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "A tall flowering plant with detailed and colourful petals.",
     shortDescription: "Irises produce distinctive flowers with upright and drooping petals in many colours. They are often grown along borders, ponds, and pathways because their tall stems and detailed blooms add structure and colour to gardens.",
-    care: noteUnavailable,
     accent: "lavender",
   },
   {
@@ -1144,7 +1076,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A popular flowering plant for pots, borders, and hanging baskets.",
     shortDescription: "Petunias produce soft, trumpet-shaped flowers in a wide range of colours and patterns. They are commonly grown in containers, hanging baskets, and garden borders because they bloom repeatedly during warm weather and are easy to maintain.",
-    care: noteUnavailable,
     accent: "plum",
   },
   {
@@ -1160,7 +1091,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A colourful flower with tall spikes of dragon-shaped blooms.",
     shortDescription: "Snapdragons grow upright flower spikes covered with colourful blooms that resemble small mouths. They are popular in borders and cutting gardens because they provide height, flower in cooler weather, and are available in many colours.",
-    care: noteUnavailable,
     accent: "amber",
   },
   {
@@ -1176,7 +1106,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A delicate flowering plant with daisy-like blooms.",
     shortDescription: "Cosmos plants produce light, daisy-like flowers on tall, slender stems with feathery foliage. They are popular in relaxed garden designs because they grow quickly, tolerate warm conditions, and attract bees and butterflies.",
-    care: noteUnavailable,
     accent: "mint",
   },
   {
@@ -1192,7 +1121,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A flowering plant known for dense blooms in many colours.",
     shortDescription: "Chrysanthemums produce dense, decorative flowers in a wide variety of colours and forms. They are commonly grown in pots and garden beds because they provide strong colour later in the growing season when many other flowers have finished.",
-    care: noteUnavailable,
     accent: "sand",
   },
   {
@@ -1208,7 +1136,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "A delicate flower with thin petals and a distinctive centre.",
     shortDescription: "Poppies produce delicate, cup-shaped flowers with thin petals and dark central markings. They are often grown in cottage gardens and wildflower areas because they create bold colour while maintaining a soft and natural appearance.",
-    care: noteUnavailable,
     accent: "red",
   },
   {
@@ -1224,7 +1151,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "A tall flowering plant with rows of bell-shaped blooms.",
     shortDescription: "Foxgloves produce tall flower spikes covered with hanging, bell-shaped blooms in shades of pink, purple, white, and yellow. They are grown to add height to shaded borders and attract pollinating insects during their flowering season.",
-    care: noteUnavailable,
     accent: "orchid",
   },
   {
@@ -1240,7 +1166,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A striking tropical plant with large, upright leaves.",
     shortDescription: "Bird of Paradise is known for its broad, banana-like leaves and bold tropical appearance. It is often grown indoors as a feature plant because its tall shape and large foliage can make a room feel lush and dramatic.",
-    care: noteUnavailable,
     accent: "forest",
   },
   {
@@ -1256,7 +1181,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A leafy houseplant with patterned green and cream foliage.",
     shortDescription: "Dieffenbachia has broad leaves decorated with green, cream, and yellow patterns. It is commonly grown indoors because its colourful foliage adds interest to shaded rooms without requiring direct sunlight for most of the day.",
-    care: noteUnavailable,
     accent: "ivory",
   },
   {
@@ -1272,7 +1196,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A durable houseplant with long, dark-green leaves.",
     shortDescription: "Cast iron plant produces upright, dark-green leaves and is valued for its tough nature. It is popular in homes and shaded gardens because it can tolerate lower light and occasional missed watering better than many houseplants.",
-    care: noteUnavailable,
     accent: "forest",
   },
   {
@@ -1288,7 +1211,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A decorative houseplant with umbrella-shaped leaf clusters.",
     shortDescription: "Schefflera develops groups of glossy leaves arranged like the spokes of an umbrella. It is commonly used as an indoor feature plant because it grows upright, responds well to pruning, and provides dense green foliage.",
-    care: noteUnavailable,
     accent: "emerald",
   },
   {
@@ -1304,7 +1226,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A compact indoor palm with soft, feathery leaves.",
     shortDescription: "Parlor palm is a compact palm with slender stems and gently arching green fronds. It is popular indoors because it grows slowly, fits smaller spaces, and can adapt to lower light than many other palm species.",
-    care: noteUnavailable,
     accent: "mint",
   },
   {
@@ -1320,7 +1241,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A compact houseplant with round, coin-shaped leaves.",
     shortDescription: "Pilea is recognised by its round leaves held on long, thin stems. It is frequently grown on desks and windowsills because of its compact size, unusual shape, and ability to produce small offshoots around the main plant.",
-    care: noteUnavailable,
     accent: "jade",
   },
   {
@@ -1336,7 +1256,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A small houseplant with thick and decorative foliage.",
     shortDescription: "Peperomia includes many compact varieties with thick leaves in different colours, textures, and shapes. It is popular for shelves and desks because it remains relatively small and does not usually require frequent watering.",
-    care: noteUnavailable,
     accent: "teal",
   },
   {
@@ -1352,7 +1271,6 @@ export const plants = [
     climates: ["subtropical", "desert"],
     summary: "An unusual houseplant with a swollen trunk and curling leaves.",
     shortDescription: "Ponytail palm has a thick water-storing base topped with long, narrow leaves that curve downward. It is commonly grown indoors because of its unusual appearance and ability to cope with relatively dry conditions.",
-    care: noteUnavailable,
     accent: "sand",
   },
   {
@@ -1368,7 +1286,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "A trailing plant with recognisable pointed green leaves.",
     shortDescription: "English ivy is a climbing or trailing plant with lobed leaves growing along flexible stems. It is often displayed in hanging baskets or trained along supports because its vines can create a dense, flowing appearance.",
-    care: noteUnavailable,
     accent: "olive",
   },
   {
@@ -1384,7 +1301,6 @@ export const plants = [
     climates: ["subtropical", "desert"],
     summary: "An upright houseplant with thick stems and pointed leaves.",
     shortDescription: "Yucca cane grows from sturdy woody stems topped with clusters of long, pointed leaves. It is used as an indoor feature plant because its upright structure creates height while its foliage gives rooms a bold appearance.",
-    care: noteUnavailable,
     accent: "bark",
   },
   {
@@ -1400,7 +1316,6 @@ export const plants = [
     climates: ["desert", "subtropical"],
     summary: "A tiny succulent that resembles colourful stones.",
     shortDescription: "Lithops are small succulents formed from paired leaves that closely resemble pebbles. They are grown by collectors because of their unusual camouflage, compact size, varied patterns, and occasional daisy-like flowers.",
-    care: noteUnavailable,
     accent: "sand",
   },
   {
@@ -1416,7 +1331,6 @@ export const plants = [
     climates: ["subtropical", "desert"],
     summary: "A trailing succulent covered with thick, rounded leaves.",
     shortDescription: "Burro's tail produces long hanging stems densely covered with small, fleshy leaves. It is popular in hanging containers because its stems flow over the edges and create a distinctive trailing display as the plant matures.",
-    care: noteUnavailable,
     accent: "sage",
   },
   {
@@ -1432,7 +1346,6 @@ export const plants = [
     climates: ["subtropical", "desert"],
     summary: "A fuzzy succulent with dark markings along its leaves.",
     shortDescription: "Panda plant has thick, soft leaves covered with fine hairs and edged with dark markings. It is commonly grown indoors because its fuzzy texture and contrasting leaf tips make it visually different from smoother succulents.",
-    care: noteUnavailable,
     accent: "bark",
   },
   {
@@ -1448,7 +1361,6 @@ export const plants = [
     climates: ["subtropical", "desert"],
     summary: "A succulent with broad, flat leaves that can develop red edges.",
     shortDescription: "Flapjack plant forms stacked rosettes of wide, paddle-shaped leaves that may develop red edges in bright light. It is grown for its bold shape and strong colour contrast in pots and succulent gardens.",
-    care: noteUnavailable,
     accent: "coral",
   },
   {
@@ -1464,7 +1376,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A branching succulent with large rosettes at the ends of its stems.",
     shortDescription: "Aeonium develops neat leaf rosettes on top of branching, woody stems. It is valued in pots and warm-climate gardens because its elevated rosettes create a tree-like appearance that differs from many low-growing succulents.",
-    care: noteUnavailable,
     accent: "plum",
   },
   {
@@ -1480,7 +1391,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "A hardy succulent that produces clusters of small rosettes.",
     shortDescription: "Hens and chicks form a central rosette surrounded by smaller offsets that spread into clusters. They are popular in rock gardens and containers because they tolerate cold conditions and gradually create dense groups of plants.",
-    care: noteUnavailable,
     accent: "olive",
   },
   {
@@ -1496,7 +1406,6 @@ export const plants = [
     climates: ["subtropical", "desert"],
     summary: "A compact succulent with thick, patterned leaves.",
     shortDescription: "Gasteria grows thick, tongue-shaped leaves that are often marked with pale spots or stripes. It is well suited to indoor pots because it remains compact and can tolerate less direct sunlight than many desert succulents.",
-    care: noteUnavailable,
     accent: "moss",
   },
   {
@@ -1512,7 +1421,6 @@ export const plants = [
     climates: ["subtropical", "desert"],
     summary: "A branching succulent with small, round green leaves.",
     shortDescription: "Elephant bush develops reddish stems covered with small, rounded succulent leaves. It is grown in containers, warm gardens, and bonsai-style displays because its branching shape can be pruned into a miniature tree-like form.",
-    care: noteUnavailable,
     accent: "jade",
   },
   {
@@ -1528,7 +1436,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A flowering succulent with flat, segmented stems.",
     shortDescription: "Christmas cactus has jointed, flattened stems and colourful flowers that appear near the ends of its branches. Unlike desert cacti, it comes from humid forest environments and is commonly grown as an indoor flowering plant.",
-    care: noteUnavailable,
     accent: "rose",
   },
   {
@@ -1544,7 +1451,6 @@ export const plants = [
     climates: ["desert", "subtropical"],
     summary: "A cactus with broad, flat pads and colourful flowers.",
     shortDescription: "Prickly pear cactus grows in connected, flattened pads that may produce bright flowers and rounded fruit. It is a recognisable landscape plant in dry regions because it can form large, spreading clusters in sunny conditions.",
-    care: noteUnavailable,
     accent: "sage",
   },
   {
@@ -1560,7 +1466,6 @@ export const plants = [
     climates: ["subtropical", "temperate"],
     summary: "A flowering tree known for its clusters of purple-blue blossoms.",
     shortDescription: "Jacaranda is an ornamental tree admired for its fern-like foliage and masses of purple-blue flowers. It is often planted as a feature tree because its colourful seasonal display can make streets, parks, and gardens look striking.",
-    care: noteUnavailable,
     accent: "lavender",
   },
   {
@@ -1576,7 +1481,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "An ornamental tree celebrated for its soft pink spring blossoms.",
     shortDescription: "Cherry blossom trees are grown for their delicate pink or white flowers that appear in spring. They are popular in gardens and public landscapes because their seasonal blooms create a soft and decorative display.",
-    care: noteUnavailable,
     accent: "rose",
   },
   {
@@ -1592,7 +1496,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "A shrub known for fragrant clusters of purple, pink, or white flowers.",
     shortDescription: "Lilac is a deciduous shrub that produces fragrant flower clusters in spring. It is valued in gardens because its scented blooms and classic appearance make it a popular ornamental planting.",
-    care: noteUnavailable,
     accent: "plum",
   },
   {
@@ -1608,7 +1511,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A compact flowering shrub with vibrant spring blooms.",
     shortDescription: "Azaleas are shrubs that become covered in bright flowers during their main blooming season. They are commonly planted in garden beds and borders because they add strong seasonal colour and suit many ornamental designs.",
-    care: noteUnavailable,
     accent: "coral",
   },
   {
@@ -1624,7 +1526,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "An evergreen shrub with large clusters of decorative flowers.",
     shortDescription: "Rhododendrons are flowering shrubs known for their broad leaves and large flower trusses. They are used in ornamental gardens because their blooms create bold displays and their foliage provides structure for much of the year.",
-    care: noteUnavailable,
     accent: "orchid",
   },
   {
@@ -1640,7 +1541,6 @@ export const plants = [
     climates: ["subtropical", "temperate"],
     summary: "An Australian shrub or small tree with brush-shaped red flowers.",
     shortDescription: "Bottlebrush is known for its narrow leaves and bright cylindrical flowers that resemble bottle brushes. It is commonly planted in warm gardens because its flowers attract birds and add strong colour.",
-    care: noteUnavailable,
     accent: "red",
   },
   {
@@ -1656,7 +1556,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A tropical tree with fragrant waxy flowers.",
     shortDescription: "Frangipani is a small tropical tree valued for its thick branches and highly fragrant flowers. It is often grown in warm climates because its blooms are decorative, strongly scented, and associated with tropical gardens.",
-    care: noteUnavailable,
     accent: "ivory",
   },
   {
@@ -1672,7 +1571,6 @@ export const plants = [
     climates: ["subtropical", "temperate"],
     summary: "A small tree or shrub with long-lasting summer flowers.",
     shortDescription: "Crepe myrtle produces clusters of crinkled flowers and often has attractive bark. It is a popular landscape plant because it flowers for a long period and can be grown as either a shrub or a small tree.",
-    care: noteUnavailable,
     accent: "pink",
   },
   {
@@ -1688,7 +1586,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "An ornamental tree known for its spring blooms and layered branching.",
     shortDescription: "Dogwood is a small ornamental tree that is appreciated for its showy spring flowers and attractive form. It is often planted in gardens and parks because it provides seasonal interest without becoming overly large.",
-    care: noteUnavailable,
     accent: "ivory",
   },
   {
@@ -1704,7 +1601,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "An evergreen tree or shrub with needle-like or scale-like foliage.",
     shortDescription: "Juniper includes hardy evergreen shrubs and trees with dense foliage and a wide range of forms. It is commonly used in landscaping because it can provide structure, screening, and year-round greenery.",
-    care: noteUnavailable,
     accent: "forest",
   },
   {
@@ -1720,7 +1616,6 @@ export const plants = [
     climates: ["temperate"],
     summary: "A dense evergreen shrub often used for hedges and shaping.",
     shortDescription: "Boxwood is a compact shrub with small evergreen leaves and a naturally neat appearance. It is popular in formal gardens because it responds well to pruning and can be shaped into hedges or decorative forms.",
-    care: noteUnavailable,
     accent: "moss",
   },
   {
@@ -1736,7 +1631,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "An evergreen shrub or tree with glossy leaves and bright berries.",
     shortDescription: "Holly is recognised by its shiny leaves and colourful berries on suitable plants. It is often grown for ornament because its foliage provides year-round interest and its berries add seasonal colour.",
-    care: noteUnavailable,
     accent: "red",
   },
   {
@@ -1752,7 +1646,6 @@ export const plants = [
     climates: ["subtropical", "temperate"],
     summary: "A flowering shrub with narrow leaves and abundant blooms.",
     shortDescription: "Oleander is a shrub that produces clusters of showy flowers in warm conditions. It is used in ornamental planting because it flowers well and forms a dense shrub, though all parts of the plant should be handled carefully.",
-    care: noteUnavailable,
     accent: "rose",
   },
   {
@@ -1768,7 +1661,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "A graceful tree with long, drooping branches.",
     shortDescription: "Weeping willow is a distinctive tree with flowing branches and narrow leaves. It is planted in larger landscapes because its shape creates a dramatic appearance, especially near water or open spaces.",
-    care: noteUnavailable,
     accent: "sage",
   },
   {
@@ -1784,7 +1676,6 @@ export const plants = [
     climates: ["temperate", "continental"],
     summary: "A shrub covered in bright yellow flowers early in the season.",
     shortDescription: "Forsythia is a deciduous shrub that blooms with bright yellow flowers before its leaves fully appear. It is commonly planted to bring strong early-season colour to hedges, borders, and garden edges.",
-    care: noteUnavailable,
     accent: "gold",
   },
   {
@@ -1800,7 +1691,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A leafy herb commonly used for flavour and garnish.",
     shortDescription: "Parsley is a culinary herb with fresh green leaves and a clean flavour. It is often grown in pots and garden beds because it is useful in cooking and easy to harvest regularly.",
-    care: noteUnavailable,
     accent: "lime",
   },
   {
@@ -1816,7 +1706,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A fragrant herb valued for both its leaves and seeds.",
     shortDescription: "Coriander is a fast-growing herb grown for its aromatic leaves and seeds. It is popular in edible gardens because it can be used in many dishes and grows quickly in suitable conditions.",
-    care: noteUnavailable,
     accent: "mint",
   },
   {
@@ -1832,7 +1721,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A compact herb with tiny aromatic leaves.",
     shortDescription: "Thyme is a low-growing herb with small fragrant leaves on thin stems. It is often planted in kitchen gardens and pots because it is useful for cooking and remains relatively compact.",
-    care: noteUnavailable,
     accent: "sage",
   },
   {
@@ -1848,7 +1736,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "An aromatic herb often used in savoury dishes.",
     shortDescription: "Oregano is a hardy herb with fragrant leaves that are widely used in cooking. It is commonly grown in sunny garden beds and containers because it is both practical and easy to maintain.",
-    care: noteUnavailable,
     accent: "olive",
   },
   {
@@ -1864,7 +1751,6 @@ export const plants = [
     climates: ["temperate", "subtropical"],
     summary: "A hardy herb with soft grey-green leaves.",
     shortDescription: "Sage is an edible herb with textured leaves and a strong savoury aroma. It is often included in herb gardens because it is useful in cooking and can also look attractive as a compact planting.",
-    care: noteUnavailable,
     accent: "sage",
   },
   {
@@ -1880,7 +1766,6 @@ export const plants = [
     climates: ["temperate"],
     summary: "A quick-growing leafy vegetable suited to beds and containers.",
     shortDescription: "Lettuce is a leafy vegetable grown for its crisp edible leaves in many shapes and colours. It is popular with home gardeners because it grows quickly and can be harvested over a relatively short time.",
-    care: noteUnavailable,
     accent: "lime",
   },
   {
@@ -1896,7 +1781,6 @@ export const plants = [
     climates: ["temperate", "subtropical", "tropical"],
     summary: "A climbing edible plant that produces refreshing cucumbers.",
     shortDescription: "Cucumber plants grow along trailing or climbing stems and produce elongated edible fruit. They are commonly grown in vegetable gardens because they can be productive in warm conditions and suit trellises or garden beds.",
-    care: noteUnavailable,
     accent: "teal",
   },
   {
@@ -1912,7 +1796,6 @@ export const plants = [
     climates: ["temperate"],
     summary: "A fruiting shrub that produces soft red berries.",
     shortDescription: "Raspberry bushes produce canes with edible berries that are sweet and popular fresh or cooked. They are often grown in edible gardens because they provide seasonal harvests and fit well into backyard fruit plantings.",
-    care: noteUnavailable,
     accent: "red",
   },
   {
@@ -1928,7 +1811,6 @@ export const plants = [
     climates: ["subtropical", "temperate"],
     summary: "A citrus tree grown for its fragrant flowers and edible lemons.",
     shortDescription: "Lemon trees are small citrus trees with glossy leaves, white blossoms, and yellow fruit. They are popular in gardens and large pots because they combine decorative value with useful edible harvests.",
-    care: noteUnavailable,
     accent: "gold",
   },
   {
@@ -1944,7 +1826,6 @@ export const plants = [
     climates: ["tropical"],
     summary: "A rare parasitic plant famous for its enormous flower.",
     shortDescription: "Rafflesia is known for producing one of the world's largest individual flowers. It is considered a special plant because of its unusual life cycle, striking appearance, and rarity in natural habitats.",
-    care: noteUnavailable,
     accent: "red",
   },
   {
@@ -1960,7 +1841,6 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "A plant that grows without needing soil in the usual way.",
     shortDescription: "Air plants absorb moisture and nutrients through their leaves rather than relying on ordinary soil. They are popular for decorative displays because they can be mounted or placed in creative containers.",
-    care: noteUnavailable,
     accent: "teal",
   },
   {
@@ -1976,10 +1856,12 @@ export const plants = [
     climates: ["tropical", "subtropical"],
     summary: "An unusual fern with antler-shaped fronds.",
     shortDescription: "Staghorn fern is an epiphytic fern with large fronds that resemble antlers. It is often displayed mounted on boards or baskets because its growth habit and form make it very different from ordinary potted plants.",
-    care: noteUnavailable,
     accent: "moss",
   },
-];
+].map((plant) => ({
+  ...plant,
+  growingGuide: growingGuides[plant.id],
+}));
 
 export function labelFor(category, value) {
   return labels[category]?.[value] ?? value;

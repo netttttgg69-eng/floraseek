@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import Badge from "../components/Badge.jsx";
 import ComparePlantButton from "../components/ComparePlantButton.jsx";
 import PlantCard from "../components/PlantCard.jsx";
+import PlantGuides from "../components/PlantGuides.jsx";
 import PlantImage from "../components/PlantImage.jsx";
 import SavePlantButton from "../components/SavePlantButton.jsx";
 import SectionHeader from "../components/SectionHeader.jsx";
@@ -105,7 +106,7 @@ export default function PlantPage() {
               {!shopUrl && !isTechniqueProfile && <p className="shop-note">Coming soon</p>}
             </div>
             {isTechniqueProfile ? (
-              <a className="button primary shop-button" href="#">
+              <a className="button primary shop-button" href="#growing-guide">
                 {shopCardLabel}
               </a>
             ) : shopUrl ? (
@@ -125,6 +126,8 @@ export default function PlantPage() {
           </article>
         </div>
       </section>
+
+      <PlantGuides key={plant.id} guide={plant.growingGuide} />
 
       <section className="section muted">
         <div className="container">
