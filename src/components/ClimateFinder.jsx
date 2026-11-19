@@ -1,4 +1,4 @@
-import { MapPin, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { labelFor } from "../data/plants.js";
@@ -73,10 +73,6 @@ export default function ClimateFinder({ onApplyClimate }) {
   return (
     <div className="climate-tool" id="climate-finder">
       <div>
-        <p className="eyebrow">
-          <MapPin size={16} aria-hidden="true" />
-          Find your climate
-        </p>
         <h2>Find your climate</h2>
         <p>
           Search for a city to estimate a broad Floraseek climate category using historical

@@ -1,4 +1,4 @@
-import { SlidersHorizontal, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import ClimateFinder from "../components/ClimateFinder.jsx";
@@ -93,14 +93,9 @@ export default function FinderPage() {
     <section className="page-section">
       <div className="container">
         <div className="page-heading">
-          <p className="eyebrow">
-            <SlidersHorizontal size={16} aria-hidden="true" />
-            Plant Finder
-          </p>
-          <h1>Filter every Floraseek plant.</h1>
+          <h1>Plant Finder</h1>
           <p>
-            Combine difficulty, climate, and category to narrow the project catalogue without
-            refreshing the page.
+            Browse the catalogue by growing difficulty, climate and plant category.
           </p>
           <div className="page-heading-actions">
             <Link className="button primary" to="/find-my-plant">
@@ -111,7 +106,7 @@ export default function FinderPage() {
           </div>
         </div>
 
-        <form className="finder-panel" onSubmit={(event) => event.preventDefault()}>
+        <div className="finder-panel" role="group" aria-label="Plant filters">
           <PlantSearch
             label="Search"
             placeholder="Search by name, category, climate"
@@ -143,9 +138,12 @@ export default function FinderPage() {
           <button className="button secondary reset-button" type="button" onClick={resetFilters}>
             Reset
           </button>
-        </form>
+        </div>
 
-        <ClimateFinder onApplyClimate={(climate) => updateFilter("climate", climate)} />
+        <details className="finder-climate" open={window.location.hash === "#climate-finder" || undefined}>
+          <summary>Find your climate by city</summary>
+          <ClimateFinder onApplyClimate={(climate) => updateFilter("climate", climate)} />
+        </details>
 
         <div className="results-header" aria-live="polite">
           <SectionHeader title={results.length === 1 ? "1 matching plant" : `${results.length} matching plants`}>

@@ -69,8 +69,7 @@ export default function PlantPage() {
       <section className="section">
         <div className="container plant-detail-grid">
           <article className="detail-card">
-            <h2>Quick summary</h2>
-            <p>{description}</p>
+            <h2>Growing conditions</h2>
             <dl className="plant-facts">
               <div>
                 <dt>
@@ -102,7 +101,7 @@ export default function PlantPage() {
                 <ShoppingBag size={16} aria-hidden="true" />
                 {isTechniqueProfile ? "Technique" : "Seeds"}
               </p>
-              <h2>{shopCardLabel}</h2>
+              <h2>{isTechniqueProfile ? "Technique guide" : "Seed availability"}</h2>
               {!shopUrl && !isTechniqueProfile && <p className="shop-note">Coming soon</p>}
             </div>
             {isTechniqueProfile ? (

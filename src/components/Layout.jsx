@@ -1,31 +1,23 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import {
-  BookOpen,
-  GitCompareArrows,
-  Heart,
-  Leaf,
-  Menu,
-  Search,
-  Users,
-  X,
-} from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import useComparison from "../hooks/useComparison.js";
 import FlowerBuckDisplay from "./FlowerBuckDisplay.jsx";
 import PlantSearch from "./PlantSearch.jsx";
 
 const mainNavLinks = [
-  { to: "/", label: "Home", Icon: Leaf },
-  { to: "/finder", label: "Plant Finder", Icon: Search },
-  { to: "/blog", label: "Blog", Icon: BookOpen },
-  { to: "/compare", label: "Compare", Icon: GitCompareArrows, showCount: true },
-  { to: "/saved-plants", label: "Saved Plants", Icon: Heart },
+  { to: "/", label: "Home" },
+  { to: "/finder", label: "Plant Finder" },
+  { to: "/blog", label: "Blog" },
+  { to: "/compare", label: "Compare", showCount: true },
+  { to: "/saved-plants", label: "Saved Plants" },
 ];
 
 const mobileNavLinks = [
   ...mainNavLinks,
-  { to: "/about", label: "About the Creator", Icon: Users },
+  { to: "/about", label: "About the Creator" },
+  { to: "/contact", label: "Contact" },
 ];
 
 export default function Layout() {
@@ -57,12 +49,11 @@ export default function Layout() {
     };
   }, []);
 
-  function renderNavLink({ to, label, Icon, showCount }) {
+  function renderNavLink({ to, label, showCount }) {
     return (
       <NavLink key={to} to={to} onClick={closeHeaderPanels}>
-        <Icon size={17} aria-hidden="true" />
         <span>{label}</span>
-        {showCount && (
+        {showCount && comparisonCount > 0 && (
           <span
             className="nav-count"
             aria-label={`${comparisonCount} plants selected for comparison`}
@@ -88,17 +79,18 @@ export default function Layout() {
             />
           </NavLink>
 
+          <nav className="nav-links desktop-nav" aria-label="Main navigation">
+            {mainNavLinks.map(renderNavLink)}
+          </nav>
+
           <PlantSearch
             className="nav-search desktop-search"
             label="Search plants"
             placeholder="Search plants"
           />
 
-          <nav className="nav-links desktop-nav" aria-label="Main navigation">
-            {mainNavLinks.map(renderNavLink)}
-          </nav>
-
           <FlowerBuckDisplay />
+          <NavLink className="nav-contact" to="/contact">Contact</NavLink>
 
           <div className="mobile-header-actions">
             <button
@@ -155,26 +147,16 @@ export default function Layout() {
 
       <footer className="site-footer">
         <div className="container footer-grid">
-          <div>
-            <div className="footer-brand">
-              <Leaf size={18} />
-              Floraseek
-            </div>
-            <p>
-              An educational plant-discovery tool for browsing by climate, difficulty, and type.
-            </p>
-          </div>
-          <div className="footer-links" aria-label="Footer navigation">
-            <NavLink to="/finder">Plant Finder</NavLink>
-            <NavLink to="/blog">Blog</NavLink>
-            <NavLink to="/compare">Compare</NavLink>
-            <NavLink to="/saved-plants">Saved Plants</NavLink>
+          <NavLink to="/" className="brand" aria-label="Floraseek homepage">
+            <img className="brand-logo" src="/images/floraseek-logo.svg" alt="Floraseek" width="224" height="48" />
+          </NavLink>
+          <nav className="footer-links" aria-label="Footer navigation">
             <NavLink to="/flowers">Flowers</NavLink>
             <NavLink to="/plants">Plants</NavLink>
             <NavLink to="/about">About the Creator</NavLink>
             <NavLink to="/contact">Contact</NavLink>
             <NavLink to="/ai-policy">AI Policy</NavLink>
-          </div>
+          </nav>
         </div>
       </footer>
     </div>

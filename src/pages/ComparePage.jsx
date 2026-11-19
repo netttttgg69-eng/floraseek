@@ -42,8 +42,7 @@ export default function ComparePage() {
           </p>
           <h1>Compare your shortlist.</h1>
           <p>
-            Add any plants you want to compare and review the details Floraseek already tracks.
-            Differences are highlighted so each choice is easier to scan.
+            Review plant characteristics side by side. Highlighted rows show where your plants differ.
           </p>
           <div className="page-heading-actions">
             <Link className="button secondary" to="/finder">
@@ -83,43 +82,37 @@ export default function ComparePage() {
               </Link>
             </div>
 
-            <div className="comparison-scroller" role="region" aria-label="Selected plant comparison">
-              <div
-                className="comparison-grid"
-                style={{ "--comparison-count": selectedPlants.length }}
-              >
-                {selectedPlants.map((plant, plantIndex) => (
-                  <article className="comparison-column" key={plant.id}>
-                    <div className="comparison-plant-header">
-                      <PlantImage plant={plant} />
-                      <div>
-                        <Badge category="category" value={plant.category} />
-                        <h2>{plant.name}</h2>
-                      </div>
-                      <button
-                        className="icon-button comparison-remove"
-                        type="button"
-                        aria-label={`Remove ${plant.name} from comparison`}
-                        onClick={() => removeFromComparison(plant.id)}
-                      >
-                        <X size={18} aria-hidden="true" />
-                      </button>
-                    </div>
-
-                    <dl className="comparison-list">
-                      {comparisonRows.map((row) => (
-                        <div
-                          className={`comparison-row ${row.isDifferent ? "different" : ""}`.trim()}
-                          key={row.key}
-                        >
-                          <dt>{row.label}</dt>
-                          <dd>{row.values[plantIndex]}</dd>
+            <div className="comparison-scroller" role="region" tabIndex={0} aria-label="Selected plant comparison">
+              <table className="comparison-table">
+                <caption className="sr-only">Selected plants and their characteristics</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Characteristic</th>
+                    {selectedPlants.map((plant) => (
+                      <th scope="col" key={plant.id}>
+                        <div className="comparison-plant-header">
+                          <PlantImage plant={plant} />
+                          <button className="icon-button comparison-remove" type="button"
+                            aria-label={`Remove ${plant.name} from comparison`}
+                            onClick={() => removeFromComparison(plant.id)}>
+                            <X size={17} aria-hidden="true" />
+                          </button>
+                          <Badge category="category" value={plant.category} />
+                          <Link to={`/plants/${plant.slug}`}>{plant.name}</Link>
                         </div>
-                      ))}
-                    </dl>
-                  </article>
-                ))}
-              </div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonRows.map((row) => (
+                    <tr key={row.key} className={row.isDifferent ? "different" : ""}>
+                      <th scope="row">{row.label}</th>
+                      {row.values.map((value, index) => <td key={selectedPlants[index].id}>{value}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </>
         )}

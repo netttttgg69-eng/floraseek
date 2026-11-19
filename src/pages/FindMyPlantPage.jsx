@@ -54,8 +54,7 @@ export default function FindMyPlantPage() {
           </p>
           <h1>Find a plant that fits you.</h1>
           <p>
-            Answer a few quick questions and Floraseek will rank the best matches from the existing
-            plant catalogue.
+            Answer a few questions about your space and preferences to find your closest matches.
           </p>
         </div>
 
@@ -68,7 +67,7 @@ export default function FindMyPlantPage() {
           </div>
 
           {!isResultsStep ? (
-            <div className="quiz-question">
+            <div className="quiz-question" key={currentQuestion.id}>
               <h2 id={`quiz-question-${currentQuestion.id}`}>{currentQuestion.title}</h2>
               <div
                 className="quiz-options"
@@ -123,8 +122,7 @@ export default function FindMyPlantPage() {
           ) : (
             <div className="quiz-results">
               <SectionHeader eyebrow="Recommendations" title="Your top matches">
-                Floraseek scores every plant by your answers, then keeps catalogue order stable when
-                results tie.
+                These plants are the closest matches for your answers.
               </SectionHeader>
 
               {resolvedAnswers.climate === "not-sure" && (

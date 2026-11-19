@@ -76,8 +76,7 @@ export default function BlogPage() {
         {featuredPost && (
           <section className="blog-featured" aria-labelledby="featured-article-title">
             <div className="section-header">
-              <p className="eyebrow">Featured article</p>
-              <h2 id="featured-article-title">Start here</h2>
+              <h2 id="featured-article-title">Featured article</h2>
             </div>
             <BlogCard post={featuredPost} variant="featured" />
           </section>
@@ -86,7 +85,6 @@ export default function BlogPage() {
         <section className="blog-browser" aria-labelledby="all-articles-title">
           <div className="blog-browser-heading">
             <div>
-              <p className="eyebrow">Browse the journal</p>
               <h2 id="all-articles-title">All articles</h2>
             </div>
             <p aria-live="polite">
